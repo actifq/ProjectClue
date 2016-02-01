@@ -1,12 +1,13 @@
 package Clue;
 import java.awt.*;
 import javax.swing.*;
+
 public class GWR_userPanel extends JPanel{
 
 	Image panelImg;
 	
 	public GWR_userPanel() {
-		panelImg=Toolkit.getDefaultToolkit().getImage("image/cardback1.jpg");
+		panelImg=Toolkit.getDefaultToolkit().getImage("/image/cardback1.jpg");
 		
 	}
 

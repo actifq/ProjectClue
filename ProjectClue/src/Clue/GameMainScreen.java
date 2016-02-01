@@ -3,6 +3,7 @@ package Clue;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
+
 public class GameMainScreen extends JPanel {
 	Image back;
 	JPanel jpLogo,jpTurn,jpGameBoard,jpDice;
@@ -12,7 +13,7 @@ public class GameMainScreen extends JPanel {
 	JButton b;
 	
 	public GameMainScreen() {
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\background.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("/image/boardBack.png");
 		jpLogo=new JPanel();// 배너
 		jpTurn=new JPanel();//턴화면
 		jpGameBoard=new GameArea();//게임화면

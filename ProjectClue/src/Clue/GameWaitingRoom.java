@@ -2,6 +2,7 @@ package Clue;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
+
 public class GameWaitingRoom extends JPanel {
 	Image back3;
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
@@ -11,7 +12,7 @@ public class GameWaitingRoom extends JPanel {
 	JButton btnReady,btnExit;
 	
 	public GameWaitingRoom(){
-		back3=Toolkit.getDefaultToolkit().getImage("c:\\image\\back3.jpg");
+		back3=Toolkit.getDefaultToolkit().getImage("/image/boardBack.png");
 		//game user
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
