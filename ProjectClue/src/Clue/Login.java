@@ -18,9 +18,13 @@ public class Login extends JPanel{
 	 */
 	public Login() 
 	{
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back3.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back8.gif");
 		la1=new JLabel("ID");
+		la1.setForeground(Color.WHITE);
+		la1.setFont(new Font("Arial", Font.BOLD, 14));
 		la2=new JLabel("PW");
+		la2.setForeground(Color.WHITE);
+		la2.setFont(new Font("Arial", Font.BOLD, 14));
 		tf=new JTextField();
 		pf=new JPasswordField();
 		b1=new JButton("·Î±×ÀÎ");

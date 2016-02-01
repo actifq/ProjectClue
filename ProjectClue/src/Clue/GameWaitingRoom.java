@@ -15,8 +15,8 @@ public class GameWaitingRoom extends JPanel {
 		//game user
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
-		user1=new JPanel();
-		user1.setBackground(Color.gray);
+		user1=new GWR_userPanel();
+		user1.setSize(450,300);
 		user2=new JPanel();
 		user2.setBackground(Color.gray);
 		user3=new JPanel();
