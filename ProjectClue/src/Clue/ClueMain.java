@@ -54,7 +54,6 @@ public class ClueMain extends JFrame implements ActionListener{
 		else if(e.getSource()==gwr.btnReady)
 		{	
 			repaint();
-			
 			card.show(getContentPane(), "MS");
 		}else if(e.getSource()==gwr.btnExit){
 			repaint();

@@ -15,7 +15,7 @@ public class GameArea_InnerBoard extends JPanel{
 	
 	public GameArea_InnerBoard(){
 		
-		board = Toolkit.getDefaultToolkit().getImage("/image/woodboard.jpg");
+		board = Toolkit.getDefaultToolkit().getImage(" ");
 		//보드 초기화
 				//보드판 테두리=>1
 				//입구 =>-1
