@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.table.*;
 public class GameWaitingRoom extends JPanel {
 	Image back3;
-	JPanel title,user1,user2,user3,user4,chr1,chr2,qcard;
+	JPanel title,user1,user2,user3,user4,chr1,chr2;
 	JTextArea chat;
 	JTextField chatInput;
 	JComboBox box;
@@ -23,7 +23,7 @@ public class GameWaitingRoom extends JPanel {
 		//user3.setBackground(Color.gray);
 		user4=new GWR_userPanel();
 		//user4.setBackground(Color.gray);
-		qcard=new QuestionCard();
+		
 		
 		//choose character
 		chr1=new JPanel();
@@ -65,7 +65,7 @@ public class GameWaitingRoom extends JPanel {
 		chr1.setBounds(912, 75, 278, 572);
 		chr2.setBounds(912, 45, 278, 30);
 		p.setBounds(912, 652, 278, 215);
-		qcard.setBounds(30, 70, 171, 250);
+		
 		
 		add(title);
 		add(user1);
@@ -78,8 +78,7 @@ public class GameWaitingRoom extends JPanel {
 		add(chr1);
 		add(chr2);
 		add(p);
-		add(qcard);
-		
+	
 	}
 	@Override
 	//paint, paintComponent => 자동호출

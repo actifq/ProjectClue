@@ -10,7 +10,7 @@ public class LoadingTest extends JPanel implements Runnable{
 	ClueMain cm;
 	public LoadingTest(ClueMain cm) {
 		this.cm=cm;
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\loadingBack.gif");
+		back=Toolkit.getDefaultToolkit().getImage("image/loadingbr.gif");
 		
 		prg=new JProgressBar(0,100);
 		prg.setValue(0);  
