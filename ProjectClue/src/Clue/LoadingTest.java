@@ -17,7 +17,7 @@ public class LoadingTest extends JPanel implements Runnable{
 		prg.setStringPainted(true);  
 	      
 		setLayout(null);
-		prg.setBounds(300,500,500,30);
+		prg.setBounds(100,800,1000,40);
 		add(prg);  
 		
 		
@@ -32,7 +32,7 @@ public class LoadingTest extends JPanel implements Runnable{
 		  {
 			  cm.card.show(cm.getContentPane(), "MS");
 		  }
-		  try{Thread.sleep(30);}catch(Exception e){}  
+		  try{Thread.sleep(55);}catch(Exception e){}  
 		}  
 		}  
 	
