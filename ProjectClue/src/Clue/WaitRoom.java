@@ -6,21 +6,21 @@ public class WaitRoom extends JPanel {
 	Image back;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
-	JTextArea ta;
+	JTextPane ta;
 	JTextField tf;
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
 	
 	public WaitRoom() {
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
 		String[] col1={"방이름","공개/비공개","인원"};
 		String[][] row1=new String[0][3];
 		model1=new DefaultTableModel(row1, col1);
 		table1=new JTable(model1);
 		JScrollPane js1=new JScrollPane(table1);
 		
-		back=Toolkit.getDefaultToolkit().getImage("c:\\image\\back.jpg");
+		
 		String[] col2={"ID","대화명","성별","위치"};
 		String[][] row2=new String[0][4];
 		model2=new DefaultTableModel(row2, col2);
@@ -28,11 +28,12 @@ public class WaitRoom extends JPanel {
 		JScrollPane js2=new JScrollPane(table2);
 		
 		//채팅
-		ta=new JTextArea();
+		ta=new JTextPane();
+		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
 		tf=new JTextField();
 		box=new JComboBox();
-		box.addItem("black");
+		box.addItem("white");
 		box.addItem("blue");
 		box.addItem("pink");
 		box.addItem("green");
@@ -59,13 +60,13 @@ public class WaitRoom extends JPanel {
 		p.setOpaque(false);
 		
 		setLayout(null);
-		js1.setBounds(10, 15, 500, 320);
-		js2.setBounds(10, 340, 500, 220);
-		js3.setBounds(515, 15, 265, 200);
-		tf.setBounds(515, 220, 170, 30);
-		box.setBounds(695, 220, 85, 30);
-		movie.setBounds(515, 255, 265, 180);
-		p.setBounds(515, 440, 265, 120);
+		js1.setBounds(30, 30, 700, 450);
+		js2.setBounds(30, 490,700, 350);
+		js3.setBounds(740, 30, 420, 300);
+		tf.setBounds(740, 335, 310, 40);
+		box.setBounds(1055, 335, 105, 40);
+		movie.setBounds(740, 385, 420, 250);
+		p.setBounds(740, 645, 420, 195);
 		add(js1);
 		add(js2);
 		add(js3);

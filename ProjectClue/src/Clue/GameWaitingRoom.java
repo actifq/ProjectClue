@@ -7,13 +7,12 @@ public class GameWaitingRoom extends JPanel {
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
 	JTextArea chat;
 	JTextField chatInput;
-	JComboBox box;
-	JButton btnReady,btnExit;
+	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
 	
 	
 	public GameWaitingRoom(){
 		back3=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
-		//game user
+		//게임 유저
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
 		user1=new GWR_userPanel();
@@ -24,26 +23,21 @@ public class GameWaitingRoom extends JPanel {
 		user4=new GWR_userPanel();
 		//user4.setBackground(Color.gray);
 		
-		
-		//choose character
+		//캐릭터 고르기
 		chr1=new JPanel();
 		chr1.setBackground(Color.black);
 		chr2=new JPanel();
 		chr2.setBackground(Color.lightGray);
 		
-		//chat
+		//채팅창
 		chat=new JTextArea();
 		chat.setEditable(false);
 		JScrollPane js1=new JScrollPane(chat);
 		chatInput=new JTextField();
-		box=new JComboBox();
-		box.addItem("black");
-		box.addItem("blue");
-		box.addItem("pink");
-		box.addItem("green");
-		box.addItem("magenta");
+		insert=new JButton("입력");
 		
-		//exit, ready
+		
+		//레디,나가기
 		btnReady=new JButton("READY");
 		btnExit=new JButton("EXIT");
 		
@@ -61,7 +55,7 @@ public class GameWaitingRoom extends JPanel {
 		user4.setBounds(457, 347, 449, 300);
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
-		box.setBounds(805,837,102,30);
+		insert.setBounds(805,837,102,30);
 		chr1.setBounds(912, 75, 278, 572);
 		chr2.setBounds(912, 45, 278, 30);
 		p.setBounds(912, 652, 278, 215);
@@ -74,11 +68,11 @@ public class GameWaitingRoom extends JPanel {
 		add(user4);
 		add(js1);
 		add(chatInput);
-		add(box);
+		add(insert);
 		add(chr1);
 		add(chr2);
 		add(p);
-	
+
 	}
 	@Override
 	//paint, paintComponent => 자동호출
