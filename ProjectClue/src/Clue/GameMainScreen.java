@@ -8,14 +8,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.*;
 
-
-import java.awt.Graphics;
-
 import Clue.ClueMain;
 import Clue.Dice;
 public class GameMainScreen extends JPanel {
 	Image back,dice1,dice2;//정선추가160207
-	JPanel jpLogo,jpTurn,jpGameBoard,jpDice;
+	Image jpLogo;
+	JPanel jpTurn,jpGameBoard,jpDice;
 	JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
@@ -30,7 +28,8 @@ public class GameMainScreen extends JPanel {
 		dice1=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage1());//정선추가 160207
 		dice2=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage2());//정선추가 160207
 		back=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
-		jpLogo=new JPanel();// 배너
+		//jpLogo=new JPanel();// 배너
+		jpLogo=Toolkit.getDefaultToolkit().getImage("image/jplogo2.png");
 		//jpTurn=new JPanel();//턴화면
 		jpGameBoard=new GameArea();//게임화면
 		JScrollPane jsMemo=new JScrollPane(table);//메모카드
@@ -43,7 +42,7 @@ public class GameMainScreen extends JPanel {
 		b=new JButton("입력");	//채팅창
 		
 		setLayout(null);
-		jpLogo.setBounds(5, 10, 850, 90);
+		//jpLogo.setBounds(5, 10, 850, 90);
 		//jpTurn.setBounds(865, 10, 320, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);
 		jsMemo.setBounds(865, 105, 320, 570);
@@ -53,7 +52,7 @@ public class GameMainScreen extends JPanel {
 		b.setBounds(795, 840, 60, 25);
 		
 		
-		add(jpLogo);
+		//add(jpLogo);
 		//add(jpTurn);
 		add(jpGameBoard);
 		add(jsMemo);
@@ -71,6 +70,7 @@ public class GameMainScreen extends JPanel {
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 		g.drawImage(dice1, 1140, 10, this);//정선추가 160207
 		g.drawImage(dice2, 1140, 55, this);//정선추가 160207
+		g.drawImage(jpLogo, 5, 10, this);//정선추가 160211
 	}
 	
 	
