@@ -7,8 +7,21 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.StringTokenizer;
 
 public class ClueMain extends JFrame implements ActionListener,KeyListener{
+	Socket socket;
+	BufferedReader bufferedReader;
+	OutputStream outputStream;
+	
+	String myID;
+	
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
@@ -90,10 +103,12 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		{
 			repaint();
 			card.show(getContentPane(),"WR");
+			wait.tf.requestFocus();
 		}
 		else if(e.getSource()==login.b2)
 		{
 			join.setVisible(true);
+			
 		} // 160211 정선 추가
 		else if(e.getSource()==wait.b1)
 		{
@@ -218,6 +233,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			doc.insertString(doc.getLength(), msg+"\n", wait.ta.getStyle(color));
 		}catch(Exception e){}
 	}
+	
 
 }
 

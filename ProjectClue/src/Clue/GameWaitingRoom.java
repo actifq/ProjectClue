@@ -12,7 +12,7 @@ public class GameWaitingRoom extends JPanel {
 	
 	
 	public GameWaitingRoom(){
-		back3=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
+		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		//게임 유저
 		title=new JPanel();
 		title.setBackground(Color.darkGray);

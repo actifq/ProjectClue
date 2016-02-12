@@ -12,9 +12,10 @@ public class WaitRoom extends JPanel {
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
+
 	
 	public WaitRoom() {
-		back=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		String[] col1={"방이름","공개/비공개","인원"};
 		String[][] row1=new String[0][3];
 		model1=new DefaultTableModel(row1, col1);
