@@ -7,6 +7,7 @@ public class GameWaitingRoom extends JPanel {
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
 	JTextArea chat;
 	JTextField chatInput;
+
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
 	
 	

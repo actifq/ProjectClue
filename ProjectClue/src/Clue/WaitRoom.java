@@ -6,6 +6,7 @@ public class WaitRoom extends JPanel {
 	Image back;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
+
 	JTextPane ta;
 	JTextField tf;
 	JComboBox box;
@@ -67,6 +68,7 @@ public class WaitRoom extends JPanel {
 		box.setBounds(1055, 335, 105, 40);
 		movie.setBounds(740, 385, 420, 250);
 		p.setBounds(740, 645, 420, 195);
+
 		add(js1);
 		add(js2);
 		add(js3);
