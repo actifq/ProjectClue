@@ -16,11 +16,6 @@ import java.net.UnknownHostException;
 import java.util.StringTokenizer;
 
 public class ClueMain extends JFrame implements ActionListener,KeyListener{
-	Socket socket;
-	BufferedReader bufferedReader;
-	OutputStream outputStream;
-	
-	String myID;
 	
 	CardLayout card;
 	GameWaitingRoom gwr=new GameWaitingRoom();
