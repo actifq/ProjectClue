@@ -84,6 +84,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	{
 		return dice;
 	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try
