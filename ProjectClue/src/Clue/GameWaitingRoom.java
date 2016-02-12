@@ -5,29 +5,31 @@ import javax.swing.table.*;
 
 public class GameWaitingRoom extends JPanel {
 	Image back3;
-	JPanel title,user1,user2,user3,user4,chr1,chr2;
+	JPanel title,user1,user2,user3,user4,chr1,chr2,qcard;
 	JTextArea chat;
 	JTextField chatInput;
 	JComboBox box;
 	JButton btnReady,btnExit;
 	
 	public GameWaitingRoom(){
-		back3=Toolkit.getDefaultToolkit().getImage("/image/boardBack.png");
+
+		back3=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
+
 		//game user
 		title=new JPanel();
 		title.setBackground(Color.darkGray);
 		user1=new GWR_userPanel();
-		user1.setSize(450,300);
-		user2=new JPanel();
-		user2.setBackground(Color.gray);
-		user3=new JPanel();
-		user3.setBackground(Color.gray);
-		user4=new JPanel();
-		user4.setBackground(Color.gray);
+		user2=new GWR_userPanel();
+		//user2.setBackground(Color.gray);
+		user3=new GWR_userPanel();
+		//user3.setBackground(Color.gray);
+		user4=new GWR_userPanel();
+		//user4.setBackground(Color.gray);
+		qcard=new QuestionCard();
 		
 		//choose character
 		chr1=new JPanel();
-		chr1.setBackground(Color.white);
+		chr1.setBackground(Color.black);
 		chr2=new JPanel();
 		chr2.setBackground(Color.lightGray);
 		
@@ -63,7 +65,8 @@ public class GameWaitingRoom extends JPanel {
 		box.setBounds(805,837,102,30);
 		chr1.setBounds(912, 75, 278, 572);
 		chr2.setBounds(912, 45, 278, 30);
-		p.setBounds(912, 652, 278, 215);		
+		p.setBounds(912, 652, 278, 215);
+		qcard.setBounds(30, 70, 171, 250);
 		
 		add(title);
 		add(user1);
@@ -76,6 +79,7 @@ public class GameWaitingRoom extends JPanel {
 		add(chr1);
 		add(chr2);
 		add(p);
+		add(qcard);
 		
 	}
 	@Override

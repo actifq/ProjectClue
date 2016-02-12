@@ -4,17 +4,23 @@ import javax.swing.*;
 
 public class GWR_userPanel extends JPanel{
 
-	Image panelImg;
+	Image panelImage;
+	Image qcard;
 	
 	public GWR_userPanel() {
-		panelImg=Toolkit.getDefaultToolkit().getImage("/image/cardback1.jpg");
+
+		
+		panelImage=Toolkit.getDefaultToolkit().getImage("image/cardback.jpg");
+		qcard=Toolkit.getDefaultToolkit().getImage("image/qcard1.png");
+
 		
 	}
 
 	@Override
-	public void paint(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		// TODO Auto-generated method stub
-		g.drawImage(panelImg, 0,0, getWidth(), getHeight(), this);
+		g.drawImage(panelImage, 0,0, getWidth(), getHeight(), this);
+		g.drawImage(qcard, 20, 25, 171, 250, this);
 	}
 
 	
