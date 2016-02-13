@@ -8,8 +8,10 @@ public class GWR_userPanel extends JPanel{
 	
 	public GWR_userPanel() {
 		
-		panelImage=Toolkit.getDefaultToolkit().getImage("image/cardback.jpg");
-		qcard=Toolkit.getDefaultToolkit().getImage("image/qcard1.png");
+
+		panelImage=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");
+		qcard=Toolkit.getDefaultToolkit().getImage("image/player/qcard1.png");
+
 		
 	}
 

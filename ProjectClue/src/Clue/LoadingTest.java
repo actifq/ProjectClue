@@ -10,7 +10,8 @@ public class LoadingTest extends JPanel implements Runnable{
 	ClueMain cm;
 	public LoadingTest(ClueMain cm) {
 		this.cm=cm;
-		back=Toolkit.getDefaultToolkit().getImage("image/loadingbr.gif");
+
+		back=Toolkit.getDefaultToolkit().getImage("image/back/loadingbr.gif");
 		
 		prg=new JProgressBar(0,100);
 		prg.setValue(0);  
@@ -31,8 +32,10 @@ public class LoadingTest extends JPanel implements Runnable{
 		  if(i==100)
 		  {
 			  cm.card.show(cm.getContentPane(), "MS");
+			  cm.mainScreen.gameStart();
 		  }
 		  try{Thread.sleep(55);}catch(Exception e){}  
+
 		}  
 		}  
 	
