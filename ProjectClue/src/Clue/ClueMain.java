@@ -7,6 +7,13 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import java.awt.event.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	CardLayout card;
@@ -20,6 +27,9 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	private Dice dice;//160206 정선 추가
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
+	
+	MusicManager mm=new MusicManager();//160214 정선 추가
+	
 	
 
 
@@ -65,6 +75,23 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		
 
 	}
+	
+	public class Sound { // class
+		 public Sound(String file, boolean Loop){ // method
+		  Clip clip; //new Clip
+		  try {
+		  AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream("wav/login_bgm.wav"))); //read wav file.
+		  clip = AudioSystem.getClip(); //setting clip.
+		  clip.open(ais); //read ais in clip
+		  clip.start(); //Music start.
+		  if ( Loop) clip.loop(-1); //if Loof = true, play over and over.
+		  } 
+		  catch (Exception e) { //exception
+		   e.printStackTrace();
+		  }
+		 }
+		}
+
 	
 	public Dice dice() //정선 추가 160206
 	{

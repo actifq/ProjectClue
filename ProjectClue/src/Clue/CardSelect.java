@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class CardSelect extends JPanel{
+public class CardSelect extends JPanel implements ActionListener{
    Image back;
    JTextField wp;//무기
    JTextField sp;//용의자
@@ -18,33 +18,33 @@ public CardSelect()
    {
    back=Toolkit.getDefaultToolkit().getImage("image/gwrback1.jpg");
    
-   
-   for(int i=0;i<6;i++)
+   for(int i=0;i<9;i++)//용의자
    {
-      p[i]=new JButton(new ImageIcon("image/player/char"+i+".jpg"));
-      
+	   p[i]=new JButton(new ImageIcon("image/player/char"+i+".jpg"));
    }
-   for(int i=6;i<9;i++)
+   for(int i=6;i<9;i++)//용의자 남은칸 투명
    {
-      p[i]=new JButton(new ImageIcon("image/player/qcard1.png"));
+	   p[i].setBorderPainted(false);
+	   p[i].setContentAreaFilled(false); 
+	   p[i].setFocusPainted(false);
    }
-   
-   
-   for(int i=0;i<8;i++)
+   for(int i=0;i<8;i++)//무기
    {
       q[i]=new JButton(new ImageIcon("image/weapon/wp"+i+".jpg"));
       
    }
-   for(int i=8;i<9;i++)
+   for(int i=8;i<9;i++)//무기 남은칸 투명
    {
-      q[i]=new JButton(new ImageIcon("image/player/qcard1.png"));
+      p[i].setBorderPainted(false);
+      p[i].setContentAreaFilled(false); 
+      p[i].setFocusPainted(false);
    }
-   
    
    for(int i=0;i<9;i++)
    {
-      j[i]=new JButton(new ImageIcon("image/player/qcard1.png"));
+	   j[i].setIcon(new ImageIcon("image/player/qcard1.png"));
    }
+	   
    
    
    r=new JTextField("어디에서");
@@ -111,6 +111,20 @@ public CardSelect()
    add(p4);
    add(p5);
     }
+
+
+public Image setImage(String filename, int width, int height){
+	ImageIcon ii = new ImageIcon(filename);
+	Image image=ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	
+	return image;
+}
+
+@Override
+public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	
+}
 
 
 

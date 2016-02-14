@@ -34,8 +34,8 @@ public class LoadingTest extends JPanel implements Runnable{
 			  cm.card.show(cm.getContentPane(), "MS");
 			  cm.mainScreen.gameStart();
 		  }
-		  try{Thread.sleep(55);}catch(Exception e){}  
-
+		  try{Thread.sleep(1);}catch(Exception e){}  
+		  //sleep(55)
 		}  
 		}  
 	
