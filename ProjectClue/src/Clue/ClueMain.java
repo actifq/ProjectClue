@@ -21,10 +21,11 @@ public class ClueMain extends JFrame implements ActionListener{
 		card=new CardLayout();
 		setLayout(card);
 		
-		add("LS",loading);
+		add("MS",mainScreen);
 		add("LOG",login);
 		add("GWR",gwr);
-		add("MS",mainScreen);
+		add("LS",loading);
+		
 		
 		setSize(1200,900);
 		setVisible(true);
@@ -64,6 +65,7 @@ public class ClueMain extends JFrame implements ActionListener{
 			repaint();
 			
 			card.show(getContentPane(), "LS");
+			new Thread(loading).start();
 		}else if(e.getSource()==gwr.btnExit){
 			repaint();
 			card.previous(getContentPane());
