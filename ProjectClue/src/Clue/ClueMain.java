@@ -7,13 +7,15 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
 
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.StringTokenizer;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 
 public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	
@@ -28,6 +30,9 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	private Dice dice;//160206 정선 추가
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
+	
+	MusicManager mm=new MusicManager();//160214 정선 추가
+	
 	
 
 
@@ -75,6 +80,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 
 	}
 	
+
 	public Dice dice() //정선 추가 160206
 	{
 		return dice;
@@ -160,13 +166,15 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 			
-			//수정필요
+			
 			mainScreen.game.savePlayerStatus();
 			mainScreen.game.setGamePlayer(Game.crrPlayer,mainScreen.game.runDice());
 			
 			mainScreen.showCount();
+			mainScreen.setImage();
 			mainScreen.jpGameBoard.repaint();
-			//여기까지
+			
+			
 			//mainScreen.mc.show(getParent(), "GB");
 		}else if(e.getSource()==reachRoom.b1){
 			repaint();
@@ -195,6 +203,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			reachRoom.setVisible(true);
 		}
 		mainScreen.showCount();
+		mainScreen.setImage();
 		mainScreen.jpGameBoard.repaint();
 	}
 	@Override

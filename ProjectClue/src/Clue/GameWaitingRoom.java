@@ -1,15 +1,24 @@
 package Clue;
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.net.MalformedURLException;
+
 import javax.swing.*;
 import javax.swing.table.*;
-public class GameWaitingRoom extends JPanel {
+public class GameWaitingRoom extends JPanel implements ActionListener{
 	Image back3;
 	JPanel title,user1,user2,user3,user4,chr1,chr2;
 	JTextArea chat;
 	JTextField chatInput;
 
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
+	AudioClip clip;
 	
+	WaitRoom wait=new WaitRoom();
 	
 	public GameWaitingRoom(){
 		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -73,6 +82,17 @@ public class GameWaitingRoom extends JPanel {
 		add(chr1);
 		add(chr2);
 		add(p);
+		
+		try {
+            File file = new File("wav/GameWaitingRoom_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
+
 
 	}
 	@Override
@@ -80,4 +100,12 @@ public class GameWaitingRoom extends JPanel {
 	protected void paintComponent(Graphics g) {
 		g.drawImage(back3, 0, 0, getWidth(),getHeight(),this);
 }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==wait.b2)
+		{
+			clip.play();
+		}
+	}
 }

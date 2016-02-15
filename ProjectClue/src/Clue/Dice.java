@@ -19,8 +19,8 @@ public class Dice extends JPanel{
 		
 		//setLayout(null);
 		
-		dice1=random.nextInt(6)+1;
-		dice2=random.nextInt(6)+1;
+		dice1=random.nextInt(5)+1;
+		dice2=random.nextInt(5)+1;
 		
 	}
 	

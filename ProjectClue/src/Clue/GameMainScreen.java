@@ -1,5 +1,7 @@
 package Clue;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 
 import javax.swing.*;
@@ -8,43 +10,50 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-public class GameMainScreen extends JPanel{
+import java.net.MalformedURLException;
+public class GameMainScreen extends JPanel implements ActionListener{
+	
 	Image back;
 	Image dice1,dice2; //정선
 	Image jpLogo; //정선
-	JPanel jpTurn,jpCount,jpDice;
+	JPanel jpTurn,jpCount;
+	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
+
 	JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
 	JButton b;
 	Game game;
-	JLabel showCnt;
+	JLabel jlshowCnt;
 	JFrame jfTurn;
-	Dice dice;//정선추가 160207
+	AudioClip clip;
 	
+	GameWaitingRoom gwr= new GameWaitingRoom();
 	
 
 	public GameMainScreen() {
-		dice=new Dice();//정선 추가 160207
+
+		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
+		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
+
 		
-		dice1=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage1());//정선추가 160207
-		dice2=Toolkit.getDefaultToolkit().getImage(dice.getDiceImage2());//정선추가 160207
+		
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
-		//jpLogo=new JPanel();// 배너
+		
 		jpTurn=new JPanel();//턴이미지화면
 		
-		showCnt = new JLabel("0");
-		showCnt.setFont(new Font("맑은고딕",Font.BOLD,50));
+		jlshowCnt = new JLabel("0");
+		jlshowCnt.setFont(new Font("맑은고딕",Font.BOLD,50));
 		jpCount = new JPanel();
-		jpCount.add("CENTER",showCnt);
+		jpCount.add("CENTER",jlshowCnt);
 			//이미지 불러와서 판넬에 채우기
 		
 		jpGameBoard=new GameArea();//게임화면
 		
 		JScrollPane jsMemo=new JScrollPane(table);//메모카드
-		jpDice=new ShowMyCard();//카드보여주기
+		jpMyCard=new ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);//채팅창
 		ChatInput=new JTextField();	//채팅입력창
@@ -54,34 +63,38 @@ public class GameMainScreen extends JPanel{
 		
 
 		setLayout(null);
-		
-		
 
-		//jpLogo.setBounds(5, 10, 850, 90);
 		jpTurn.setBounds(865, 10, 90, 90);
-		
 		jpCount.setBounds(955, 10, 180, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
-
 		jsMemo.setBounds(865, 105, 320, 570);
 		jsChatArea.setBounds(5, 680, 600, 160);
-		jpDice.setBounds(610, 680, 575, 185);
+		jpMyCard.setBounds(610, 680, 575, 185);
 		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
 		
-		//add(jpLogo);
 		add(jpTurn);
 		add(jpCount);
 		add(jpGameBoard);
 
 		add(jsMemo);
-		add(jpDice);
+		add(jpMyCard);
 		add(jsChatArea);
 		add(ChatInput);
 		add(b);
-		add(dice);
+
+		try {
+            File file = new File("wav/Game_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 		
 	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {  
 		
@@ -95,10 +108,34 @@ public class GameMainScreen extends JPanel{
 	
 	public void gameStart(){
 		game= new Game(jpGameBoard,jfTurn);
+		try {
+			Thread.sleep(20);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		jpMyCard.setCardImg(game.pCard[0]);//0번플레이어로
+		showCount();
+		setImage();
+		
+
+	}
+	public void setImage(){
+		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice1+ ".png");
+		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice2+ ".png");
 	}
 	
 	public void showCount(){
-		showCnt.setText(String.valueOf(game.gp.getCount()));
+		jlshowCnt.setText(String.valueOf(game.gp.getCount()));
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==gwr.btnReady)
+		{
+			clip.play();
+		}
 	}
 	
 
