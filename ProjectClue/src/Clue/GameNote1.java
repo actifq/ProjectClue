@@ -1,27 +1,54 @@
 package Clue;
 import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+
 import javax.swing.*;
-/*public class GameNote1 extends JPanel{
-	JPanel[] pan=new JPanel[6];
-	JTextField[] idtf=new JTextField[6];
+import javax.swing.table.*;
 	
-	public GameNote1() {
-		for(int i=0;i<pan.length;i++){
-			pan[i]=new JPanel();
-			pan[i].setBackground(Color.black);
-			nt[i]=new JTextField();
-			nt[i].setEnabled(false);
-		}
-		pan[i].setBounds(10+(i*190), 15, 180, 150);
-		nt[i].setBounds(10+(i*190), 170, 180, 30);
-		add(pan[i]);
-		add(nt[i]);
-		JPanel p=new JPanel();
-		p.setLayout(new GridLayout(3, 1, 5, 5));
-		p.add(b1);
-		p.add(b2);
-		p.add(b3);
-		p.setBounds(575, 400, 205, 165);
-		add(p);
-	}
-}*/
+	  /* public class GameNote1 extends JFrame {
+	    // private static final long serialVersionUID = 1L;
+	    private JTable table;
+
+	    public GameNote1() {
+	        Object[] columnNames = {"구분", "종류", "메모"};
+	        Object[][] data = {
+	            {"용의자", false, ""},
+	            {"무기", false, ""},
+	            {"방",  false, ""}
+	        };
+	        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+	        table = new JTable(model) {
+
+	            private static final long serialVersionUID = 1L;
+
+	            @Override
+	            public Class getColumnClass(int column) {
+	                switch (column) {
+	                    case 0:
+	                        return String.class;
+	                    case 1:
+	                        return Boolean.class;  
+	                    default:
+	                        return String.class;
+	                }
+	            }
+	        };
+	        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+	        JScrollPane scrollPane = new JScrollPane(table);
+	        getContentPane().add(scrollPane);
+	    }
+
+	    public static void main(String[] args) {
+	        SwingUtilities.invokeLater(new Runnable() {
+
+	            @Override
+	            public void run() {
+	            	GameNote1 frame = new GameNote1();
+	                frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	                frame.pack();
+	                frame.setLocation(150, 150);
+	                frame.setVisible(true);
+	            }
+	        });
+	    }*/
