@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class GameArea extends JPanel{
 	Image backImg;
+
 	JPanel gridBoard;
 	
 	public GameArea(){
@@ -25,5 +26,7 @@ public class GameArea extends JPanel{
 	@Override
 	protected void paintComponent(Graphics g) {
 		g.drawImage(backImg, 0, 0, getWidth(), getHeight(),this);
-		}
+	}
 }
+
+

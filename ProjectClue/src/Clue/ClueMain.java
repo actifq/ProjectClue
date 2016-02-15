@@ -9,6 +9,7 @@ public class ClueMain extends JFrame implements ActionListener{
 	GameWaitingRoom gwr=new GameWaitingRoom();
 	Login login=new Login();
 	GameMainScreen mainScreen=new GameMainScreen();
+
 	LoadingTest loading;
 	
 	
@@ -19,12 +20,12 @@ public class ClueMain extends JFrame implements ActionListener{
 		card=new CardLayout();
 		setLayout(card);
 		
-		
+
 		add("MS",mainScreen);
 		add("LOG",login);
 		add("GWR",gwr);
 		add("LS",loading);
-		
+
 		setSize(1200,900);
 		setVisible(true);
 		setResizable(false);

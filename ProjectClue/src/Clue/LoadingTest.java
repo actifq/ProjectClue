@@ -19,7 +19,7 @@ public class LoadingTest extends JPanel implements Runnable{
 		setLayout(null);
 		prg.setBounds(300,500,500,30);
 		add(prg);  
-		new Thread(this).start();
+		
 		
 	}
 	

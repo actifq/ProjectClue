@@ -4,24 +4,25 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
-public class GameMainScreen extends JPanel {
+public class GameMainScreen extends JPanel{
 	Image back;
-	JPanel jpLogo,jpTurn,jpGameBoard,jpDice,jpNote1;
+	JPanel jpLogo,jpTurn,jpGameBoard,jpDice,jpNote1,jpNote2,jpNote3;
 	JTextArea ta;
 	JTextField ChatInput;
 	JButton b;
 	
 	public GameMainScreen() {
 		back=Toolkit.getDefaultToolkit().getImage(" ");
-		jpLogo=new JPanel();	// 배너
-		jpTurn=new JPanel();	//턴화면
-		jpGameBoard=new GameArea();		//게임화면
-		jpDice=new JPanel();	//주사위
-		jpNote1=new GameNote();
-		jpNote1.setLayout(new FlowLayout());
-		/*JScrollPane js1=new JScrollPane(jpNote1);
-		js1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);*/
-		//jpNote1.setBackground(Color.gray);		//추리노트
+		jpLogo=new JPanel();// 배너
+		jpTurn=new JPanel();//턴화면
+		jpGameBoard=new GameArea();//게임화면
+		jpDice=new JPanel();//주사위
+		
+		//추리노트
+		jpNote1=new GameNote_js();
+		jpNote2=new GameNote_js2();
+		jpNote3=new GameNote_js3();
+
 		
 		//채팅
 		ta=new JTextArea();
@@ -43,6 +44,11 @@ public class GameMainScreen extends JPanel {
 		jpNote3.setBounds(865, 485, 320, 185);*/
 		
 		
+		jpNote1.setBounds(865, 105, 320, 186);
+		jpNote2.setBounds(865, 295, 320, 186);
+		jpNote3.setBounds(865, 485, 320, 186);
+		
+	
 		add(jpLogo);
 		add(jpTurn);
 		add(jpGameBoard);
@@ -51,9 +57,8 @@ public class GameMainScreen extends JPanel {
 		add(ChatInput);
 		add(b);
 		add(jpNote1);
-		/*add(jpNote2);
-		add(jpNote3);*/
-		//add(js1);
+		add(jpNote2);
+		add(jpNote3);
 		
 	}
 	@Override

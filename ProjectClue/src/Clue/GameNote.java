@@ -1,149 +1,49 @@
+
 package Clue;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.table.*;
-
+import javax.swing.text.html.HTML;
 
 public class GameNote extends JPanel{
-	JPanel jpNote1;
-	/*JTextField[] nt=new JTextField[23];
-	//JTextField nt1,nt2;
-	JCheckBox[] cb=new JCheckBox[23];*/
-	JTable table;
-	DefaultTableModel model;
-	TableColumn column;
 	
-	//@SuppressWarnings("deprecation")
+	JPanel jpNote1,jpNote2,jpNote3;
+	JTextField nt1,nt2,nt3,nt4,nt5,nt6,
+				nt7,nt8,nt9,nt10,nt11,nt12;
+	JCheckBox sus1,sus2,sus3,sus4,sus5,sus6;
+	
+	
 	public GameNote() {
-
-			Object[] col={"구분", "종류", "메모"};
-	        Object[][] row = {
-	   
-	            {"용의자", false, ""},	
-	            {"무기", false, ""},
-	            {"방",  false, ""}
-	        };
-	        model=new DefaultTableModel(row,col){
-				public boolean isCellEditable(int r,int c){
-					return false;
-				}
-	        };
-	        DefaultTableModel model = new DefaultTableModel(row, col);
-	        table = new JTable(model) {
-
-	            //private static final long serialVersionUID = 1L;
-
-	            @Override
-	            public Class getColumnClass(int col) {
-	                switch (col) {
-	                    case 0:
-	                        return String.class;
-	                    case 1:
-	                        return Boolean.class;  
-	                    default:
-	                        return String.class;
-	                }
-	            }
-	        };
-	       
-			table.getTableHeader().setReorderingAllowed(false);		//column 위치 고정
-			table.getTableHeader().setResizingAllowed(false); 	//column 크기 고정
-	       // table.setPreferredScrollableViewportSize(table.);
-	        JScrollPane scrollPane = new JScrollPane(table);
-	        //getContentPane().add(scrollPane);
-	        add(scrollPane);
-	        
-	        for(int i=0;i<col.length;i++){		//column 크기 지정
-				DefaultTableCellRenderer rnd=new DefaultTableCellRenderer();
-				column=table.getColumnModel().getColumn(i);
-				if(i==0){
-					column.setPreferredWidth(30);
-					rnd.setHorizontalAlignment(JLabel.CENTER);	//default는 LEFT정렬
-				}else if(i==1){
-					column.setPreferredWidth(10);
-					rnd.setHorizontalAlignment(JLabel.CENTER);
-				}else if(i==2){
-					column.setPreferredWidth(100);
-				}
-				column.setCellRenderer(rnd);
-			}
-	    }
-			/*JLabel lb1 = new JLabel("용의자");
-			JLabel lb2 = new JLabel("무기");
-			JLabel lb3 = new JLabel("장소");
-			//lb1.setFont(new Font("맑은 고딕", Font.BOLD, 11));
-			cb[0]=new JCheckBox("고현정");
-			cb[1]=new JCheckBox("길태미");
-			cb[2]=new JCheckBox("오달수");
-			cb[3]=new JCheckBox("신민아");
-			cb[4]=new JCheckBox("이준기");
-			cb[5]=new JCheckBox("김혜수");
-			cb[6]=new JCheckBox("활  ");
-			cb[7]=new JCheckBox("삽  ");
-			cb[8]=new JCheckBox("비소 ");
-			cb[9]=new JCheckBox("은장도");
-			cb[10]=new JCheckBox("밧줄 ");
-			cb[11]=new JCheckBox("부지깽이");
-			cb[12]=new JCheckBox("절구공이");
-			cb[13]=new JCheckBox("곡괭이");
-			cb[14]=new JCheckBox("뒷간 ");
-			cb[15]=new JCheckBox("헛간 ");
-			cb[16]=new JCheckBox("안채 ");
-			cb[17]=new JCheckBox("텃밭 ");
-			cb[18]=new JCheckBox("툇마루 ");
-			cb[19]=new JCheckBox("부엌 ");
-			cb[20]=new JCheckBox("곳간 ");
-			cb[21]=new JCheckBox("서재 ");
-			cb[22]=new JCheckBox("사랑방 ");
 			
-			JScrollPane js1=new JScrollPane(jpNote1);
-			js1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-			js1.setSize(new Dimension(320,570));
+			JLabel lb1 = new JLabel(" 용의자");
+			JLabel lb2 = new JLabel(" ");
+			lb1.setFont(new Font("", Font.BOLD, 13));
+			sus1=new JCheckBox("고현정");
+			sus2=new JCheckBox("길태미");
+			sus3=new JCheckBox("오달수");
+			sus4=new JCheckBox("신민아");
+			sus5=new JCheckBox("오달수");
+			sus6=new JCheckBox("신민아");
+			nt1=new JTextField();
+			nt2=new JTextField();
+			nt3=new JTextField();
+			nt4=new JTextField();
+			nt5=new JTextField();
+			nt6=new JTextField();
 			
-			//배치
-			//lb1.setBounds(870, 115, 50, 30);
-			//js1.setBounds(865, 105, 320, 570);
-			js2.setBounds(865, 295, 320, 185);
-			js3.setBounds(865, 485, 320, 185);
 			
-			//add(js1);
-			add(js2);
-			add(js3);
+			setLayout(new GridLayout(8,0,0,2));
 			
-			setLayout(null);
-			for(int i=0;i<cb.length;i++){
-				if(i<6){
-					//lb1.setBounds(870, 105, 30, 10);
-					//add(lb1);
-					//cb[i].setBounds(870, 115+(i*10) , 30, 10);
-					add(cb[i]);
-					nt[i]=new JTextField(20);
-					//nt[i].setBounds(870, 115+(10*i), 50, 10);
-					add(nt[i]);
-				}else if(i<14){
-					//lb2.setBounds(870, 105, 30, 10);
-					//add(lb2);
-					//cb[i].setBounds(870, 115, 50, 30);
-					add(cb[i]);
-					nt[i]=new JTextField(20);
-					//nt[i].setBounds(870, 115+(10*i), 50, 10);
-					add(nt[i]);
-				}else{
-					//lb3.setBounds(870, 105, 30, 10);
-					//add(lb3);
-					//cb[i].setBounds(870, 115, 50, 30);
-					add(cb[i]);
-					nt[i]=new JTextField(20);
-					//nt[i].setBounds(870, 115+(10*i), 50, 10);
-					add(nt[i]);
-				}
-			}
-			*/
+			add(lb1); add(lb2);
+			add(sus1); add(nt1);
+			add(sus2); add(nt2);
+			add(sus3); add(nt3);
+			add(sus4); add(nt4);
+			add(sus5); add(nt5);
+			add(sus6); add(nt6);
+			
+	}
 
-	/*private Container getContentPane() {
-		// TODO Auto-generated method stub
-		return null;
-	}*/
 
 }
+
