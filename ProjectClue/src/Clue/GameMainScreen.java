@@ -1,5 +1,7 @@
 package Clue;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 
 import javax.swing.*;
@@ -8,7 +10,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
-public class GameMainScreen extends JPanel{
+import java.net.MalformedURLException;
+public class GameMainScreen extends JPanel implements ActionListener{
 	
 	Image back;
 	Image dice1,dice2; //Á¤¼±
@@ -24,7 +27,9 @@ public class GameMainScreen extends JPanel{
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
+	AudioClip clip;
 	
+	GameWaitingRoom gwr= new GameWaitingRoom();
 	
 
 	public GameMainScreen() {
@@ -78,7 +83,15 @@ public class GameMainScreen extends JPanel{
 		add(ChatInput);
 		add(b);
 
-		
+		try {
+            File file = new File("wav/Game_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 		
 	}
 	
@@ -114,6 +127,15 @@ public class GameMainScreen extends JPanel{
 	
 	public void showCount(){
 		jlshowCnt.setText(String.valueOf(game.gp.getCount()));
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==gwr.btnReady)
+		{
+			clip.play();
+		}
 	}
 	
 }
