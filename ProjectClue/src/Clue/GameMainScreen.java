@@ -84,7 +84,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		add(b);
 
 		try {
-            File file = new File("wav/Game_bgm.wav");
+            File file = new File("wav/Game_bgm_low.wav");
             clip = Applet.newAudioClip(file.toURL());
             clip.stop();
             

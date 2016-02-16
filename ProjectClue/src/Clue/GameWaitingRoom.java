@@ -85,7 +85,7 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 		add(p);
 		
 		try {
-            File file = new File("wav/GameWaitingRoom_bgm.wav");
+            File file = new File("wav/GameWaitingRoom_bgm_low.wav");
             clip = Applet.newAudioClip(file.toURL());
             clip.stop();
             
