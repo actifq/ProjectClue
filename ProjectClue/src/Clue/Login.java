@@ -69,7 +69,7 @@ public class Login extends JPanel implements ActionListener{
 		
 		
 		 try {
-	            File file = new File("wav/login_bgm.wav");
+	            File file = new File("wav/login_bgm_low.wav");
 	            clip = Applet.newAudioClip(file.toURL());
 	            clip.play();
 	            
