@@ -89,6 +89,8 @@ public class WaitRoom extends JPanel implements ActionListener{
 		add(movie);
 		add(p);
 		
+		login.b1.addActionListener(this);
+		
 		try {
             File file = new File("wav/WaitingRoom_bgm.wav");
             clip = Applet.newAudioClip(file.toURL());

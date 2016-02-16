@@ -65,6 +65,8 @@ public class Login extends JPanel implements ActionListener{
 		add(la2); add(pf);
 		add(p);
 		
+		b1.addActionListener(this);
+		
 		
 		 try {
 	            File file = new File("wav/login_bgm.wav");
@@ -76,6 +78,7 @@ public class Login extends JPanel implements ActionListener{
 	            e.printStackTrace();
 	        }
 	}
+	
 	
 
 	
