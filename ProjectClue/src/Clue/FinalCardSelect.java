@@ -1,20 +1,23 @@
 package Clue; 
 import java.awt.*; 
-import javax.swing.*; 
+import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.LineBorder;
+
 import java.awt.event.*; 
  
-public class CardSelect extends JPanel{ 
+public class FinalCardSelect extends JPanel implements ActionListener{ 
    Image back; 
-   JTextField wp;//무기 
-   JTextField sp;//용의자 
-   JTextField r;//방 
+   JLabel wp;//무기 
+   JLabel sp;//용의자 
+   JLabel r;//방 
    JLabel k;//죽임 
    JButton[] p= new JButton[9]; 
    JButton[] q=new JButton[9];  
    JButton[] j=new JButton[9]; 
    JButton st;//추리 제안 
 
-	public CardSelect() 
+	public FinalCardSelect() 
 	   { 
 	   back=Toolkit.getDefaultToolkit().getImage("image/gwrback1.jpg"); 
 	    
@@ -61,13 +64,20 @@ public class CardSelect extends JPanel{
 		{
 			j[i]=new JButton();
 			p3.add(j[i]);
+			
 		}
 		p3.setOpaque(false);
 	    
-	   r=new JTextField("어디에서"); 
-	   sp=new JTextField("누가"); 
-	   wp=new JTextField("무엇으로"); 
-	   k=new JLabel("죽였다!!",JLabel.RIGHT); 
+	   r=new JLabel("어디에서", JLabel.CENTER);
+	   r.setBorder(new BevelBorder(WHEN_FOCUSED));
+	   sp=new JLabel("누가", JLabel.CENTER); 
+	   sp.setBorder(new BevelBorder(WHEN_FOCUSED));
+	   wp=new JLabel("무엇으로", JLabel.CENTER); 
+	   wp.setBorder(new BevelBorder(WHEN_FOCUSED));
+	   
+	   
+	   k=new JLabel("죽였다!!", JLabel.RIGHT);
+	   k.setFont(new Font("맑은 고딕", Font.BOLD, 15));
 	   st=new JButton("추리 제안"); 
 	    
 	   JPanel p4=new JPanel(); 
@@ -108,11 +118,22 @@ public class CardSelect extends JPanel{
 		
 	}
 
-
 	public Image setImage(String filename, int width, int height){
 			ImageIcon i = new ImageIcon(filename);
 			Image image=i.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
 			
 			return image;
      }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==j)
+		{
+			for(int i=0;i<p.length;i++)
+			{
+				r=setIcon(new ImageIcon(setImage("image/room/room"+i+".jpg",j[0].getWidth(),j[i].getHeight())));
+			}
+		}
+	}
 }

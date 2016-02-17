@@ -30,15 +30,8 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 	private Dice dice;//160206 정선 추가
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
+	FinalCardSelect fcs=new FinalCardSelect(); //160216 정선 추가
 	
-	MusicManager mm=new MusicManager();//160214 정선 추가
-	
-	
-
-
-	
-	
-
 	
 	public ClueMain()
 	{	
@@ -52,6 +45,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 		add("MS",mainScreen);
 		add("LD",loading); //160204정선추가
 		add("CS",cs);
+		add("FCS",fcs);
 		
 		setSize(1200,900);
 		setVisible(true);
@@ -163,6 +157,7 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 				
 		}else if(e.getSource()==cs.st){
 			repaint();
+
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 			
@@ -178,13 +173,19 @@ public class ClueMain extends JFrame implements ActionListener,KeyListener{
 			//mainScreen.mc.show(getParent(), "GB");
 		}else if(e.getSource()==reachRoom.b1){
 			repaint();
+			
 			card.show(getContentPane(), "CS");
+			cs.setCardImg();
+			reachRoom.setVisible(false);
+		}
+		else if(e.getSource()==reachRoom.b2)
+		{
+			repaint();
+			card.show(getContentPane(), "FCS");
+			fcs.setCardImg();
 			reachRoom.setVisible(false);
 		}
 	}
-
-	
-	
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
