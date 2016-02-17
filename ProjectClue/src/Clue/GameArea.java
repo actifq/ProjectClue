@@ -38,10 +38,9 @@ public class GameArea extends JPanel{
 	protected void paintComponent(Graphics g) {
 		g.drawImage(backImg, 0, 0, getWidth(), getHeight(),this);
 		for(int i=0; i<Game.p.length; i++){
-			if(i==Game.crrPlayer){
-				g.drawImage(horse[i], DFT_X+(BLOCK_WIDTH*crrX), DFT_Y+(BLOCK_WIDTH*crrY), this);
-			}
-			else 
+			
+				//g.drawImage(horse[i], DFT_X+(BLOCK_WIDTH*crrX), DFT_Y+(BLOCK_WIDTH*crrY), this);
+			
 				g.drawImage(horse[i], DFT_X+(BLOCK_WIDTH*Game.p[i].crrX), DFT_Y+(BLOCK_WIDTH*Game.p[i].crrY), this);
 			
 			

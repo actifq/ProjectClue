@@ -5,12 +5,15 @@ public class PlayerDTO {
 	String id;
 	int crrX,crrY;
 	int numCanGo;
+	int charIndex;
 	int[] cards=new int[5];
 	
 	
 
-	public PlayerDTO(String id, int[] cards){
-		this.id = id;
+	public PlayerDTO(int charIndex, int[] cards){
+		this.charIndex= charIndex;
+		this.id = RefData.nameChar[charIndex];
+		
 		crrX = 6;
 		crrY = 6;
 		numCanGo=0;
@@ -48,6 +51,11 @@ public class PlayerDTO {
 
 	public int[] getCards() {
 		return cards;
+	}
+
+
+	public int getCharIndex() {
+		return charIndex;
 	}
 
 	

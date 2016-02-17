@@ -14,6 +14,7 @@ public class GamePlayer {
 	GamePlayer(Game game){
 		this.game=game;
 		
+		
 	}
 	
 	public void keyReleased(KeyEvent e){
@@ -62,12 +63,14 @@ public class GamePlayer {
 		int isChanged=0;
 		if(crrX+inputX>=0 && crrX+inputX<13){
 			crrX=crrX+inputX;
+			game.pMain.crrX=crrX;
 			GameArea.crrX=crrX;
 			isChanged++;
 		}
 		
 		if(crrY+inputY>=0 && crrY+inputY<13){
 			crrY=crrY+inputY;
+			game.pMain.crrY=crrY;
 			GameArea.crrY=crrY;
 			isChanged++;
 		}

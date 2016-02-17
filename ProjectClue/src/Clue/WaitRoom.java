@@ -19,11 +19,10 @@ public class WaitRoom extends JPanel implements ActionListener{
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
-
 	AudioClip clip;
 	
 	Login login=new Login();
-
+	JScrollBar bar;
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -44,6 +43,7 @@ public class WaitRoom extends JPanel implements ActionListener{
 		ta=new JTextPane();
 		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
+		bar=js3.getVerticalScrollBar();
 		tf=new JTextField();
 		box=new JComboBox();
 		box.addItem("white");
@@ -100,6 +100,7 @@ public class WaitRoom extends JPanel implements ActionListener{
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
+
 	}
 	@Override
 	//paint, paintComponent => 자동호출

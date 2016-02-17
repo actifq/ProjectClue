@@ -108,7 +108,6 @@ public class CardSelect extends JPanel{
 		
 	}
 
-
 	public Image setImage(String filename, int width, int height){
 			ImageIcon i = new ImageIcon(filename);
 			Image image=i.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

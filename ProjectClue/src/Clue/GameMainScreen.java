@@ -14,9 +14,9 @@ import java.net.MalformedURLException;
 public class GameMainScreen extends JPanel implements ActionListener{
 	
 	Image back;
-	Image dice1,dice2; //정선
+	Image dice1,dice2,jpTurn; //정선
 	Image jpLogo; //정선
-	JPanel jpTurn,jpCount;
+	JPanel jpCount;
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 
@@ -42,7 +42,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		
-		jpTurn=new JPanel();//턴이미지화면
+		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar.jpg");//턴이미지화면
 		
 		jlshowCnt = new JLabel("0");
 		jlshowCnt.setFont(new Font("맑은고딕",Font.BOLD,50));
@@ -64,8 +64,9 @@ public class GameMainScreen extends JPanel implements ActionListener{
 
 		setLayout(null);
 
-		jpTurn.setBounds(865, 10, 90, 90);
-		jpCount.setBounds(955, 10, 180, 90);
+
+		//jpTurn.setBounds(865, 10, 90, 90);
+		jpCount.setBounds(995, 10, 140, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
 		jsMemo.setBounds(865, 105, 320, 570);
 		jsChatArea.setBounds(5, 680, 600, 160);
@@ -73,7 +74,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
 		
-		add(jpTurn);
+		//add(jpTurn);
 		add(jpCount);
 		add(jpGameBoard);
 
@@ -102,7 +103,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		g.drawImage(dice1, 1140, 10, this);//정선추가 160207
 		g.drawImage(dice2, 1140, 55, this);//정선추가 160207
 		g.drawImage(jpLogo, 5, 10, this);//정선추가 160211
-
+		g.drawImage(jpTurn,865, 10,this);
 	}
 	//서버에서 받아와야 하는 것->플레이어 번호, 캐릭터카드 인덱스 ,id
 	
@@ -121,6 +122,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 
 	}
 	public void setImage(){
+		jpTurn=Toolkit.getDefaultToolkit().getImage("image/player/schar"+game.getpMain().getCharIndex()+".jpg");
 		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice1+ ".png");
 		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d" + Game.dice2+ ".png");
 	}
