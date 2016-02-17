@@ -132,7 +132,7 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 		{
 			for(int i=0;i<p.length;i++)
 			{
-				r=setIcon(new ImageIcon(setImage("image/room/room"+i+".jpg",j[0].getWidth(),j[i].getHeight())));
+				//r=setIcon(new ImageIcon(setImage("image/room/room"+i+".jpg",j[0].getWidth(),j[i].getHeight())));
 			}
 		}
 	}
