@@ -7,7 +7,8 @@ public class Login extends JPanel{
 	Image back;
 	JLabel la1,la2;
 	JTextField tf;
-	JPasswordField pf;
+	//JPasswordField pf;
+	JTextField tf2;
 	JButton b1,b2;
 	// 저장 (초기화)
 	/*
@@ -19,7 +20,9 @@ public class Login extends JPanel{
 	 */
 	public Login() 
 	{
-		back=Toolkit.getDefaultToolkit().getImage("image/background.gif");
+
+		back=Toolkit.getDefaultToolkit().getImage("image/back/background.gif");
+
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
 		la1.setFont(new Font("Arial", Font.BOLD, 14));
@@ -27,7 +30,8 @@ public class Login extends JPanel{
 		la2.setForeground(Color.WHITE);
 		la2.setFont(new Font("Arial", Font.BOLD, 14));
 		tf=new JTextField();
-		pf=new JPasswordField();
+		//pf=new JPasswordField();
+		tf2=new JTextField();
 		b1=new JButton("로그인");
 		b2=new JButton("회원가입");
 		
@@ -42,10 +46,11 @@ public class Login extends JPanel{
 		la1.setBounds(490, 480, 30, 30);
 		tf.setBounds(520, 480, 150, 30);
 		la2.setBounds(490, 515, 30, 30);
-		pf.setBounds(520, 515, 150, 30);
+		//pf.setBounds(520, 515, 150, 30);
+		tf2.setBounds(520, 515, 150, 30);
 		// 추가
 		add(la1); add(tf);
-		add(la2); add(pf);
+		add(la2); add(tf2);
 		add(p);
 	}
 	@Override

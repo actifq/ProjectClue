@@ -10,18 +10,28 @@ public class LoadingTest extends JPanel implements Runnable{
 	ClueMain cm;
 	public LoadingTest(ClueMain cm) {
 		this.cm=cm;
+<<<<<<< HEAD
 		back=Toolkit.getDefaultToolkit().getImage("image/loadingBack.gif");
+=======
+
+		back=Toolkit.getDefaultToolkit().getImage("image/back/loadingbr.gif");
+>>>>>>> refs/remotes/origin/kyung-eun
 		
 		prg=new JProgressBar(0,100);
 		prg.setValue(0);  
 		prg.setStringPainted(true);  
 	      
 		setLayout(null);
-		prg.setBounds(300,500,500,30);
+		prg.setBounds(100,800,1000,40);
 		add(prg);  
+<<<<<<< HEAD
 		
 		
+=======
+
+>>>>>>> refs/remotes/origin/kyung-eun
 	}
+	
 	
 
 	public void iterate(){  
@@ -31,8 +41,14 @@ public class LoadingTest extends JPanel implements Runnable{
 		  if(i==100)
 		  {
 			  cm.card.show(cm.getContentPane(), "MS");
+			  cm.mainScreen.gameStart();
 		  }
+<<<<<<< HEAD
 		  try{Thread.sleep(40);}catch(Exception e){}  
+=======
+		  try{Thread.sleep(55);}catch(Exception e){}  
+
+>>>>>>> refs/remotes/origin/kyung-eun
 		}  
 		}  
 	
