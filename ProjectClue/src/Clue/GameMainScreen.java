@@ -23,7 +23,6 @@ public class GameMainScreen extends JPanel{
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 	JTable table;
->>>>>>> refs/remotes/origin/kyung-eun
 	JTextArea ta;
 	JTextField ChatInput;
 	JButton b;
@@ -31,10 +30,8 @@ public class GameMainScreen extends JPanel{
 	JLabel jlshowCnt;
 	JFrame jfTurn;
 	
-	
-
 	public GameMainScreen() {
-<<<<<<< HEAD
+
 		back=Toolkit.getDefaultToolkit().getImage(" ");
 		jpLogo=new JPanel();// 배너
 		jpTurn=new JPanel();//턴화면
@@ -46,12 +43,8 @@ public class GameMainScreen extends JPanel{
 		jpNote2=new GameNote_js2();
 		jpNote3=new GameNote_js3();
 
-=======
-
 		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
-		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
->>>>>>> refs/remotes/origin/kyung-eun
-		
+		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");	
 		
 		jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -73,24 +66,7 @@ public class GameMainScreen extends JPanel{
 		ChatInput=new JTextField();		//채팅입력창
 		b=new JButton("입력");	//채팅창
 		
-		
-<<<<<<< HEAD
-		setLayout(null);
-		jpLogo.setBounds(5, 10, 850, 90);
-		jpTurn.setBounds(865, 10, 320, 90);
-		jpGameBoard.setBounds(5, 105, 850, 570);
-		jsChatArea.setBounds(5, 680, 850, 160);
-		jpDice.setBounds(865, 680, 320, 185);
-		ChatInput.setBounds(5, 840, 790, 25);
-		b.setBounds(795, 840, 60, 25);
-		jpNote1.setBounds(865, 105, 320, 570);
-		/*jpNote2.setBounds(865, 295, 320, 185);
-		jpNote3.setBounds(865, 485, 320, 185);*/
-=======
 		jfTurn= new JFrame("주사위");
->>>>>>> refs/remotes/origin/kyung-eun
-		
-<<<<<<< HEAD
 		
 		jpNote1.setBounds(865, 105, 320, 186);
 		jpNote2.setBounds(865, 295, 320, 186);
@@ -99,12 +75,8 @@ public class GameMainScreen extends JPanel{
 	
 		add(jpLogo);
 		add(jpTurn);
-=======
 
 		setLayout(null);
-		
-		
-
 		
 		//jpTurn.setBounds(865, 10, 90, 90);
 		jpCount.setBounds(995, 10, 140, 90);
@@ -118,26 +90,17 @@ public class GameMainScreen extends JPanel{
 		
 		//add(jpTurn);
 		add(jpCount);
->>>>>>> refs/remotes/origin/kyung-eun
 		add(jpGameBoard);
-<<<<<<< HEAD
-		add(jpDice);
-=======
 
 		add(jsMemo);
 		add(jpMyCard);
->>>>>>> refs/remotes/origin/kyung-eun
 		add(jsChatArea);
 		add(ChatInput);
 		add(b);
-<<<<<<< HEAD
+
 		add(jpNote1);
 		add(jpNote2);
 		add(jpNote3);
-=======
-
-		
->>>>>>> refs/remotes/origin/kyung-eun
 		
 	}
 	

@@ -2,13 +2,11 @@ package Clue;
 
 import java.awt.*;
 import javax.swing.*;
-<<<<<<< HEAD
-=======
+
 import javax.swing.text.*;
 
 import com.sist.common.Function;
 
->>>>>>> refs/remotes/origin/kyung-eun
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
@@ -18,13 +16,6 @@ public class ClueMain extends JFrame implements ActionListener,
 KeyListener,Runnable,MouseListener{
 
 	CardLayout card;
-<<<<<<< HEAD
-	GameWaitingRoom gwr=new GameWaitingRoom();
-	Login login=new Login();
-	GameMainScreen mainScreen=new GameMainScreen();
-
-	LoadingTest loading;
-=======
 	GameWaitingRoom gwr = new GameWaitingRoom();
 	Login login = new Login();
 	GameMainScreen mainScreen = new GameMainScreen();
@@ -36,9 +27,6 @@ KeyListener,Runnable,MouseListener{
 	
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
->>>>>>> refs/remotes/origin/kyung-eun
-	
-	
 	
 	 // 소켓 연결시도
 	 
@@ -56,19 +44,8 @@ KeyListener,Runnable,MouseListener{
 
 		card = new CardLayout();
 		setLayout(card);
-<<<<<<< HEAD
-		
 
-		add("MS",mainScreen);
-=======
->>>>>>> refs/remotes/origin/kyung-eun
 		add("LOG",login);
-<<<<<<< HEAD
-		add("GWR",gwr);
-		add("LS",loading);
-
-		setSize(1200,900);
-=======
 		add("WR", wait);
 		add("GWR", gwr);
 		add("MS", mainScreen);
@@ -76,34 +53,10 @@ KeyListener,Runnable,MouseListener{
 		add("CS", cs);
 
 		setSize(1200, 900);
->>>>>>> refs/remotes/origin/kyung-eun
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-<<<<<<< HEAD
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==login.b1)
-		{
-			card.show(getContentPane(),"GWR");
-		}
-		else if(e.getSource()==gwr.chatInput)
-		{
-			String data= gwr.chatInput.getText();
-			gwr.chat.append(data+"\n");
-			gwr.chatInput.setText("");
-		}
-		else if(e.getSource()==gwr.btnReady)
-		{	
-			repaint();
-			
-			card.show(getContentPane(), "LS");
-
-		}else if(e.getSource()==gwr.btnExit){
-=======
 		login.b1.addActionListener(this);
 
 		login.b2.addActionListener(this);// 160211 정선추가
@@ -311,7 +264,6 @@ KeyListener,Runnable,MouseListener{
 			new Thread(loading).start(); // 160204 정선추가
 
 		} else if (e.getSource() == gwr.btnExit) {
->>>>>>> refs/remotes/origin/kyung-eun
 			repaint();
 			card.previous(getContentPane());
 		}

@@ -16,8 +16,6 @@ public class GameWaitingRoom extends JPanel {
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
 
 	
-<<<<<<< HEAD
-=======
     JTextField t1=new JTextField();
     JTextField t2=new JTextField();
     JTextField t3=new JTextField();
@@ -30,14 +28,8 @@ public class GameWaitingRoom extends JPanel {
 	JButton chr1, chr2, chr3, chr4, chr5, chr6, chrN;
 
 	
->>>>>>> refs/remotes/origin/kyung-eun
 	public GameWaitingRoom(){
-<<<<<<< HEAD
 
-		back3=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
-
-		//game user
-=======
 		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 
 		p1 = Toolkit.getDefaultToolkit().getImage("image/player/char0.jpg");
@@ -50,7 +42,6 @@ public class GameWaitingRoom extends JPanel {
 		
 
 		//게임 유저
->>>>>>> refs/remotes/origin/kyung-eun
 		title=new JPanel();
 
 		//title.setBackground(Color.darkGray);
