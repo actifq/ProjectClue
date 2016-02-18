@@ -120,6 +120,7 @@ KeyListener,Runnable,MouseListener{
 		// 서버로부터 응답값을 받아서 처리
 
 		new Thread(this).start();// run 돈다.
+		
 	}
 
 	public static void main(String[] args) {

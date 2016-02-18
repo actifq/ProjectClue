@@ -122,29 +122,7 @@ public class WaitRoom extends JPanel implements ActionListener{
 		
 =======*/
 
-		for(int i=0;i<col1.length;i++)
-		{
-			 column=table1.getColumnModel().getColumn(i);
-			 DefaultTableCellRenderer rend=
-					 new DefaultTableCellRenderer();
-			 if(i==0)
-			 {
-				 column.setPreferredWidth(250);
-				 rend.setHorizontalAlignment(JLabel.LEFT);
-			 }
-			 if(i==1)
-			 {
-				 column.setPreferredWidth(100);
-				 rend.setHorizontalAlignment(JLabel.CENTER);
-			 }
-			 if(i==2)
-			 {
-				 column.setPreferredWidth(100);
-				 rend.setHorizontalAlignment(JLabel.CENTER);
-			 }
-			 column.setCellRenderer(rend);
-		}
-
+		
 //>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
 
 	}
