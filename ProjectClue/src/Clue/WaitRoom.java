@@ -19,17 +19,31 @@ public class WaitRoom extends JPanel implements ActionListener{
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
+
 	AudioClip clip;
 	
 	Login login=new Login();
+
+	JScrollBar bar;
+
 	
 	
 	public WaitRoom() {
-		back=Toolkit.getDefaultToolkit().getImage("image/gwrback.jpg");
+		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 		String[] col1={"방이름","공개/비공개","인원"};
 		String[][] row1=new String[0][3];
-		model1=new DefaultTableModel(row1, col1);
+		model1=new DefaultTableModel(row1, col1){
+		     public boolean isCellEditable(int r,int c)
+		     {
+		    	 return false;
+		     }
+		     };
 		table1=new JTable(model1);
+		table1.getTableHeader().setReorderingAllowed(false);
+		table1.setRowHeight(30);
+		table1.setShowVerticalLines(false);
+		table1.setIntercellSpacing(new Dimension(0,0));
+		
 		JScrollPane js1=new JScrollPane(table1);
 		
 		
@@ -43,6 +57,7 @@ public class WaitRoom extends JPanel implements ActionListener{
 		ta=new JTextPane();
 		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
+		bar=js3.getVerticalScrollBar();
 		tf=new JTextField();
 		box=new JComboBox();
 		box.addItem("white");
@@ -88,6 +103,7 @@ public class WaitRoom extends JPanel implements ActionListener{
 		add(movie);
 		add(p);
 		
+
 		try {
             File file = new File("wav/WaitingRoom_bgm_low.wav");
             clip = Applet.newAudioClip(file.toURL());
@@ -97,6 +113,40 @@ public class WaitRoom extends JPanel implements ActionListener{
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
+
+/*<<<<<<< HEAD
+		tf.setEnabled(false);
+		js1.setEnabled(false);
+		js2.setEnabled(false);
+		js3.setEnabled(false);
+		
+=======*/
+
+		for(int i=0;i<col1.length;i++)
+		{
+			 column=table1.getColumnModel().getColumn(i);
+			 DefaultTableCellRenderer rend=
+					 new DefaultTableCellRenderer();
+			 if(i==0)
+			 {
+				 column.setPreferredWidth(250);
+				 rend.setHorizontalAlignment(JLabel.LEFT);
+			 }
+			 if(i==1)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 if(i==2)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 column.setCellRenderer(rend);
+		}
+
+//>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
+
 	}
 	@Override
 	//paint, paintComponent => 자동호출

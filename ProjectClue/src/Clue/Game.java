@@ -3,6 +3,7 @@ package Clue;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.Random;
 
@@ -11,16 +12,17 @@ import javax.swing.JLabel;
 
 public class Game{
 	
-	
 	GamePlayer gp=new GamePlayer(this);
 	GameArea gv;
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
 	static int dice1=1,dice2=1;
-	static PlayerDTO[] p;
+	PlayerDTO pMain;
+	PlayerDTO[] p;
 	static int crrPlayer; 
 	JFrame frTurn;
 	private Random random;
+	
 /*	public Game(){
 		answerCard=selectAnswerCard();	//정답카드
 		distributeCard(answerCard, pCard); //플레이어카드
@@ -31,10 +33,12 @@ public class Game{
 		p[3]= new PlayerDTO("고현정",pCard[3]);
 		
 		crrPlayer=0;
-	}*/
+	}
+	*/
 	
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
+		
 		this.gv=gv;
 		frTurn=fr;
 		answerCard=selectAnswerCard();	//정답카드
@@ -42,28 +46,27 @@ public class Game{
 		
 		
 		//플레이어 초기화 수정필요=> 대기실에서 데이터 가져와야함.
-		p[0]= new PlayerDTO("신민아",pCard[0]);
-		p[1]= new PlayerDTO("오달수",pCard[1]);
-		p[2]= new PlayerDTO("길태미",pCard[2]);
-		p[3]= new PlayerDTO("고현정",pCard[3]);
+		p[0]= new PlayerDTO(0,pCard[0]);
+		p[1]= new PlayerDTO(1,pCard[1]);
+		p[2]= new PlayerDTO(2,pCard[2]);
+		p[3]= new PlayerDTO(3,pCard[3]);
+		
+		pMain=new PlayerDTO(p[0].getCharIndex(),pCard[0]);
 		
 		crrPlayer=0;
 		
 		setGamePlayer(crrPlayer,runDice());
 		
-		
-		
 	}
 
-	
 	
 	public int runDice() {
 		// TODO Auto-generated method stub
 		
 		random= new Random(System.currentTimeMillis());
 		
-		dice1=random.nextInt(5)+1;
-		dice2=random.nextInt(5)+1;
+		dice1=random.nextInt(6)+1;
+		dice2=random.nextInt(6)+1;
 		/*frTurn = new JFrame("주사위");
 		frTurn.setSize(300, 300);
 		Container contentPane = frTurn.getContentPane();
@@ -74,6 +77,13 @@ public class Game{
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
 		*/
+		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+		try {
+			Thread.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
 		frTurn.setVisible(true);
 		
@@ -83,6 +93,12 @@ public class Game{
 
 	
 	
+
+	public PlayerDTO getpMain() {
+		return pMain;
+	}
+
+
 
 	public int getDice1() {
 		return dice1;
@@ -97,22 +113,9 @@ public class Game{
 
 
 	public void move(){
-		gp.move();		
+		gp.move(gv);		
 		
 	}
-
-
-	/*테스트용
-	 * public static void main(String args[]){
-		Game g  = new Game();
-		for(int i=0;i<4; i++){
-			for(int j=0;j<5;j++){
-				System.out.print(g.pCard[i][j]+" ");
-			}
-			System.out.println();
-		}
-		
-	}*/
 
 	
 	public int process()  {
@@ -122,7 +125,15 @@ public class Game{
 			if(roomNum!=0){
 				return roomNum;
 			}
-			isTurn();
+			if(gp.getCount()==0){
+				
+				
+				savePlayerStatus();
+				setGamePlayer(crrPlayer,runDice());
+				
+				
+			}
+			//isTurn();
 			return 0;
 		
 	}
@@ -130,12 +141,11 @@ public class Game{
 	public void isTurn() {
 		// TODO Auto-generated method stub
 		if(gp.getCount()==0){
-			//JOptionPane.showMessageDialog(this, "더이상 이동할 수 없습니다.","더이상 이동할 수 없습니다.",JOptionPane.YES_NO_OPTION);
-			System.out.println("더이상 이동할 수 없습니다.");
+			
 			
 			savePlayerStatus();
 			setGamePlayer(crrPlayer,runDice());
-			//System.exit(0);
+			
 			
 		}
 	}
@@ -224,11 +234,20 @@ public class Game{
 	}*/
 	
 	//현재플레이의 좌표값과 count값을 배열에서 불러와 설정
-	public void setGamePlayer(int pNum, int dice){
+	/*public void setGamePlayer(int pNum, int dice){
 		p[pNum].setNumCanGo(dice);
 		gp.setCrrX(p[pNum].crrX);
 		gp.setCrrY(p[pNum].crrY);
 		gp.setCount(dice);
 		
+	}*/
+	public void setGamePlayer(int pNum, int dice){
+		pMain=p[pNum];
+		pMain.setNumCanGo(dice);
+		gp.setCrrX(pMain.crrX);
+		gp.setCrrY(pMain.crrY);
+		gp.setCount(dice);
+		
 	}
+	
 }
