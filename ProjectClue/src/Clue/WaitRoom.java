@@ -1,15 +1,8 @@
 package Clue;
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.net.MalformedURLException;
-
 import javax.swing.*;
 import javax.swing.table.*;
-public class WaitRoom extends JPanel implements ActionListener{
+public class WaitRoom extends JPanel {
 	Image back;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
@@ -19,10 +12,9 @@ public class WaitRoom extends JPanel implements ActionListener{
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
-	AudioClip clip;
-	
-	Login login=new Login();
 	JScrollBar bar;
+	TableColumn column;
+	
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -99,32 +91,44 @@ public class WaitRoom extends JPanel implements ActionListener{
 		add(movie);
 		add(p);
 		
-		login.b1.addActionListener(this);
+/*<<<<<<< HEAD
+		tf.setEnabled(false);
+		js1.setEnabled(false);
+		js2.setEnabled(false);
+		js3.setEnabled(false);
 		
-		try {
-            File file = new File("wav/WaitingRoom_bgm_low.wav");
-            clip = Applet.newAudioClip(file.toURL());
-            clip.stop();
-            
-           
-        } catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+=======*/
 
+		for(int i=0;i<col1.length;i++)
+		{
+			 column=table1.getColumnModel().getColumn(i);
+			 DefaultTableCellRenderer rend=
+					 new DefaultTableCellRenderer();
+			 if(i==0)
+			 {
+				 column.setPreferredWidth(250);
+				 rend.setHorizontalAlignment(JLabel.LEFT);
+			 }
+			 if(i==1)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 if(i==2)
+			 {
+				 column.setPreferredWidth(100);
+				 rend.setHorizontalAlignment(JLabel.CENTER);
+			 }
+			 column.setCellRenderer(rend);
+		}
+
+//>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
 	}
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 
-	}
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==login.b1)
-		{
-			clip.play();
-		}
 	}
 }
 

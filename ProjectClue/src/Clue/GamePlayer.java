@@ -36,7 +36,7 @@ public class GamePlayer {
 		case KeyEvent.VK_RIGHT:
 			inputX=1;
 			break;
-		default: //´Ù¸¥ Å° ´­·¶À» ¶§
+		default: //Â´Ã™Â¸Â¥ Ã…Â° Â´Â­Â·Â¶Ã€Â» Â¶Â§
 			count++;
 		}
 		count--;
@@ -84,7 +84,7 @@ public class GamePlayer {
 	}
 	public int isReached(){
 		int roomNo=0;
-		//¹æ1~3
+		//Â¹Ã¦1~3
 		if(crrY==0){
 			if(crrX==1){
 				roomNo=1;

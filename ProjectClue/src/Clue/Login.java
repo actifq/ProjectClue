@@ -2,29 +2,14 @@ package Clue;
 
 
 import javax.swing.*;
-
-import java.applet.Applet;
-import java.applet.AudioClip;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.sound.sampled.*;
-import java.io.File;
-import java.net.MalformedURLException;
-
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
-public class Login extends JPanel implements ActionListener{
+public class Login extends JPanel{
 	Image back;
 	JLabel la1,la2;
 	JTextField tf;
 	//JPasswordField pf;
 	JTextField tf2;
 	JButton b1,b2;
-	AudioClip clip;
-	
 	// 저장 (초기화)
 	/*
 	 *   JPanel => 로딩
@@ -37,7 +22,7 @@ public class Login extends JPanel implements ActionListener{
 	{
 
 		back=Toolkit.getDefaultToolkit().getImage("image/back/background.gif");
-		
+
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
 		la1.setFont(new Font("Arial", Font.BOLD, 14));
@@ -67,40 +52,11 @@ public class Login extends JPanel implements ActionListener{
 		add(la1); add(tf);
 		add(la2); add(tf2);
 		add(p);
-		
-		b1.addActionListener(this);
-		
-		
-		 try {
-	            File file = new File("wav/login_bgm.wav");
-	            clip = Applet.newAudioClip(file.toURL());
-	            clip.play();
-	            
-	           
-	        } catch (MalformedURLException e){
-	            e.printStackTrace();
-	        }
 	}
-	
-	
-
-	
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {
 		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 	}
-
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(e.getSource()==b1)
-		{
-			clip.stop();
-		}
-	}
-
 	
 }

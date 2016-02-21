@@ -17,7 +17,7 @@ public class PlayerDTO {
 		crrX = 6;
 		crrY = 6;
 		numCanGo=0;
-		this.cards=cards.clone();//Ä«µåÀÎµ¦½º º¹Á¦.
+		this.cards=cards.clone();//Ã„Â«ÂµÃ¥Ã€ÃÂµÂ¦Â½Âº ÂºÂ¹ÃÂ¦.
 	}
 	
 	

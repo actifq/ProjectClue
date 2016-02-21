@@ -1,18 +1,18 @@
-package Clue; 
-import java.awt.*; 
-import javax.swing.*; 
-import java.awt.event.*; 
- 
-public class CardSelect extends JPanel{ 
-   Image back; 
-   JTextField wp;//무기 
-   JTextField sp;//용의자 
-   JTextField r;//방 
-   JLabel k;//죽임 
-   JButton[] p= new JButton[9]; 
-   JButton[] q=new JButton[9];  
-   JButton[] j=new JButton[9]; 
-   JButton st;//추리 제안 
+package Clue;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class CardSelect extends JPanel{
+   Image back;
+   JTextField wp;//무기
+   JTextField sp;//용의자
+   JTextField r;//방
+   JLabel k;//죽임
+   JButton[] p= new JButton[9];
+   JButton[] q=new JButton[9]; 
+   JButton[] j=new JButton[9];
+   JButton st;//추리 제안
 
 public CardSelect()
    {
@@ -95,5 +95,16 @@ public void setCardImg(){
 		  
 	   }
 }
+
+	
+	public Image setImage(String filename, int width, int height){
+		ImageIcon ii = new ImageIcon(filename);
+		Image image=ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
+		
+		return image;
+	}
+
+
+
 
 }
