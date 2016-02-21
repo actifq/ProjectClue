@@ -79,6 +79,7 @@ public class Join_Login extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==b1)
 		{
+			JOptionPane.showMessageDialog(b1, "회원가입 완료");
 			setVisible(false);
 		}
 		else if(e.getSource()==b2)

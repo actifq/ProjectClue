@@ -96,12 +96,4 @@ public void setCardImg(){
 	   }
 }
 
-
-	
-	public Image setImage(String filename, int width, int height){
-		ImageIcon ii = new ImageIcon(filename);
-		Image image=ii.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
-		
-		return image;
-	}
 }

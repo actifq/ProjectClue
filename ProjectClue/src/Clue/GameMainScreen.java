@@ -61,9 +61,8 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		
 		jfTurn= new JFrame("주사위");
 		
-
 		setLayout(null);
-		
+
 		//jpTurn.setBounds(865, 10, 90, 90);
 		jpCount.setBounds(995, 10, 140, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
@@ -72,7 +71,7 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		jpMyCard.setBounds(610, 680, 575, 185);
 		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
-
+		
 		//add(jpTurn);
 		add(jpCount);
 		add(jpGameBoard);
@@ -139,4 +138,5 @@ public class GameMainScreen extends JPanel implements ActionListener{
 		}
 	}
 	
+
 }

@@ -15,31 +15,17 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 	
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,aa1,aa2,aa3,aa4,bb1,bb2,bb3,bb4;
-	JPanel[] imgP={aa1,aa2,aa3,aa4};
-	
-	
 	JTextArea chat;
 	JTextField chatInput;
-	
+
 	JButton btnReady,btnExit,insert;//160211 정선 수정 (JComboBox삭제->JButton insert추가/하위box관련항목 수정)
 	AudioClip clip;
 
 	WaitRoom wait=new WaitRoom();
-
-    JTextField t1=new JTextField();
-    JTextField t2=new JTextField();
-    JTextField t3=new JTextField();
-    JTextField t4=new JTextField();
-
-	
-	JTextField[] idtf={t1,t2,t3,t4};
-	boolean[] sw=new boolean[4];
-
 	JButton chr1, chr2, chr3, chr4, chr5, chr6, chrN;
 
-
-	
 	public GameWaitingRoom(){
+
 		back3=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 
 		p1 = Toolkit.getDefaultToolkit().getImage("image/player/char0.jpg");
@@ -48,12 +34,10 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 		p4 = Toolkit.getDefaultToolkit().getImage("image/player/char3.jpg");
 		p5 = Toolkit.getDefaultToolkit().getImage("image/player/char4.jpg");
 		p6 = Toolkit.getDefaultToolkit().getImage("image/player/char5.jpg");
-		
-		
 
 		//게임 유저
-		title=new JPanel();
 
+		title=new JPanel();
 		//title.setBackground(Color.darkGray);
 		title.add(new JLabel(new ImageIcon(setImage("image/back/jplogo2.png", 1185, 35))));
 		
@@ -64,8 +48,6 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 		uPan1.setBounds(5, 45, 450, 300);
 		uPan1.setLayout(new BorderLayout());
 		uPan1.add("Center",new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", uPan1.getWidth(), uPan1.getHeight()))));
-		
-		
 		
 
 		aa1=new JPanel();
@@ -180,23 +162,6 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 		setLayout(null);
 		title.setBounds(5, 5, 1185, 35);
 
-	
-		
-  		  
-  		idtf[0].setBounds(235,45,225, 50);
-  		idtf[1].setBounds(690,45,225, 50);
-  		idtf[2].setBounds(235,347,225, 50);
-  		idtf[3].setBounds(690,347,225, 50);
-  		  
-  		add(idtf[0]);
-  		add(idtf[1]);
-  		add(idtf[2]);
-  		add(idtf[3]);
-  		
-  		
-		
-
-		
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
 		insert.setBounds(805,837,102,30);
@@ -228,6 +193,8 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
 		add(chr2);
 		add(p);
 		
+		wait.b2.addActionListener(this);
+		
 		try {
             File file = new File("wav/GameWaitingRoom_bgm_low.wav");
             clip = Applet.newAudioClip(file.toURL());
@@ -238,17 +205,6 @@ public class GameWaitingRoom extends JPanel implements ActionListener{
             e.printStackTrace();
         }
 
-
-		
-	/*	캐릭터 이미지 바꿀때
-	 * gwr.pan[i].removeAll();
-		  gwr.pan[i].setLayout(new BorderLayout());
-		  gwr.pan[i].add("Center",
-				  new JLabel(new ImageIcon("c:\\image\\"+s+avata+".gif")));
-		  gwr.pan[i].validate();//panel재배치
-*/
-
-		
 	}
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub

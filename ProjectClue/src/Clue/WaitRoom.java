@@ -19,14 +19,10 @@ public class WaitRoom extends JPanel implements ActionListener{
 	JComboBox box;
 	JPanel movie;
 	JButton b1,b2,b3,b4,b5,b6;
-
 	AudioClip clip;
 	
 	Login login=new Login();
-
 	JScrollBar bar;
-
-	
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -103,7 +99,8 @@ public class WaitRoom extends JPanel implements ActionListener{
 		add(movie);
 		add(p);
 		
-
+		login.b1.addActionListener(this);
+		
 		try {
             File file = new File("wav/WaitingRoom_bgm_low.wav");
             clip = Applet.newAudioClip(file.toURL());
@@ -113,17 +110,6 @@ public class WaitRoom extends JPanel implements ActionListener{
         } catch (MalformedURLException e){
             e.printStackTrace();
         }
-
-/*<<<<<<< HEAD
-		tf.setEnabled(false);
-		js1.setEnabled(false);
-		js2.setEnabled(false);
-		js3.setEnabled(false);
-		
-=======*/
-
-		
-//>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
 
 	}
 	@Override

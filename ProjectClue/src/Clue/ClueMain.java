@@ -7,8 +7,10 @@ import javax.swing.text.*;
 import com.sist.common.Function;
 
 import java.awt.event.*;
+
 import java.io.*;
 import java.net.*;
+
 import java.util.*;
 
 public class ClueMain extends JFrame implements ActionListener,
@@ -18,22 +20,21 @@ KeyListener,Runnable,MouseListener{
 	GameWaitingRoom gwr = new GameWaitingRoom();
 	Login login = new Login();
 	GameMainScreen mainScreen = new GameMainScreen();
+
 	CardSelect cs = new CardSelect();
 
 	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
 	ReachRoom reachRoom =new ReachRoom();
 	WaitRoom wait=new WaitRoom(); //160211 정선추가
-	
+
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
 	MusicManager mm=new MusicManager();//160214 정선 추가
 	
-	
-	
-	
-	 // 소켓 연결시도
-	 
+	FinalCardSelect fcs=new FinalCardSelect(); //160216 정선 추가
+
+	// 소켓 연결시도
 
 	Socket s;
 
@@ -50,13 +51,14 @@ KeyListener,Runnable,MouseListener{
 		setLayout(card);
 
 		add("LOG",login);
-		add("WR", wait);
-		add("GWR", gwr);
-		add("MS", mainScreen);
-		add("LD", loading); // 160204정선추가
-		add("CS", cs);
-
-		setSize(1200, 900);
+		add("WR",wait);
+		add("GWR",gwr);
+		add("MS",mainScreen);
+		add("LD",loading); //160204정선추가
+		add("CS",cs);
+		add("FCS",fcs);
+		
+		setSize(1200,900);
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -120,7 +122,6 @@ KeyListener,Runnable,MouseListener{
 		// 서버로부터 응답값을 받아서 처리
 
 		new Thread(this).start();// run 돈다.
-		
 	}
 
 	public static void main(String[] args) {
@@ -137,7 +138,6 @@ KeyListener,Runnable,MouseListener{
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
 		if (e.getSource() == login.b1) {
 			String id = login.tf.getText().trim();
 			if (id.length() < 1) {
@@ -172,7 +172,6 @@ KeyListener,Runnable,MouseListener{
 			mkr.pf.setText("");
 			mkr.pf.setVisible(false);
 			mkr.box.setSelectedIndex(0);
-
 			mkr.setVisible(true);
 
 		}//160211 정선추가 
@@ -255,7 +254,11 @@ KeyListener,Runnable,MouseListener{
 
 		}
 
-		
+		else if (e.getSource() == mkr.b1) {
+			repaint();
+			card.show(getContentPane(), "GWR");
+			mkr.setVisible(false);
+		} // 160211 정선추가
 
 		// ################## GameWaitngRoom   // gwr 160217 찬재추가
 
@@ -301,6 +304,7 @@ KeyListener,Runnable,MouseListener{
 
 		} else if (e.getSource() == cs.st) {
 			repaint();
+
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 
@@ -314,8 +318,16 @@ KeyListener,Runnable,MouseListener{
 			// mainScreen.mc.show(getParent(), "GB");
 		} else if (e.getSource() == reachRoom.b1) {
 			repaint();
+			
 			card.show(getContentPane(), "CS");
 			cs.setCardImg();
+			reachRoom.setVisible(false);
+		}
+		else if(e.getSource()==reachRoom.b2)
+		{
+			repaint();
+			card.show(getContentPane(), "FCS");
+			fcs.setCardImg();
 			reachRoom.setVisible(false);
 		}
 
