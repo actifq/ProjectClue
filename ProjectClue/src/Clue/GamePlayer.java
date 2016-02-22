@@ -100,7 +100,7 @@ public class GamePlayer {
 		}else if(crrY==12){
 			if(crrX==9)
 				roomNo=6;
-			else if(crrX==3)
+			else if(crrX==2)
 				roomNo=7;
 			
 		}else if(crrX==0){

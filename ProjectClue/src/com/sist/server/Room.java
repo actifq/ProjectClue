@@ -7,6 +7,8 @@ public class Room {
      int current;
      int noPlayer;
      Vector<Server.ClientThread> userVc=new Vector<Server.ClientThread>();
+
+	 int rdyCnt;
      public Room(String rn,String rs,String rp,int max)
      {
     	 roomName=rn;
@@ -14,6 +16,6 @@ public class Room {
     	 roomPwd=rp;
     	 maxcount=max;
     	 current=1;
-    	 
+    	 rdyCnt=0;
      }
 }

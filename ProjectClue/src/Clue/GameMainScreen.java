@@ -4,6 +4,11 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
+
+import com.sist.note.GameNote_js;
+import com.sist.note.GameNote_js2;
+import com.sist.note.GameNote_js3;
+
 import java.awt.event.*;
 import java.io.*;
 public class GameMainScreen extends JPanel{
@@ -12,9 +17,9 @@ public class GameMainScreen extends JPanel{
 	Image dice1,dice2,jpTurn; //정선
 	Image jpLogo; //정선
 	JPanel jpCount,jpDice,jpNote1,jpNote2,jpNote3;
+
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
-	JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
 	JButton b;
@@ -51,7 +56,7 @@ public class GameMainScreen extends JPanel{
 		
 		jpGameBoard=new GameArea();//게임화면
 		
-		JScrollPane jsMemo=new JScrollPane(table);//메모카드
+		
 		jpMyCard=new ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);		//채팅창
@@ -59,37 +64,35 @@ public class GameMainScreen extends JPanel{
 		b=new JButton("입력");	//채팅창
 		
 		jfTurn= new JFrame("주사위");
-		
-		jpNote1.setBounds(865, 105, 320, 186);
-		jpNote2.setBounds(865, 295, 320, 186);
-		jpNote3.setBounds(865, 485, 320, 186);
-		
-	
-		//add(jpLogo);
-		//add(jpTurn);
+		//추리노트
+		 		
+		jpNote1=new GameNote_js();
+ 		jpNote2=new GameNote_js2();
+ 		jpNote3=new GameNote_js3();
 
 		setLayout(null);
 		
 		//jpTurn.setBounds(865, 10, 90, 90);
 		jpCount.setBounds(995, 10, 140, 90);
 		jpGameBoard.setBounds(5, 105, 850, 570);//게임화면
-		jsMemo.setBounds(865, 105, 320, 570);
+		
 		jsChatArea.setBounds(5, 680, 600, 160);
 		jpMyCard.setBounds(610, 680, 575, 185);
 		ChatInput.setBounds(5, 840, 540, 25);
 		b.setBounds(545, 840, 60, 25);
-		
+		jpNote1.setBounds(865, 105, 320, 186);
+		jpNote2.setBounds(865, 295, 320, 186);
+		jpNote3.setBounds(865, 485, 320, 186);
 		
 		//add(jpTurn);
 		add(jpCount);
 		add(jpGameBoard);
 
-		add(jsMemo);
 		add(jpMyCard);
 		add(jsChatArea);
 		add(ChatInput);
 		add(b);
-
+		
 		add(jpNote1);
 		add(jpNote2);
 		add(jpNote3);

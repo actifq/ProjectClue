@@ -13,13 +13,20 @@ public class Function {
     
     public static final int ROOMADD=230;//먼저 방에 들어가 있는 사람
     public static final int MYROOMOUT=240;
-    
+
     public static final int WAITROOMUPDATE=250;
-    
     public static final int REFLUSH=260;
     
-	//채팅관련
-	public static final int WAITCHAT=500;
+	//GameWaitingRoom
+	
+	public static final int CHOOSECHAR = 600;
+	public static final int WAITCHAT=610;
+	public static final int AVATA = 620;
+	public static final int READY = 630;
+	public static final int GETREADY = 640;
+	public static final int STARTGAME = 700;
+	public static final int ALLREADY = 650;
+
 	
 	
 	//게임관련
