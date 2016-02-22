@@ -1,3 +1,4 @@
+
 package com.sist.note;
 
 import java.awt.*;
@@ -21,15 +22,14 @@ public class GameNote extends JPanel{
 			sus2=new JCheckBox("길태미");
 			sus3=new JCheckBox("오달수");
 			sus4=new JCheckBox("신민아");
-			sus5=new JCheckBox("오달수");
-			sus6=new JCheckBox("신민아");
+			sus5=new JCheckBox("이준기");
+			sus6=new JCheckBox("김혜수");
 			nt1=new JTextField();
 			nt2=new JTextField();
 			nt3=new JTextField();
 			nt4=new JTextField();
 			nt5=new JTextField();
 			nt6=new JTextField();
-			
 			
 			setLayout(new GridLayout(8,0,0,2));
 			
@@ -45,3 +45,4 @@ public class GameNote extends JPanel{
 
 
 }
+

@@ -50,11 +50,9 @@ public class GameArea_InnerBoard extends JPanel{
 					g2.fillRect(i*SIZE, j*SIZE, SIZE, SIZE);
 					g2.setColor(Color.BLACK);
 				}else{
-								
-				
+							
 					g2.drawRect(i*SIZE, j*SIZE, SIZE, SIZE);
 					//
-					
 							
 				}
 				
@@ -62,7 +60,6 @@ public class GameArea_InnerBoard extends JPanel{
 		}
 		//여기까지
 				
-		
 		g2.fillRect(6*(SIZE), 6*(SIZE), SIZE, SIZE);
 		g2.drawImage(board, 0, 0, getWidth(), getHeight(), this);
 		

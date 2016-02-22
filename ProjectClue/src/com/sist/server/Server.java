@@ -308,9 +308,7 @@ public class Server implements Runnable{
  				   break;
  				   
  				   case Function.STARTGAME:
- 					   
- 				  
- 				  
+ 					 
  					  }
 
 				} catch (Exception ex) {
@@ -324,7 +322,6 @@ public class Server implements Runnable{
 				out.write((msg+"\n").getBytes());//데이터 넘길 때 쓰는 것,.바이트로 넘김. 역슬래쉬로 끝냄
 				
 			}catch(Exception ex){}
-			
 		}
 		//전체적으로
 		public synchronized void messageAll(String msg){//순차적으로 보내야하니까 동기화로.

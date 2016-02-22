@@ -17,11 +17,11 @@ public class GameNote2 extends JPanel{
 		wp1=new JCheckBox("활");
 		wp2=new JCheckBox("삽");
 		wp3=new JCheckBox("비소");
-		wp4=new JCheckBox("은장도");
-		wp5=new JCheckBox("활");
-		wp6=new JCheckBox("삽");
-		wp7=new JCheckBox("비소");
-		wp8=new JCheckBox("은장도");
+		wp4=new JCheckBox("밧줄");
+		wp5=new JCheckBox("곡괭이");
+		wp6=new JCheckBox("은장도");
+		wp7=new JCheckBox("절구공이");
+		wp8=new JCheckBox("부지깽이");
 		nt7=new JTextField();
 		nt8=new JTextField();
 		nt9=new JTextField();

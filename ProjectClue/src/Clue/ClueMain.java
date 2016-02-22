@@ -44,11 +44,11 @@ KeyListener,Runnable,MouseListener{
 
 		card = new CardLayout();
 		setLayout(card);
-		
+		add("MS", mainScreen);
 		add("LOG",login);
 		add("WR", wait);
 		add("GWR", gwr);
-		add("MS", mainScreen);
+		
 		add("LD", loading); // 160204정선추가
 		add("CS", cs);
 
