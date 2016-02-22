@@ -4,22 +4,14 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.table.*;
-<<<<<<< HEAD
-
-public class GameMainScreen extends JPanel{
-	Image back;
-	JPanel jpLogo,jpTurn,jpGameBoard,jpDice,jpNote1,jpNote2,jpNote3;
-=======
 import java.awt.event.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 public class GameMainScreen extends JPanel{
 	
 	Image back;
 	Image dice1,dice2,jpTurn; //정선
 	Image jpLogo; //정선
-	JPanel jpCount;
+	JPanel jpCount,jpDice,jpNote1,jpNote2,jpNote3;
 	ShowMyCard jpMyCard;
 	GameArea jpGameBoard;
 	JTable table;
@@ -33,8 +25,8 @@ public class GameMainScreen extends JPanel{
 	public GameMainScreen() {
 
 		back=Toolkit.getDefaultToolkit().getImage(" ");
-		jpLogo=new JPanel();// 배너
-		jpTurn=new JPanel();//턴화면
+		//jpLogo=new JPanel();// 배너
+		//jpTurn=new JPanel();//턴화면
 		jpGameBoard=new GameArea();//게임화면
 		jpDice=new JPanel();//주사위
 		
@@ -73,8 +65,8 @@ public class GameMainScreen extends JPanel{
 		jpNote3.setBounds(865, 485, 320, 186);
 		
 	
-		add(jpLogo);
-		add(jpTurn);
+		//add(jpLogo);
+		//add(jpTurn);
 
 		setLayout(null);
 		
