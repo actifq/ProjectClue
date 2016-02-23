@@ -14,7 +14,6 @@ public class WaitRoom extends JPanel {
 	JButton b1,b2,b3,b4,b5,b6;
 	JScrollBar bar;
 	TableColumn column;
-
 	
 	public WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -90,7 +89,7 @@ public class WaitRoom extends JPanel {
 		add(box);
 		add(movie);
 		add(p);
-		
+
 /*<<<<<<< HEAD
 		tf.setEnabled(false);
 		js1.setEnabled(false);

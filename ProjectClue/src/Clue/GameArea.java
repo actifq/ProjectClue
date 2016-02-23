@@ -23,10 +23,9 @@ public class GameArea extends JPanel{
 
 
 		backImg=Toolkit.getDefaultToolkit().getImage("image/back/boardBack.png");
-		for(int i=0;i<horse.length;i++){
-			
+
+		for(int i=0;i<4;i++){
 		horse[i]=Toolkit.getDefaultToolkit().getImage("image/player/horse"+(i+1)+".png");
-		
 		}
 		
 

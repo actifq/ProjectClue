@@ -15,13 +15,14 @@ public class GameWaitingRoom extends JPanel {
 	*/
 	Image back3;
 	Image p1,p2,p3,p4,p5,p6,qc;
-	
+
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,bb1,bb2,bb3,bb4;
+
 	JPanel CntDwn;
+
 	JPanel[] aa= new JPanel[4];
 	int pnum; //플레이어 넘버
-
 	
 	JTextArea chat;
 	JTextField chatInput;
@@ -34,7 +35,9 @@ public class GameWaitingRoom extends JPanel {
     JTextField t4=new JTextField();
     
     JTextField[] avaName= new JTextField[4];
+
     JTextField[] isReady= new JTextField[4];
+
 	
 	JTextField[] idtf={t1,t2,t3,t4};
 	boolean[] sw=new boolean[4];
@@ -67,7 +70,6 @@ public class GameWaitingRoom extends JPanel {
 		uPan1.setBounds(5, 45, 450, 300);
 		uPan1.setLayout(new BorderLayout());
 		uPan1.add("Center",new JLabel(new ImageIcon(setImage("image/back/cardback.jpg", uPan1.getWidth(), uPan1.getHeight()))));
-		
 		
 		aa[0]=new JPanel();
 		aa[0].setOpaque(false);
@@ -139,7 +141,6 @@ public class GameWaitingRoom extends JPanel {
 		bb4.setBounds(682, 362, 220, 295);
 		bb4.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		//add(bb4);
-		
 	
 		//채팅창
 		chat=new JTextArea();
@@ -189,6 +190,7 @@ public class GameWaitingRoom extends JPanel {
 		avaName[1]= new JTextField("?");
 		avaName[2]= new JTextField("?");
 		avaName[3]= new JTextField("?");
+
 		
 		isReady[0]= new JTextField("");
 		isReady[1]= new JTextField("");
@@ -234,7 +236,6 @@ public class GameWaitingRoom extends JPanel {
   		CntDwn.setBounds(510, 330, 171, 250);
   		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
 
-		
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
 		insert.setBounds(805,837,102,30);
@@ -250,7 +251,6 @@ public class GameWaitingRoom extends JPanel {
 		
 		
 		add(title);
-
 		add(chr[0]);
 		add(chr[1]);
 		add(chr[2]);
@@ -258,7 +258,7 @@ public class GameWaitingRoom extends JPanel {
 		add(chr[4]);
 		add(chr[5]);
 		add(chr[6]);
-
+		
 		add(uPan1);
 		add(uPan2);
 		add(uPan3);
@@ -268,7 +268,7 @@ public class GameWaitingRoom extends JPanel {
 		add(insert);
 		
 		add(p);
-		
+
 	/*	캐릭터 이미지 바꿀때
 	 * gwr.pan[i].removeAll();
 		  gwr.pan[i].setLayout(new BorderLayout());

@@ -4,6 +4,7 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+
 import com.sist.common.Function;
 
 public class Server implements Runnable{
@@ -49,6 +50,7 @@ public class Server implements Runnable{
 		String id,name,sex,pos;
 
 		int avata,pnum;
+
 		boolean ready=false;
 		
 		Socket s;
@@ -187,6 +189,23 @@ public class Server implements Runnable{
  					    }
  				   }
  				   break;
+					case Function.ROOMCHAT:
+ 				   {
+ 					    String rname=st.nextToken();
+ 					    String strMsg=st.nextToken();
+ 					    for(int i=0;i<roomVc.size();i++)
+ 					    {
+ 					    	Room room=roomVc.elementAt(i);
+ 					    	if(rname.equals(room.roomName))
+ 					    	{
+ 					    		 for(int j=0;j<room.userVc.size();j++)
+ 					    		 {
+ 					    			  ClientThread c=room.userVc.elementAt(j);
+ 					    			  c.messageTo(Function.ROOMCHAT+"|["+name+"]"+strMsg);
+ 					    		 }
+ 					    	}
+ 					    }
+ 				   }
  				   case Function.ROOMOUT:
  				   {
  					   
@@ -296,17 +315,135 @@ public class Server implements Runnable{
 						    			 break;
 						    			 }
 						    		 }
-				    				
 				    			 }
-					    		
 					    	}
 					    }
  				  
  				   break;
  				   
  				   case Function.STARTGAME:
- 					 
- 					  }
+
+ 				   {
+ 					  String rname=st.nextToken();
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	room.initGame();
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.STARTGAME+"|"+c.pnum+"|"+c.avata+"|"+room.getAnsCard()+room.getPCard());//자신의 Player 넘버와 캐릭터
+					    			 
+					    			 
+					    			c.messageTo(Function.ROOMCHAT+"|[알림] 게임이 시작되었습니다");
+					    			 
+					    		 }
+					    }
+ 				   }
+ 				  break;
+ 				   case Function.REACHROOM:
+ 				   {
+ 					  String rname=st.nextToken();
+ 					  String pnum =st.nextToken();
+ 					  String roomName=st.nextToken();
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			    			 
+					    			c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+roomName+"에 도달하였습니다");
+					    			 
+					    		 }
+					    }
+ 				   }
+ 				   break;
+ 				  case Function.GUESS:
+				   {
+					  String rname=st.nextToken();					  
+					  int roomNum=Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.SELECTCARD+"|"+pnum+"|"+avata+"|"+roomNum);
+					    			
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				 case Function.MOVE:
+				   {
+					  String rname=st.nextToken();					  
+					  int pnum=Integer.parseInt(st.nextToken());
+					  int key=Integer.parseInt(st.nextToken());
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.MOVE+"|"+pnum+"|"+key);
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+key+"누름");
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				case Function.SETTURN:
+				   {
+					  String rname=st.nextToken();					  
+					 
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	room.runDice();
+					    		 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.SETTURN+"|"+(pnum-1)+"|"+room.dice1+"|"+room.dice2);
+					    			 //currPlayer+dice1+dice2
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)턴");
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				case Function.FINISHTURN:
+				   {
+					  String rname=st.nextToken();					  
+					 
+					    
+					    for(int i=0;i<roomVc.size();i++)
+					    {
+					    	Room room=roomVc.elementAt(i);
+					    	 	 for(int j=0;j<room.userVc.size();j++)
+					    		 {
+					    			 ClientThread c=room.userVc.elementAt(j);
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] +"+pnum+"P턴이 종료되었습니다.");
+					    			 c.messageTo(Function.FINISHTURN+"|");
+					    			 if(c.pnum==(pnum%4)+1){
+					    				 c.messageTo(Function.MYTURN+"|"+c.pnum);
+					    			
+					    			 }
+					    			 
+					    		 }
+					    }
+				   }
+				   break;
+ 				    }
 
 				} catch (Exception ex) {
 					
