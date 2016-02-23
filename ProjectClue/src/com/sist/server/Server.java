@@ -6,8 +6,6 @@ import java.io.*;
 
 import com.sist.common.Function;
 
-
-
 public class Server implements Runnable{
 	Vector<ClientThread> waitVC=new Vector<ClientThread>();//접속자 정보 저장
 	Vector<Room> roomVc=new Vector<Room>();//방정보 저장 
@@ -298,7 +296,6 @@ public class Server implements Runnable{
 						    			 break;
 						    			 }
 						    		 }
-				    				
 				    				
 				    			 }
 					    		

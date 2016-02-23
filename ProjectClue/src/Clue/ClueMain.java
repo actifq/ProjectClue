@@ -28,7 +28,6 @@ KeyListener,Runnable,MouseListener{
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	
-
 	 // 소켓 연결시도
 	 
 	Socket s;
