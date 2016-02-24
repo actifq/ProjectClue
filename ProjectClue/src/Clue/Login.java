@@ -25,10 +25,10 @@ public class Login extends JPanel{
 
 		la1=new JLabel("ID");
 		la1.setForeground(Color.WHITE);
-		la1.setFont(new Font("Arial", Font.BOLD, 14));
-		la2=new JLabel("PW");
+		la1.setFont(new Font("맑은 고딕", Font.BOLD, 14));
+		la2=new JLabel("대화명");
 		la2.setForeground(Color.WHITE);
-		la2.setFont(new Font("Arial", Font.BOLD, 14));
+		la2.setFont(new Font("맑은 고딕", Font.BOLD, 14));
 		tf=new JTextField();
 		//pf=new JPasswordField();
 		tf2=new JTextField();
@@ -38,16 +38,16 @@ public class Login extends JPanel{
 		JPanel p=new JPanel(); // FlowLayout
 		p.add(b1);
 		p.add(b2);
-		p.setBounds(520, 555, 150, 35);
+		p.setBounds(550, 555, 150, 35);
 		p.setOpaque(false);
 		// 배치
 		//setLayout(new GridLayout(3, 2 , 5 , 5)); //뒤쪽 5(좌우간격),5(위아래간격)
 		setLayout(null); //사용자 지정
-		la1.setBounds(490, 480, 30, 30);
-		tf.setBounds(520, 480, 150, 30);
-		la2.setBounds(490, 515, 30, 30);
+		la1.setBounds(490, 480, 50, 30);
+		tf.setBounds(540, 480, 150, 30);
+		la2.setBounds(490, 515, 50, 30);
 		//pf.setBounds(520, 515, 150, 30);
-		tf2.setBounds(520, 515, 150, 30);
+		tf2.setBounds(540, 515, 150, 30);
 		// 추가
 		add(la1); add(tf);
 		add(la2); add(tf2);
