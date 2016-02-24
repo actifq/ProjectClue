@@ -26,7 +26,7 @@ KeyListener,Runnable,MouseListener{
 	
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
-	
+	ShowTurn  jfTurn=new ShowTurn();
 	
 	
 	 // 소켓 연결시도
@@ -36,10 +36,11 @@ KeyListener,Runnable,MouseListener{
 
 	BufferedReader in;	//서버에서 값을 읽는다
 	OutputStream out;	//서버로 요청값을 보낸다.
-	
+	int n=0;
 	 
     String myRoom,myId;
 
+   int myNum;
 
 	public ClueMain() {
 
@@ -59,15 +60,12 @@ KeyListener,Runnable,MouseListener{
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		login.b1.addActionListener(this);
-
 		login.b2.addActionListener(this);// 160211 정선추가
 		wait.b1.addActionListener(this);// 160211 정선추가
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
-
 		mkr.b1.addActionListener(this);// 160211 정선추가
-
     	mkr.b2.addActionListener(this);
     	wait.table1.addMouseListener(this);
     	wait.table2.addMouseListener(this);
@@ -79,6 +77,15 @@ KeyListener,Runnable,MouseListener{
 			gwr.chr[i].addActionListener(this);
 		}
 		
+		for(int i=0; i<cs.p.length; i++){
+			cs.p[i].addActionListener(this);
+		}
+		for(int i=0; i<cs.q.length; i++){
+			cs.q[i].addActionListener(this);
+		}
+		for(int i=1; i<cs.j.length; i++){
+			cs.j[i].addActionListener(this);
+		}
 		
 		mainScreen.b.addActionListener(this);	//채팅입력
 		cs.st.addActionListener(this);	//추리-카드선택
@@ -92,7 +99,10 @@ KeyListener,Runnable,MouseListener{
 		setFocusable(true);
 		reachRoom.b1.addActionListener(this);
 		reachRoom.b2.addActionListener(this);
-
+		mainScreen.ChatInput.addActionListener(this);
+		jfTurn.b1.addActionListener(this);
+		mainScreen.jpGameBoard.addMouseListener(this);
+		
 	}
 
 	// 소켓
@@ -267,13 +277,8 @@ KeyListener,Runnable,MouseListener{
 
 			gwr.btnReady.setEnabled(false);
 			
-			/*repaint();
-			 * card.show(getContentPane(), "LD"); // 160204 정선추가
-			new Thread(loading).start(); // 160204 정선추가
-*/
 		} else if (e.getSource() == gwr.btnExit) {
-			/*repaint();
-			card.previous(getContentPane());*/
+
 			try
 			{
 				 out.write((Function.ROOMOUT+"|"+myRoom+"\n").getBytes());
@@ -329,7 +334,7 @@ KeyListener,Runnable,MouseListener{
 				}catch(Exception ex){}
 
 		} else if (e.getSource() == cs.st) {
-			repaint();
+			/*repaint();
 			card.previous(getContentPane());
 			card.show(getContentPane(), "MS");
 
@@ -338,16 +343,200 @@ KeyListener,Runnable,MouseListener{
 
 			mainScreen.showCount();
 			mainScreen.setImage();
-			mainScreen.jpGameBoard.repaint();
-
-			// mainScreen.mc.show(getParent(), "GB");
+			mainScreen.jpGameBoard.repaint();*/
+			int pGiveHint=Game.crrPlayer+1;
+			String sr=cs.tfGuess[0].getText();
+			String sp=cs.tfGuess[1].getText();
+			String sw=cs.tfGuess[2].getText();
+			int hint=-1;
+			for(int i=0;i<3;i++){
+				hint=mainScreen.game.getHint(pGiveHint,sr,sp,sw);
+				if(hint>=0)
+					break;
+				else pGiveHint++;
+			}
+			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
+			try
+			{
+				 out.write((Function.HINT+"|"+myRoom+"|"+mainScreen.game.p[pGiveHint%4].id+"|"+(pGiveHint+1)%4+"|"+sr+"|"+sp+"|"+sw+"|"+hint+"\n").getBytes());
+			}catch(Exception ex){
+				System.out.println("guessing"+ex);
+			}
+			
+			
+			
+			for(int i=0; i<3;i++){
+				if(hint==i){
+					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					mainScreen.ta.append("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
+					
+					break;
+				}
+			}
+			
+			
+			
+			//채팅창
+			
+			/*need to decide the action after guessing.
+			either show up one dialog or either give a msg on chatarea*/
+			
 		} else if (e.getSource() == reachRoom.b1) {
-			repaint();
-			card.show(getContentPane(), "CS");
-			cs.setCardImg();
+			try
+			{
+				 out.write((Function.GUESS+"|"+myRoom+"|"+n+"\n").getBytes());
+			}catch(Exception ex){}
+			
+			
 			reachRoom.setVisible(false);
+		}else if(e.getSource()==mainScreen.ChatInput)
+		{
+			 String msg=mainScreen.ChatInput.getText().trim();
+			 if(msg.length()<1)
+				 return;
+			 //서버로 전송 
+			 /*
+			  *   사람 찾는다 ==> id (waitVc)
+			  *   방에 있는 사람 ==> roomName(userVc)
+			  */
+			 try
+			 {
+				 out.write((Function.ROOMCHAT+"|"+myRoom+"|"+msg+"\n").getBytes());
+				 // Server ==> in.readLine() (Thread==> run())
+				 /*
+				  *   1. 이벤트 발생 (Button,Mouse)   
+				  *      ==> 서버로 요청값 전송
+				  *      ******** 브라우저으로 클릭 , 주소 변경 
+				  *                 login.jsp?id=aaa&pwd=1234
+				  *   2. Server (통신을 담당하는 쓰레드에서 처리)
+				  *      class Client
+				  *      {
+				  *          public void run(){}
+				  *      }
+				  *      ==> 요청한 결과값을 클라이언트로 전송 
+				  *      ==> 웹서버 ==> 처리 결과를 클라이언트 브라우저로 전송
+				  *   3. run() : 서버에서 들어오는 응답을 받아서 
+				  *       윈도우에 출력 (브라우저 출력)
+				  *       
+				  *   Client ==> Server ==> Client
+				  *   오라클 
+				  *     요청 ==> 결과값 ==> 브라우저 전송(출력)
+				  *     SQL  
+				  *   웹서버
+				  *     요청 (브라우저) ==> 파일요청 ==> 
+				  *     파일 찾기 ==> 파일내용 브라우저 전송
+				  */
+			 }catch(Exception ex){}
+			 mainScreen.ChatInput.setText("");
+		}else if(e.getSource()==jfTurn.b1){
+			try
+			{
+				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
+			jfTurn.setVisible(false);
 		}
-
+		
+		
+		//########## 경은/ CS 버튼
+		
+		else if(e.getSource()==cs.p[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
+		}else if(e.getSource()==cs.p[1])
+		{
+			
+			try{ out.write((Function.CHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+2+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+3+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+4+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+5+"\n").getBytes());}catch(Exception ex){}
+		}
+	
+		
+		//############## cs/ 무기
+		else if(e.getSource()==cs.q[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			
+		}else if(e.getSource()==cs.q[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+7+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+8+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+9+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+10+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+11+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+12+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+13+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		//########### 방
+		else if(e.getSource()==cs.j[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+14+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+15+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+16+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+17+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+18+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+19+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+20+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+21+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[8])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
+		}
+	
 	}
 
 	@Override
@@ -359,24 +548,35 @@ KeyListener,Runnable,MouseListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-
-		mainScreen.game.gp.keyPressed(e);
-
+		//mainScreen.game.gp.keyPressed(e);
 		
-		int n=mainScreen.game.process();
-		if(n!=0){
-			reachRoom.setBounds(500,250,230,240);
-			try{
-			reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");}
-			catch(Exception ex){
-				
-			}
-
-			reachRoom.setVisible(true);
+		if(myNum==Game.crrPlayer){//내가 현재 플레이어일때.
+		int key=-1;
+		
+		//mainScreen.game.gp.keyPressed(e);
+		
+		switch(e.getKeyCode()){
+		case KeyEvent.VK_RIGHT:
+			key=3;
+			break;
+		case KeyEvent.VK_LEFT:
+			key=2;
+			break;
+		case KeyEvent.VK_UP:
+			key=0;
+			break;
+		case KeyEvent.VK_DOWN:
+			key=1;
+			break;
 		}
-		mainScreen.showCount();
-		mainScreen.setImage();
-		mainScreen.jpGameBoard.repaint();
+		
+		try{
+			
+			out.write((Function.MOVE+"|"+myRoom+"|"+(myNum+1)+"|"+key+"\n").getBytes());
+			}catch(Exception ex){
+			//reachRoom.setVisible(true);
+		}
+		}
 	}
 
 	@Override
@@ -455,8 +655,7 @@ KeyListener,Runnable,MouseListener{
 				{
 					 String id=st.nextToken();
 					 String sex=st.nextToken();
-					 //int pNum=Integer.parseInt(st.nextToken());
-					 //int avata=Integer.parseInt(st.nextToken());
+					 
 					 String s="";
 					 if(sex.equals("남자")) 
 						 s="m";
@@ -473,10 +672,7 @@ KeyListener,Runnable,MouseListener{
 							  break;
 						  }
 					 }
-					 //chAvata(pNum-1,avata);	//사진바꾸기
-					 //gwr.avaName[pNum-1].setText("캐릭터:"+RefData.nameChar[avata-1]);//캐릭터 바꾸기
 					 
-					//String[] temp={id,sex,avata};
 					
 				}
 				break;
@@ -510,10 +706,19 @@ KeyListener,Runnable,MouseListener{
 					 if(pnum==1){
 						 gwr.btnReady.setText("START");
 						 gwr.btnReady.setEnabled(false);
+/*<<<<<<< HEAD
 						 gwr.isReady[pnum-1].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
 						 gwr.isReady[pnum-1].setForeground(Color.PINK);
 						 gwr.isReady[pnum-1].setText("방장");
 					 }
+=======*/
+					 }
+						 gwr.isReady[0].setFont(new Font("맑은 고딕", Font.ITALIC, 20));
+						 gwr.isReady[0].setForeground(Color.PINK);
+						 gwr.isReady[0].setText("방장");
+					 
+				
+//>>>>>>> refs/heads/master
 					
 				}
 				break;
@@ -625,13 +830,42 @@ KeyListener,Runnable,MouseListener{
 					int prvChar=Integer.parseInt(st.nextToken()); //이전캐릭
 					
 					chAvata(pNum-1,charNum);	//사진바꾸기
-					gwr.avaName[pNum-1].setText("캐릭터:"+RefData.nameChar[charNum-1]);//캐릭터 바꾸기
+					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//캐릭터 바꾸기
 					gwr.chr[charNum].setEnabled(false);
 					gwr.chr[prvChar].setEnabled(true);
 					
 					break;
 				case Function.STARTGAME:
-				{
+				{	int[] ans= new int[3];
+					int[][] pCard= new int[4][5];
+					
+					int pnum=Integer.parseInt(st.nextToken());
+					int ava=Integer.parseInt(st.nextToken());
+					for(int i=0;i<ans.length;i++){
+						ans[i]=Integer.parseInt(st.nextToken());
+					}
+					for(int i=0;i<pCard.length;i++){
+						for(int j=0; j<pCard[i].length; j++){
+							pCard[i][j]=Integer.parseInt(st.nextToken());
+						}
+					}
+					
+					repaint();
+					card.show(getContentPane(), "LD"); // 160204 정선추가
+					new Thread(loading).start(); // 160204 정선추가
+					mainScreen.gameStart(); //game생성자 호출
+					mainScreen.game.setMyNum(pnum-1);
+					this.myNum=pnum-1;
+					mainScreen.game.setMyAva(ava);
+					mainScreen.game.setAnswerCard(ans);
+					mainScreen.game.setpCard(pCard);
+					
+					for(int i=1;i<=4;i++)
+						mainScreen.game.setPlayer(i, gwr.avaName[i-1].getText().trim());
+					
+					mainScreen.jpMyCard.setCardImg(mainScreen.game.pCard[pnum-1]);//0번플레이어로
+					mainScreen.showCount();
+					mainScreen.setImage();
 					
 				}
 				break;
@@ -641,9 +875,218 @@ KeyListener,Runnable,MouseListener{
 					gwr.btnReady.setEnabled(true);
 				}
 				break;
+				case Function.SELECTCARD:
+				{
+					String pnum=st.nextToken();
+					int avata= Integer.parseInt(st.nextToken());
+					int roomNo=Integer.parseInt(st.nextToken());
+					//데이터를 cs에 넘겨줘서 처리.. 누가 어디에서 추리중,.
+					for(int i=0;i<9;i++){
+						cs.j[i].setEnabled(false);
+					}
+					repaint();
+					
+					cs.guess[0].removeAll();
+					cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+					cs.guess[0].validate();//panel재배치
+					
+					cs.pl.removeAll();
+					cs.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", cs.pl.getWidth(), cs.pl.getHeight()))));
+					cs.pl.validate();//panel재배치
+					
+					cs.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
+					cs.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					card.show(getContentPane(), "CS");
+					
+					cs.setCardImg();
 				}
+				break;
+				
+				case Function.MOVE:
+				{
+					String pnum=st.nextToken();
+					int key= Integer.parseInt(st.nextToken());
+					mainScreen.game.keyPressed(key);
+					mainScreen.game.move();
+					
+					if(myNum==Game.crrPlayer){
+						n=mainScreen.game.isReached();
+					
+					if(n!=0){
+						reachRoom.setBounds(500,250,230,240);
+						try{
+						reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+						}
+						catch(Exception ex){
+							
+						}
+						reachRoom.setVisible(true);
+						
+					}
+					else if(mainScreen.game.getCount()==0){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
+						
+						
+						
+					}
+					}
+					mainScreen.showCount();
+					mainScreen.setImage();
+					mainScreen.jpGameBoard.repaint();
+					repaint();
+					
+					
+					
+					
+					repaint();
+					
+				}
+				break;
+				
+				case Function.ROOMCHAT:
+				{
+					 mainScreen.ta.append(st.nextToken()+"\n");
+				}
+				break;
+				case Function.SETTURN:
+				{
+					Game.crrPlayer=Integer.parseInt(st.nextToken());
+					Game.dice1=Integer.parseInt(st.nextToken());
+					Game.dice2=Integer.parseInt(st.nextToken());
+					mainScreen.game.setGamePlayer(Game.crrPlayer, (Game.dice1+Game.dice2));
+					//new GameThread().start();
+					mainScreen.showCount();
+					mainScreen.setImage();
+					mainScreen.jpGameBoard.repaint();
+					repaint();
+				}
+				break;
+				case Function.MYTURN:
+				{
+					showMyTurn();
+					
+				}
+				break;
+				case Function.FINISHTURN:
+				{
+					mainScreen.game.savePlayerStatus();
+					
+				}
+				break;
+				
+				case Function.CHOOSECARD:
+				{
+					int cardnum=Integer.parseInt(st.nextToken());
+					 System.out.println(cardnum);
+					try{
+					if(cardnum<6){
+						cs.guess[1].removeAll();
+						cs.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						cs.guess[1].validate();//panel재배치
+						cs.tfGuess[1].setText(RefData.nameChar[cardnum]);
+					}else if(cardnum>13){
+						cardnum=cardnum-13;
+						cs.guess[0].removeAll();
+						cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", cs.guess[2].getWidth(), cs.guess[2].getHeight()))));
+						cs.guess[0].validate();//panel재배치
+						cs.tfGuess[0].setText(RefData.nameRoom[cardnum]);
+					}else{
+						cardnum=cardnum-6;
+						cs.guess[2].removeAll();
+						cs.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						cs.guess[2].validate();//panel재배치
+						cs.tfGuess[2].setText(RefData.nameWp[cardnum]);
+					}
+					}catch(ArrayIndexOutOfBoundsException ex){
+						System.out.println("ChooseCard: "+ex.getMessage());
+					}
+					
+					
+					
+				}
+				break;
+				
+				case Function.HINT:
+				{
+					card.show(getContentPane(), "MS");
+					String avata=st.nextToken();
+					int who = Integer.parseInt(st.nextToken());
+					String r= st.nextToken();
+					String p = st.nextToken();
+					String w=  st.nextToken();
+					
+					mainScreen.jpGameBoard.setMsgText(avata,who,r,p,w);
+					
+					
+					if(myNum==Game.crrPlayer){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
+					}
+					Thread.sleep(4000);
+					mainScreen.jpGameBoard.deleteMsg();
+					
+					cs.guess[0].removeAll();
+					cs.guess[1].removeAll();
+					cs.guess[2].removeAll();
+					cs.tfGuess[0].setText("");
+					cs.tfGuess[1].setText("");
+					cs.tfGuess[2].setText("");;
+					
+				}
+				break;
+				case Function.MYHINT:
+				{
+					card.show(getContentPane(), "MS");
+					String avata=st.nextToken();
+					int who = Integer.parseInt(st.nextToken());
+					String r= st.nextToken();
+					String p = st.nextToken();
+					String w=  st.nextToken();
+					int hint=Integer.parseInt(st.nextToken());
+					if(hint==0){
+						mainScreen.jpGameBoard.setMsgText(avata,who,r,hint);
+					}else if(hint==1){
+						mainScreen.jpGameBoard.setMsgText(avata,who,p,hint);
+					}else if(hint==2){
+						mainScreen.jpGameBoard.setMsgText(avata,who,w,hint);
+					}
+					
+					try {
+						out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					
+					
+					
+					Thread.sleep(4000);
+					
+					mainScreen.jpGameBoard.deleteMsg();
+					
+					cs.guess[0].removeAll();
+					cs.guess[1].removeAll();
+					cs.guess[2].removeAll();
+					cs.tfGuess[0].setText("");
+					cs.tfGuess[1].setText("");
+					cs.tfGuess[2].setText("");;
+					
+				}
+				break;
+				}
+				
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println(e);
 			}
 		}
 	}
@@ -677,6 +1120,8 @@ KeyListener,Runnable,MouseListener{
 			}
 		
 		
+		}else if(e.getSource()==mainScreen.jpGameBoard){
+			setFocusable(true);
 		}
 	}
 
@@ -711,6 +1156,12 @@ KeyListener,Runnable,MouseListener{
 	
 		  
 	}
+	
+	public void showMyTurn(){
+				
+		jfTurn.setBounds(450,300,300,300);
+		jfTurn.setVisible(true);
+	}
 
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
@@ -721,3 +1172,15 @@ KeyListener,Runnable,MouseListener{
 	}
 
 }
+
+	
+
+
+
+
+
+
+
+
+
+

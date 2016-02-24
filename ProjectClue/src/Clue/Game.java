@@ -1,18 +1,14 @@
 package Clue;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Toolkit;
+
 import java.util.Random;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
+
 
 public class Game{
 	
-	GamePlayer gp=new GamePlayer(this);
+	
 	GameArea gv;
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
@@ -23,42 +19,25 @@ public class Game{
 	JFrame frTurn;
 	private Random random;
 	
-/*	public Game(){
-		answerCard=selectAnswerCard();	//정답카드
-		distributeCard(answerCard, pCard); //플레이어카드
-		p=new PlayerDTO[4];
-		p[0]= new PlayerDTO("신민아",pCard[0]);
-		p[1]= new PlayerDTO("오달수",pCard[1]);
-		p[2]= new PlayerDTO("길태미",pCard[2]);
-		p[3]= new PlayerDTO("고현정",pCard[3]);
-		
-		crrPlayer=0;
-	}
-	*/
-	
+	private int myNum, myAva;
+	private int crrX=6,crrY=6;
+	private int inputX=0,inputY=0;
+	private int count=0;
+
 	public Game(GameArea gv, JFrame fr){
 		p=new PlayerDTO[4];
 		
 		this.gv=gv;
 		frTurn=fr;
-		answerCard=selectAnswerCard();	//정답카드
-		distributeCard(answerCard, pCard); //플레이어카드
-		
-		
-		//플레이어 초기화 수정필요=> 대기실에서 데이터 가져와야함.
-		p[0]= new PlayerDTO(0,pCard[0]);
-		p[1]= new PlayerDTO(1,pCard[1]);
-		p[2]= new PlayerDTO(2,pCard[2]);
-		p[3]= new PlayerDTO(3,pCard[3]);
-		
-		pMain=new PlayerDTO(p[0].getCharIndex(),pCard[0]);
-		
+		pMain=p[0];
 		crrPlayer=0;
 		
-		setGamePlayer(crrPlayer,runDice());
+	}
+	
+	public void setPlayer(int pnum, String avata){
+		p[pnum-1]= new PlayerDTO(avata,pCard[pnum-1]);
 		
 	}
-
 	
 	public int runDice() {
 		// TODO Auto-generated method stub
@@ -67,25 +46,13 @@ public class Game{
 		
 		dice1=random.nextInt(6)+1;
 		dice2=random.nextInt(6)+1;
-		/*frTurn = new JFrame("주사위");
-		frTurn.setSize(300, 300);
-		Container contentPane = frTurn.getContentPane();
-		JLabel label = new JLabel(p[crrPlayer].getId()+"턴! ",JLabel.CENTER);
-		JLabel label2 = new JLabel("이동횟수: "+(dice1+dice2),JLabel.CENTER);
-		contentPane.add(label, BorderLayout.CENTER);
-		contentPane.add(label2, BorderLayout.SOUTH);		
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		frTurn.setBounds((screenSize.width - frTurn.getWidth())/2,(screenSize.height - frTurn.getHeight())/2,frTurn.getWidth(),frTurn.getHeight());
-		*/
-		//frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
+
 		try {
 			Thread.sleep(100);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		frTurn=new ShowTurn(p[crrPlayer].getId(), (dice1+dice2),gv);
-		frTurn.setVisible(true);
 		
 		return dice1+dice2;
 	}
@@ -93,6 +60,22 @@ public class Game{
 
 	
 	
+
+	public int getMyNum() {
+		return myNum;
+	}
+
+	public void setMyNum(int myNum) {
+		this.myNum = myNum;
+	}
+
+	public int getMyAva() {
+		return myAva;
+	}
+
+	public void setMyAva(int myAva) {
+		this.myAva = myAva;
+	}
 
 	public PlayerDTO getpMain() {
 		return pMain;
@@ -113,19 +96,71 @@ public class Game{
 
 
 	public void move(){
-		gp.move(gv);		
+		int isChanged=0;
+		if(crrX+inputX>=0 && crrX+inputX<13){
+			crrX=crrX+inputX;
+			pMain.crrX=crrX;
+			
+			isChanged++;
+		}
 		
+		if(crrY+inputY>=0 && crrY+inputY<13){
+			crrY=crrY+inputY;
+			pMain.crrY=crrY;
+			//GameArea.crrY=crrY;
+			
+			isChanged++;
+		}
+		
+		if(isChanged<2){
+			count++;
+		}
+		gv.setpXY(crrX, crrY);
+		inputX=0;
+		inputY=0;
+		System.out.println("move()");
+		
+	}
+	
+	public int isReached(){
+		int roomNo=0;
+		//방1~3
+		if(crrY==0){
+			if(crrX==1){
+				roomNo=1;
+			}else if(crrX==8)
+				roomNo=2;
+			else if(crrX==12)
+				roomNo=3;
+		}else if(crrX==12){
+			if(crrY==4)
+				roomNo=4;
+			else if(crrY==10)
+				roomNo=5;
+		}else if(crrY==12){
+			if(crrX==9)
+				roomNo=6;
+			else if(crrX==2)
+				roomNo=7;
+			
+		}else if(crrX==0){
+			if(crrY==9)
+				roomNo=8;
+			else if(crrY==3)
+				roomNo=9;
+		}
+		return roomNo;
 	}
 
 	
 	public int process()  {
 			move();
 			//isReached();
-			int roomNum=gp.isReached();
+			int roomNum=isReached();
 			if(roomNum!=0){
 				return roomNum;
 			}
-			if(gp.getCount()==0){
+			if(count==0){
 				
 				
 				savePlayerStatus();
@@ -140,7 +175,7 @@ public class Game{
 
 	public void isTurn() {
 		// TODO Auto-generated method stub
-		if(gp.getCount()==0){
+		if(count==0){
 			
 			
 			savePlayerStatus();
@@ -150,73 +185,20 @@ public class Game{
 		}
 	}
 	
-	//카드 봉인하기
-	public int[] selectAnswerCard(){
-		//정답카드고르기
-		int[] answer = new int[3];
-		answer[0]=(int)(Math.random()*6);//플레이어
-		answer[1]=(int)(Math.random()*8)+6;//무기
-		answer[2]=(int)(Math.random()*9)+14;//장소
-		//System.out.println(answer[0]+" "+answer[1]+" "+answer[2]+"\n");
-		return answer;
+	
+	
+	public void setAnswerCard(int[] answerCard) {
+		this.answerCard = answerCard;
 	}
 
-	//카드나눠주기 -정답카드포함 중복없는 난수뽑아 Player의 card[]에 채워주기
-	public void distributeCard(int[] answerCard, int[][] pCard){
-		
-		int[] com=new int[23];
-		for(int i=0; i<3; i++){
-			com[i]=answerCard[i];
-		}
-		//난수값 받는 변수
-		int su=0;
-		//중복여부
-		
-		boolean bDash=true;
-		
-		for(int i=3;i<com.length;i++){
-			
-			bDash=true;	/*
-			처음 while문 들어간 후 su가 난수를 받은 후에 bDash가 false가 되기 때문에 while 안의 for문 돌지않아 항상 false가 된다.
-			*/
-			while(bDash){	//중복되면 true ->계속돈다.
-			//난수발생
-			su=(int)(Math.random()*23);
-			bDash=false;
-			for(int j=0; j<i;j++){
-				if(com[j]==su){
-					bDash=true;
-					break;
-				}
-			}
-			
-			}com[i]=su;
-			//System.out.print(com[i]+" ");
-			
-		}
-	
-		for(int i=0;i<20; i++){
-			pCard[i/5][i%5] = com[i+3];
-			
-		}
-		
-		//정렬
-		for(int k=0;k<pCard.length;k++){
-				for(int i=0; i<pCard[0].length-1; i++){
-					for(int j=0; j<pCard[0].length-1-i;j++){
-						if(pCard[k][j]>pCard[k][j+1]){
-							int temp=pCard[k][j];
-							pCard[k][j]=pCard[k][j+1];
-							pCard[k][j+1]=temp;
-						}
-					}
-				}
-		}
-		
+	public void setpCard(int[][] pCard) {
+		this.pCard = pCard;
 	}
+
+
 	public void savePlayerStatus(){
-		p[crrPlayer].setCrrX(gp.getCrrX());
-		p[crrPlayer].setCrrY(gp.getCrrY());
+		p[crrPlayer].setCrrX(crrX);
+		p[crrPlayer].setCrrY(crrY);
 		p[crrPlayer].setNumCanGo(0);
 		
 		crrPlayer++;
@@ -224,29 +206,97 @@ public class Game{
 			crrPlayer=0;
 		
 	}
-	/*//방도달했을때 액션
-	public void setGamePlayer(int pNum){
-		//p[pNum].setNumCanGo(dice);
-		gp.setCrrX(p[pNum].crrX);
-		gp.setCrrY(p[pNum].crrY);
-		//gp.setCount(dice);
-		
-	}*/
-	
-	//현재플레이의 좌표값과 count값을 배열에서 불러와 설정
-	/*public void setGamePlayer(int pNum, int dice){
-		p[pNum].setNumCanGo(dice);
-		gp.setCrrX(p[pNum].crrX);
-		gp.setCrrY(p[pNum].crrY);
-		gp.setCount(dice);
-		
-	}*/
+
 	public void setGamePlayer(int pNum, int dice){
 		pMain=p[pNum];
 		pMain.setNumCanGo(dice);
-		gp.setCrrX(pMain.crrX);
-		gp.setCrrY(pMain.crrY);
-		gp.setCount(dice);
+		crrX=pMain.crrX;
+		crrY=pMain.crrY;
+		count=dice;
+		
+	}
+	
+	public void keyPressed(int  key){
+		switch(key){
+		case 0:	//KeyEvent.VK_UP
+			inputY=-1;
+			break;
+		case 1: //KeyEvent.VK_DOWN
+			inputY=1;
+			break;
+		case 2: //KeyEvent.VK_LEFT
+			inputX=-1;
+			break;
+		case 3: //KeyEvent.VK_RIGHT
+			inputX=1;
+			break;
+		default: //다른 키 눌렀을 때
+			count++;
+		}
+		count--;
+		System.out.println("keyPresser->count"+count);
+		
+	}
+
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return count;
+	}
+	
+	public void setCount(int count) {
+		// TODO Auto-generated method stub
+		this.count=count;
+	}
+	
+	public int getHint(int whoGiveHint, String room, String suspect, String weapon){
+		int r=0, sus=0, wp=0;
+		boolean br=false,bs=false,bw=false;
+		for(int i=0; i<RefData.nameRoom.length;i++){
+			if(room.equals(RefData.nameRoom[i])){
+				r=i+14;
+				break;
+			}
+		}
+
+		for(int i=0; i<RefData.nameChar.length;i++){
+			if(suspect.equals(RefData.nameChar[i])){
+				sus=i;
+				break;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameWp.length;i++){
+			if(weapon.equals(RefData.nameWp[i])){
+				wp=i+6;
+				break;
+			}
+		}
+		
+		for(int i=0; i<5;i++){
+			if(pCard[(whoGiveHint)%4][i]==r){
+				br=true;
+				
+			}
+			if(pCard[(whoGiveHint)%4][i]==sus){
+				bs=true;
+				
+			}
+			if(pCard[(whoGiveHint)%4][i]==wp){
+				bw=true;
+				
+			}
+		}
+		
+		if(br==true)
+			return 0;
+		else if(bs==true)
+			return 1;
+		else if(bw==true)
+			return 2;
+		else 
+			return -1;
+		
+		
 		
 	}
 	

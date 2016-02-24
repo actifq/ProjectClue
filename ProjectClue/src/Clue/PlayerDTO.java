@@ -10,10 +10,16 @@ public class PlayerDTO {
 	
 	
 
-	public PlayerDTO(int charIndex, int[] cards){
-		this.charIndex= charIndex;
-		this.id = RefData.nameChar[charIndex];
+	public PlayerDTO(String avaname, int[] cards){
 		
+		this.id = avaname;
+		
+		for(int i=0;i<6;i++){
+			if(RefData.nameChar[i].equals(avaname)){
+				charIndex=i;
+				break;
+			}
+		}
 		crrX = 6;
 		crrY = 6;
 		numCanGo=0;

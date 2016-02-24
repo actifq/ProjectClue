@@ -17,7 +17,9 @@ public class GameWaitingRoom extends JPanel {
 	
 	JPanel title;
 	JPanel uPan1,uPan2,uPan3,uPan4,bb1,bb2,bb3,bb4;
+
 	JPanel CntDwn;
+
 	JPanel[] aa= new JPanel[4];
 	int pnum; //플레이어 넘버
 	
@@ -197,8 +199,6 @@ public class GameWaitingRoom extends JPanel {
 		isReady[2]= new JTextField("");
 		isReady[3]= new JTextField("");
 
-	
-		
   		  
   		idtf[0].setBounds(235,45,225, 50);
   		idtf[1].setBounds(690,45,225, 50);
@@ -235,7 +235,6 @@ public class GameWaitingRoom extends JPanel {
   		CntDwn.setOpaque(false);
   		CntDwn.setBounds(510, 330, 171, 250);
   		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
-		
 
 		
 		js1.setBounds(5, 652, 902, 180);
@@ -268,13 +267,15 @@ public class GameWaitingRoom extends JPanel {
 		
 		add(p);
 		
-		
+
+
 	/*	캐릭터 이미지 바꿀때
 	 * gwr.pan[i].removeAll();
 		  gwr.pan[i].setLayout(new BorderLayout());
 		  gwr.pan[i].add("Center",
 				  new JLabel(new ImageIcon("c:\\image\\"+s+avata+".gif")));
 		  gwr.pan[i].validate();//panel재배치
+<<<<<<< HEAD
 */
 		//setCntDwn();
 	}
@@ -287,6 +288,8 @@ public class GameWaitingRoom extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
+
 	
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
