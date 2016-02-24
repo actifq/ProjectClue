@@ -36,7 +36,6 @@ public class GameWaitingRoom extends JPanel {
     
     JTextField[] avaName= new JTextField[4];
     JTextField[] isReady= new JTextField[4];
-	
 	JTextField[] idtf={t1,t2,t3,t4};
 	boolean[] sw=new boolean[4];
 
@@ -193,12 +192,11 @@ public class GameWaitingRoom extends JPanel {
 		avaName[1]= new JTextField("?");
 		avaName[2]= new JTextField("?");
 		avaName[3]= new JTextField("?");
-		
+
 		isReady[0]= new JTextField("");
 		isReady[1]= new JTextField("");
 		isReady[2]= new JTextField("");
 		isReady[3]= new JTextField("");
-
   		  
   		idtf[0].setBounds(235,45,225, 50);
   		idtf[1].setBounds(690,45,225, 50);
@@ -276,6 +274,9 @@ public class GameWaitingRoom extends JPanel {
 				  new JLabel(new ImageIcon("c:\\image\\"+s+avata+".gif")));
 		  gwr.pan[i].validate();//panelÀç¹èÄ¡
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/Jungsun
 */
 		//setCntDwn();
 	}
@@ -290,7 +291,6 @@ public class GameWaitingRoom extends JPanel {
 	}
 	
 
-	
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub
 		ImageIcon ii = new ImageIcon(filename);

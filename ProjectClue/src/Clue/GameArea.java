@@ -193,7 +193,6 @@ public class GameArea extends JPanel{
 		return image;
 	}
 
-
 }
 
 

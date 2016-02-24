@@ -8,17 +8,23 @@ import java.awt.event.*;
  
 public class FinalCardSelect extends JPanel implements ActionListener{ 
    Image back; 
-   JLabel wp;//무기 
-   JLabel sp;//용의자 
-   JLabel r;//방 
+   JPanel wp;//무기 
+   JPanel sp;//용의자 
+   JPanel r;//방 
    JLabel k;//죽임 
+
    JButton[] p= new JButton[9]; 
    JButton[] q=new JButton[9];  
    JButton[] j=new JButton[9]; 
    JButton st;//추리 제안 
+   int rnum; //룸넘버
 
 	public FinalCardSelect() 
 	   { 
+		
+	
+		
+		
 	   back=Toolkit.getDefaultToolkit().getImage("image/gwrback1.jpg"); 
 	    
 	   for(int i=0;i<9;i++)
@@ -68,11 +74,11 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 		}
 		p3.setOpaque(false);
 	    
-	   r=new JLabel("어디에서", JLabel.CENTER);
+	   r=new JPanel();
 	   r.setBorder(new BevelBorder(WHEN_FOCUSED));
-	   sp=new JLabel("누가", JLabel.CENTER); 
+	   sp=new JPanel(); 
 	   sp.setBorder(new BevelBorder(WHEN_FOCUSED));
-	   wp=new JLabel("무엇으로", JLabel.CENTER); 
+	   wp=new JPanel(); 
 	   wp.setBorder(new BevelBorder(WHEN_FOCUSED));
 	   
 	   
@@ -97,7 +103,7 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 	   p1.setBounds(10,15,900,120);//시작점 10(가로),15(세로) 
 	   p2.setBounds(10,150,900,120);//시작점 10(가로),250(세로) 
 	   p3.setBounds(10,285,900,120); 
-	   p4.setBounds(10,450,600,150); 
+	   p4.setBounds(10,450,400,120); 
 	   p5.setBounds(710,500,200,100); 
 	    
 	   add(p1); 
@@ -105,6 +111,7 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 	   add(p3); 
 	   add(p4); 
 	   add(p5); 
+	   
      } 
 	
 	public void setCardImg()
@@ -128,12 +135,14 @@ public class FinalCardSelect extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource()==j)
-		{
-			for(int i=0;i<p.length;i++)
-			{
+		if(e.getSource()==j[0])
+		{	
+				j[0].removeAll();
+				//j[0].setLayout(new BorderLayout());
+				j[0].add("Center",new JLabel(new ImageIcon(setImage("image/room/room0.jpg",j[0].getWidth(),j[0].getHeight()))));
+				r.validate();
 				//r=setIcon(new ImageIcon(setImage("image/room/room"+i+".jpg",j[0].getWidth(),j[i].getHeight())));
 			}
 		}
 	}
-}
+	
