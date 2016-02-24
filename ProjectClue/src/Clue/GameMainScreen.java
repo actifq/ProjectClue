@@ -54,7 +54,6 @@ public class GameMainScreen extends JPanel{
 		
 		jpGameBoard=new GameArea();//게임화면
 		
-		
 		jpMyCard=new ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);		//채팅창

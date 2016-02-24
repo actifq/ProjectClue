@@ -39,7 +39,7 @@ KeyListener,Runnable,MouseListener{
 	int n=0;
 	 
     String myRoom,myId;
-   int myNum;
+    int myNum;
 
 	public ClueMain() {
 
@@ -119,6 +119,7 @@ KeyListener,Runnable,MouseListener{
 		new Thread(this).start();// run 돈다.
 	}
 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		try {
@@ -128,7 +129,7 @@ KeyListener,Runnable,MouseListener{
 		ClueMain mn = new ClueMain();
 
 	}
-
+	
 	@Override
 
 	public void actionPerformed(ActionEvent e) {
@@ -141,7 +142,7 @@ KeyListener,Runnable,MouseListener{
 				login.tf.requestFocus();
 				return;
 			}
-
+				
 			String name = login.tf2.getText().trim();
 			if (id.length() < 1) {
 				JOptionPane.showMessageDialog(this, "대화명을 입력하세요");
@@ -267,15 +268,15 @@ KeyListener,Runnable,MouseListener{
 				if(gwr.btnReady.getText().equals("START"))
 					out.write((Function.STARTGAME+"|"+myRoom+"\n").getBytes());
 				else 
-				 out.write((Function.READY+"|"+myRoom+"\n").getBytes());
+					out.write((Function.READY+"|"+myRoom+"\n").getBytes());
 			}catch(Exception ex){}
 
 			gwr.btnReady.setEnabled(false);
 			
 			/*repaint();
 			 * card.show(getContentPane(), "LD"); // 160204 정선추가
-			new Thread(loading).start(); // 160204 정선추가
-*/
+				new Thread(loading).start(); // 160204 정선추가
+			 */
 
 		} else if (e.getSource() == gwr.btnExit) {
 			/*repaint();
@@ -509,6 +510,7 @@ KeyListener,Runnable,MouseListener{
 				case Function.LOGIN: {
 					String[] data = { st.nextToken(), st.nextToken(), st.nextToken(), st.nextToken() };
 					wait.model2.addRow(data);
+					
 				}
 					break;
 

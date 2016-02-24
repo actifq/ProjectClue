@@ -11,11 +11,8 @@ public class GameArea_InnerBoard extends JPanel{
 	static int[][] arrBoard;
 	Image board;
 	
-
-	
 	public GameArea_InnerBoard(){
 		
-
 		board = Toolkit.getDefaultToolkit().getImage("image/woodboard.jpg");
 
 		//보드 초기화
@@ -34,10 +31,6 @@ public class GameArea_InnerBoard extends JPanel{
 	}
 	
 	
-	
-	
-
-
 	public void paint(Graphics g){
 		super.paint(g);
 		Graphics g2 = g;
@@ -53,7 +46,7 @@ public class GameArea_InnerBoard extends JPanel{
 							
 					g2.drawRect(i*SIZE, j*SIZE, SIZE, SIZE);
 					//
-							
+			
 				}
 				
 			}
@@ -64,7 +57,6 @@ public class GameArea_InnerBoard extends JPanel{
 		g2.drawImage(board, 0, 0, getWidth(), getHeight(), this);
 		
 	}
-	
 	
 	
 	public boolean isReached(int x, int y){

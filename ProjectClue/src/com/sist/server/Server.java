@@ -12,6 +12,7 @@ public class Server implements Runnable{
 	Vector<Room> roomVc=new Vector<Room>();//방정보 저장 
 	
 	ServerSocket ss = null;	//서버에서 접속시 처리(교환소켓)-> 접속만 받는다
+	public ClientThread logId;
 	public Server(){
 		try{
 			ss= new ServerSocket(3355);
@@ -68,6 +69,7 @@ public class Server implements Runnable{
 				
 			}
 		}
+		
 		// 통신부분
 		public void run(){
 			while(true){
@@ -271,8 +273,7 @@ public class Server implements Runnable{
  					  for(int i=0;i<roomVc.size();i++)
 					    {
  						  Room room=roomVc.elementAt(i);  
- 						 
- 					   				
+ 										
  					   
  					   for(int j=0;j<room.userVc.size();j++)
 			    		 {
