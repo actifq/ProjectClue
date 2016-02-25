@@ -248,7 +248,7 @@ public class Game{
 		this.count=count;
 	}
 	
-	public int getHint(String room, String suspect, String weapon){
+	public int getHint(int whoGiveHint, String room, String suspect, String weapon){
 		int r=0, sus=0, wp=0;
 		boolean br=false,bs=false,bw=false;
 		for(int i=0; i<RefData.nameRoom.length;i++){
@@ -273,15 +273,15 @@ public class Game{
 		}
 		
 		for(int i=0; i<5;i++){
-			if(pCard[(crrPlayer+1)%4][i]==r){
+			if(pCard[(whoGiveHint)%4][i]==r){
 				br=true;
 				
 			}
-			if(pCard[(crrPlayer+1)%4][i]==sus){
+			if(pCard[(whoGiveHint)%4][i]==sus){
 				bs=true;
 				
 			}
-			if(pCard[(crrPlayer+1)%4][i]==wp){
+			if(pCard[(whoGiveHint)%4][i]==wp){
 				bw=true;
 				
 			}

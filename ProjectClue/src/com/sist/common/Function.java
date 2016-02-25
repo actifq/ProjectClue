@@ -38,6 +38,7 @@ public class Function {
 	
 	public static final int CHOOSECARD = 800;
 	public static final int HINT = 810;
+	public static final int MYHINT =820;
 
 	
 	//게임관련

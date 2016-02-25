@@ -466,23 +466,30 @@ public class Server implements Runnable{
  				case Function.HINT:
 				   {
 					  String rname=st.nextToken();	
-					   int who = Integer.parseInt(st.nextToken());
+					  String pAva=st.nextToken();
+					  
+					   int pp = Integer.parseInt(st.nextToken());
 					   String r= st.nextToken();
 					   
 					   String p = st.nextToken();
 					   
 					   String w=  st.nextToken();
-					    
+					    int hint =Integer.parseInt(st.nextToken());
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	
 					    	 	 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);					    			 
 					    			 
+					    			 if(c.id.equals(id)){
+					    				 messageTo(Function.MYHINT+"|"+pAva+"|"+pp+"|"+r+"|"+p+"|"+w+"|"+hint);
+					    				 continue;
+					    			 }
 					    			 
-					    			 c.messageTo(Function.HINT+"|"+who+"|"+r+"|"+p+"|"+w);
-					    			 c.messageTo(Function.ROOMCHAT+"|[알림] +"+who+"님이" +r+","+p+","+w+"중 하나의 카드를 보여주었습니다.");
+					    			 c.messageTo(Function.HINT+"|"+pAva+"|"+pp+"|"+r+"|"+p+"|"+w);
+					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+pAva+"("+pp+"P)님이" +r+","+p+","+w+"중 하나의 카드를 보여주었습니다.");
 					    			 
 					    			 
 					    		 }

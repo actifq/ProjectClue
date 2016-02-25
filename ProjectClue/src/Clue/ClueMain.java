@@ -367,25 +367,37 @@ KeyListener,Runnable,MouseListener{
 			mainScreen.showCount();
 			mainScreen.setImage();
 			mainScreen.jpGameBoard.repaint();*/
-			int hint=mainScreen.game.getHint(cs.tfGuess[0].getText(),cs.tfGuess[1].getText(),cs.tfGuess[2].getText());
+			int pGiveHint=Game.crrPlayer+1;
+			String sr=cs.tfGuess[0].getText();
+			String sp=cs.tfGuess[1].getText();
+			String sw=cs.tfGuess[2].getText();
+			int hint=-1;
+			for(int i=0;i<3;i++){
+				hint=mainScreen.game.getHint(pGiveHint,sr,sp,sw);
+				if(hint>=0)
+					break;
+				else pGiveHint++;
+			}
 			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
 			try
 			{
-				 out.write((Function.HINT+"|"+myRoom+"|"+(Game.crrPlayer%4)+1+"|"+cs.tfGuess[0].getText()+"|"+cs.tfGuess[1].getText()+"|"+cs.tfGuess[2].getText()+"\n").getBytes());
-			}catch(Exception ex){}
-			
-			if(hint==-1){
-				JOptionPane.showMessageDialog(getContentPane(), "가 카드를 가지고 있지 않습니다.");
-				
+				 out.write((Function.HINT+"|"+myRoom+"|"+mainScreen.game.p[pGiveHint%4].id+"|"+(pGiveHint+1)%4+"|"+sr+"|"+sp+"|"+sw+"|"+hint+"\n").getBytes());
+			}catch(Exception ex){
+				System.out.println("guessing"+ex);
 			}
+			
+			
 			
 			for(int i=0; i<3;i++){
 				if(hint==i){
-					JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
-					mainScreen.ta.append("[나에게만 알림]"+(Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
+					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					mainScreen.ta.append("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
+					
 					break;
 				}
 			}
+			
+			
 			
 			//채팅창
 			
@@ -1021,18 +1033,70 @@ KeyListener,Runnable,MouseListener{
 				case Function.HINT:
 				{
 					card.show(getContentPane(), "MS");
+					String avata=st.nextToken();
 					int who = Integer.parseInt(st.nextToken());
 					String r= st.nextToken();
 					String p = st.nextToken();
 					String w=  st.nextToken();
 					
-					mainScreen.jpGameBoard.setMsgText("디폴트",who,r,p,w);
-					Thread.sleep(3000);
+					mainScreen.jpGameBoard.setMsgText(avata,who,r,p,w);
+					
+					
+					if(myNum==Game.crrPlayer){
+						try{
+									out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+							}
+							catch(Exception ex){
+								
+							}
+					}
+					Thread.sleep(4000);
 					mainScreen.jpGameBoard.deleteMsg();
-					if(myNum==(Game.crrPlayer%4)+1){
-						showMyTurn();
+					
+					cs.guess[0].removeAll();
+					cs.guess[1].removeAll();
+					cs.guess[2].removeAll();
+					cs.tfGuess[0].setText("");
+					cs.tfGuess[1].setText("");
+					cs.tfGuess[2].setText("");;
+					
+				}
+				break;
+				case Function.MYHINT:
+				{
+					card.show(getContentPane(), "MS");
+					String avata=st.nextToken();
+					int who = Integer.parseInt(st.nextToken());
+					String r= st.nextToken();
+					String p = st.nextToken();
+					String w=  st.nextToken();
+					int hint=Integer.parseInt(st.nextToken());
+					if(hint==0){
+						mainScreen.jpGameBoard.setMsgText(avata,who,r,hint);
+					}else if(hint==1){
+						mainScreen.jpGameBoard.setMsgText(avata,who,p,hint);
+					}else if(hint==2){
+						mainScreen.jpGameBoard.setMsgText(avata,who,w,hint);
 					}
 					
+					try {
+						out.write((Function.FINISHTURN+"|"+myRoom+"\n").getBytes());
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					
+					
+					
+					Thread.sleep(4000);
+					
+					mainScreen.jpGameBoard.deleteMsg();
+					
+					cs.guess[0].removeAll();
+					cs.guess[1].removeAll();
+					cs.guess[2].removeAll();
+					cs.tfGuess[0].setText("");
+					cs.tfGuess[1].setText("");
+					cs.tfGuess[2].setText("");;
 					
 				}
 				break;
@@ -1040,6 +1104,7 @@ KeyListener,Runnable,MouseListener{
 				
 			} catch (Exception e) {
 				// TODO: handle exception
+				System.out.println(e);
 			}
 		}
 	}

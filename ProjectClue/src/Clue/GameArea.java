@@ -39,8 +39,8 @@ public class GameArea extends JPanel{
 	
 		
 		GameMsg.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		GameMsg.setFont(new Font("맑은 고딕", Font.BOLD, 25));
-		GameMsg.setForeground(Color.BLUE);
+		GameMsg.setFont(new Font("맑은 고딕", Font.BOLD, 20));
+		GameMsg.setForeground(Color.CYAN);
 		GameMsg.setOpaque(false);
 		GameMsg.setBounds(160, 230, 600, 40);
 		
@@ -52,7 +52,8 @@ public class GameArea extends JPanel{
 		jp.add(GameMsg);
 		setLayout(null);
 		jp.setBounds(0, 130, 850, 300);
-		//add(jp);
+		add(jp);
+		jp.setVisible(false);
 		
 		//힌트 화면
 		for(int i=0;i<3;i++){
@@ -91,14 +92,102 @@ public class GameArea extends JPanel{
 
 	public void setMsgText(String who,int pp, String r, String p, String w) {
 		// TODO Auto-generated method stub
+		int ir=0,ip=0,iw=0;
 		
-		GameMsg.setOpaque(true);
-		GameMsg.setText(""+p+"P)님이 위 카드중 하나를 보여줬습니다.");
+		for(int i=0; i<RefData.nameRoom.length; i++){
+			if(RefData.nameRoom[i].equals(r.trim())){
+				ir=i;
+				break;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameChar.length; i++){
+			if(RefData.nameChar[i].equals(p.trim())){
+				ip=i;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameWp.length; i++){
+			if(RefData.nameWp[i].equals(w.trim())){
+				iw=i;
+			}
+		}
+		hint[0].removeAll();
+		hint[1].removeAll();
+		hint[2].removeAll();
+		
+		hint[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+ir+".jpg", 140,190))));
+		hint[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+ip+".jpg", 140,190))));
+		hint[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+iw+".jpg", 140,190))));
+		
+		hint[0].validate();//panel재배치
+		hint[1].validate();//panel재배치
+		hint[2].validate();//panel재배치
+		
+		
+		GameMsg.setText(who+"("+p+"P)님이 위 카드중 하나를 보여줬습니다.");
+		jp.setVisible(true);
+	}
+	
+	public void setMsgText(String who,int pp, String card,int key) {
+		// TODO Auto-generated method stub
+		hint[0].setVisible(false);
+		hint[2].setVisible(false);
+		
+		int index=0;
+		if(key==0){
+			for(int i=0; i<RefData.nameRoom.length; i++){
+				if(RefData.nameRoom[i].equals(card.trim())){
+					index=i;
+					break;
+				}
+				
+			}
+			hint[1].removeAll();
+			hint[1].add(new JLabel(new ImageIcon(setImage("image/room/room"+index+".jpg", 140,190))));
+			hint[1].validate();//panel재배치
+			
+		}else if(key==1){
+		
+			for(int i=0; i<RefData.nameChar.length; i++){
+				if(RefData.nameChar[i].equals(card.trim())){
+					index=i;
+					break;
+				}
+			}
+			
+			hint[1].removeAll();
+			hint[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+index+".jpg", 140,190))));
+			hint[1].validate();//panel재배치
+		}else if(key==2){
+		
+			for(int i=0; i<RefData.nameWp.length; i++){
+				if(RefData.nameWp[i].equals(card.trim())){
+					index=i;
+					break;
+				}
+			}
+			
+			hint[1].removeAll();
+			hint[1].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+index+".jpg", 140,190))));
+			hint[1].validate();//panel재배치
+		}
+		
+		
+	
+		
+		
+		GameMsg.setText(who+"("+pp+"P)님이 "+card+" 를 줬습니다.");
+		jp.setVisible(true);
 	}
 	
 	public void deleteMsg(){
-		GameMsg.setOpaque(false);
+			jp.setVisible(false);
+			
+		hint[0].setVisible(true);
+		hint[2].setVisible(true);
 		GameMsg.setText("");
+		
 	}
 	
 	public Image setImage(String filename, int width, int height){
