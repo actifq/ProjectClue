@@ -137,9 +137,9 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception ex) {
-			ClueMain mn = new ClueMain();
+			
 		}
-
+		ClueMain mn = new ClueMain();
 	}
 
 	@Override
@@ -163,9 +163,11 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 			}
 			String sex = "남";
 
-			/*
-			 * if(login.man.isSelected()){ sex="남자"; }else sex="여자";
-			 */
+			
+			 if(login.man.isSelected()){ sex="남자"; }
+			 
+			 else sex="여자";
+			
 			connection(id, name, sex);
 			// repaint();
 			// card.show(getContentPane(),"WR");
