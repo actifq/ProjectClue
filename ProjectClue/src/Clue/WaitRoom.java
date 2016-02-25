@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 public class WaitRoom extends JPanel {
-	Image back;
+	Image back,movie1;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
 
@@ -16,52 +16,65 @@ public class WaitRoom extends JPanel {
 	TableColumn column;
 	
 	public WaitRoom() {
-		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
-		String[] col1={"¹æÀÌ¸§","°ø°³/ºñ°ø°³","ÀÎ¿ø"};
+		back=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");
+		movie1=Toolkit.getDefaultToolkit().getImage("image/back/moon.gif");
+		
+		String[] col1={"ë°©ì´ë¦„","ê³µê°œ/ë¹„ê³µê°œ","ì¸ì›"};
 		String[][] row1=new String[0][3];
+		
 		model1=new DefaultTableModel(row1, col1){
 		     public boolean isCellEditable(int r,int c)
 		     {
 		    	 return false;
 		     }
 		     };
+		     
 		table1=new JTable(model1);
 		table1.getTableHeader().setReorderingAllowed(false);
+		table1.getTableHeader().setResizingAllowed(false);
 		table1.setRowHeight(30);
 		table1.setShowVerticalLines(false);
 		table1.setIntercellSpacing(new Dimension(0,0));
 		
+		
+		
 		JScrollPane js1=new JScrollPane(table1);
 		
 		
-		String[] col2={"ID","´ëÈ­¸í","¼ºº°","À§Ä¡"};
+		String[] col2={"ID","ëŒ€í™”ëª…","ì„±ë³„","ìœ„ì¹˜"};
 		String[][] row2=new String[0][4];
+		
 		model2=new DefaultTableModel(row2, col2);
 		table2=new JTable(model2);
 		JScrollPane js2=new JScrollPane(table2);
+		table2.getTableHeader().setReorderingAllowed(false);
+		table2.getTableHeader().setResizingAllowed(false);
 		
-		//Ã¤ÆÃ
+		//ì±„íŒ…
 		ta=new JTextPane();
 		ta.setEditable(false);
 		JScrollPane js3=new JScrollPane(ta);
 		bar=js3.getVerticalScrollBar();
 		tf=new JTextField();
 		box=new JComboBox();
-		box.addItem("white");
-		box.addItem("blue");
-		box.addItem("pink");
-		box.addItem("green");
-		box.addItem("cyan");
+		box.addItem("ì „ì²´ì±„íŒ…");
+		box.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,13));
 		
-		movie=new JPanel();
-		movie.setBackground(Color.black);
 		
-		b1=new JButton("¹æ¸¸µé±â");
-		b2=new JButton("¹æµé¾î°¡±â");
-		b3=new JButton("°ÔÀÓ½ÅÃ»");
-		b4=new JButton("ÂÊÁöº¸³»±â");
-		b5=new JButton("Á¤º¸º¸±â");
-		b6=new JButton("³ª°¡±â");
+		
+		b1=new JButton("ë°©ë§Œë“¤ê¸°");
+		b2=new JButton("ë°©ë“¤ì–´ê°€ê¸°");
+		b3=new JButton("ê²Œì„ì‹ ì²­");
+		b4=new JButton("ìª½ì§€ë³´ë‚´ê¸°");
+		b5=new JButton("ì •ë³´ë³´ê¸°");
+		b6=new JButton("ë‚˜ê°€ê¸°");
+		
+		b1.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
+		b2.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
+		b3.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
+		b4.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
+		b5.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
+		b6.setFont(new Font("ë§‘ì€ ê³ ë”•",Font.BOLD,15));
 		
 		JPanel p=new JPanel();
 		p.setLayout(new GridLayout(3, 2, 5, 5));
@@ -79,25 +92,23 @@ public class WaitRoom extends JPanel {
 		js3.setBounds(740, 30, 420, 300);
 		tf.setBounds(740, 335, 310, 40);
 		box.setBounds(1055, 335, 105, 40);
-		movie.setBounds(740, 385, 420, 250);
+		
 		p.setBounds(740, 645, 420, 195);
-
+		
+		
+		
+		
+		
+		
 		add(js1);
 		add(js2);
 		add(js3);
 		add(tf);
 		add(box);
-		add(movie);
+		
 		add(p);
 
-/*<<<<<<< HEAD
-		tf.setEnabled(false);
-		js1.setEnabled(false);
-		js2.setEnabled(false);
-		js3.setEnabled(false);
-		
-=======*/
-
+	
 		for(int i=0;i<col1.length;i++)
 		{
 			 column=table1.getColumnModel().getColumn(i);
@@ -106,6 +117,7 @@ public class WaitRoom extends JPanel {
 			 if(i==0)
 			 {
 				 column.setPreferredWidth(250);
+				 
 				 rend.setHorizontalAlignment(JLabel.LEFT);
 			 }
 			 if(i==1)
@@ -116,19 +128,21 @@ public class WaitRoom extends JPanel {
 			 if(i==2)
 			 {
 				 column.setPreferredWidth(100);
+				 
 				 rend.setHorizontalAlignment(JLabel.CENTER);
 			 }
 			 column.setCellRenderer(rend);
 		}
 
-//>>>>>>> branch 'master' of https://github.com/actifq/ProjectClue.git
-
+	}
+	private String setImage(String string, int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	@Override
-	//paint, paintComponent => ÀÚµ¿È£Ãâ
+	//paint, paintComponent => ìë™í˜¸ì¶œ
 	protected void paintComponent(Graphics g) {
-		g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
-
+	g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
+	g.drawImage(movie1,740, 385, 420, 250,this);
 	}
 }
-

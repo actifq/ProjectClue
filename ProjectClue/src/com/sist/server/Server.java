@@ -15,7 +15,7 @@ public class Server implements Runnable{
 	public ClientThread logId;
 	public Server(){
 		try{
-			ss= new ServerSocket(3355);
+			ss= new ServerSocket(7777);
 			System.out.println("Server Start...");
 		}catch(Exception ec){
 			System.out.println(ec.getMessage());

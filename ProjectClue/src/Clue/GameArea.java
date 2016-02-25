@@ -129,10 +129,12 @@ public class GameArea extends JPanel{
 		jp.setVisible(true);
 	}
 	
+
 	public void setMsgText(String who,int pp, String card,int key) {
 		// TODO Auto-generated method stub
 		hint[0].setVisible(false);
 		hint[2].setVisible(false);
+
 		
 		int index=0;
 		if(key==0){
