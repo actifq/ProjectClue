@@ -30,11 +30,10 @@ public class ShowMyCard extends JPanel{
 	   
 	   for(int i=0;i<arr.length;i++)
 	   {
-		   if(arr[i]<6)//캐릭터
+		   if(arr[i]<6) //캐릭터
 			   jb[i].setIcon(new ImageIcon(setImage("image/player/char"+arr[i]+".jpg",jb[0].getWidth(),jb[0].getHeight())));
 		   else if(arr[i]>=6 && arr[i]<14)	//무기
 			   jb[i].setIcon(new ImageIcon(setImage("image/weapon/wp"+(arr[i]-6)+".jpg",jb[0].getWidth(),jb[0].getHeight())));
-			   
 		   else	//장소
 			   jb[i].setIcon(new ImageIcon(setImage("image/room/room"+(arr[i]-14)+".jpg",jb[0].getWidth(),jb[0].getHeight())));
 			  // jb[i].setIcon(new ImageIcon("image/room/room"+(arr[i]-14)+".jpg"));

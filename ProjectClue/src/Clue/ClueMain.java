@@ -32,7 +32,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 
-	ShowTurn  jfTurn=new ShowTurn();
+	ShowTurn jfTurn=new ShowTurn();
+	PUImg pi=new PUImg();
+	PUImg2 pii=new PUImg2();
 	
 	
 	 // 소켓 연결시도
@@ -107,10 +109,10 @@ KeyListener,Runnable,MouseListener,FocusListener{
 
 		addKeyListener(this);
 		setFocusable(true);
-		reachRoom.b1.addActionListener(this);
-		reachRoom.b2.addActionListener(this);
+		pii.b2.addActionListener(this);
+		pii.b3.addActionListener(this);
 		mainScreen.ChatInput.addActionListener(this);
-		jfTurn.b1.addActionListener(this);
+		pi.b1.addActionListener(this);
 		mainScreen.jpGameBoard.addMouseListener(this);
 		//addFocusListener(this);
 		addWindowListener(new WindowAdapter() {
@@ -424,7 +426,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			/*need to decide the action after guessing.
 			either show up one dialog or either give a msg on chatarea*/
 			
-		} else if (e.getSource() == reachRoom.b1) {
+		} else if (e.getSource() == pii.b2) {
 			try
 			{
 				 out.write((Function.GUESS+"|"+myRoom+"|"+n+"\n").getBytes());
@@ -471,7 +473,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				  */
 			 }catch(Exception ex){}
 			 mainScreen.ChatInput.setText("");
-		}else if(e.getSource()==jfTurn.b1){
+		}else if(e.getSource()==pi.b1){
 			try
 			{
 				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
@@ -987,7 +989,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					if(n!=0){
 						reachRoom.setBounds(500,250,230,240);
 						try{
-						reachRoom.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
+						pii.la1.setText(RefData.nameRoom[n-1]+"에 도달했습니다.");
 						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
 						}
 						catch(Exception ex){

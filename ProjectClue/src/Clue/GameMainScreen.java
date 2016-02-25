@@ -27,7 +27,7 @@ public class GameMainScreen extends JPanel{
 	
 	public GameMainScreen() {
 
-		back=Toolkit.getDefaultToolkit().getImage(" ");
+		//back=Toolkit.getDefaultToolkit().getImage(" ");
 		//jpLogo=new JPanel();// 배너
 		//jpTurn=new JPanel();//턴화면
 		jpGameBoard=new GameArea();//게임화면
