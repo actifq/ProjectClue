@@ -478,7 +478,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			{
 				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
 			}catch(Exception ex){}
-			jfTurn.setVisible(false);
+			pi.setVisible(false);
 		}
 		
 		

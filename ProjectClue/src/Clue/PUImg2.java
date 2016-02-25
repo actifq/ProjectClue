@@ -16,7 +16,11 @@ public class PUImg2 extends JPanel{
 		la1 = new JLabel("방이름");
 		b2=new JButton("중간추리");
 		b3=new JButton("최종추리");
-		reach=Toolkit.getDefaultToolkit().getImage("c:\\image2\\cork.jpg");
+		reach=Toolkit.getDefaultToolkit().getImage("image/back/corr.jpg");
+		/*b2.setOpaque(true);
+		b3.setOpaque(true);
+		b2.setBorderPainted(false);
+		b3.setBorderPainted(false);*/
 		
 		setLayout(null);
 		la1.setBounds(50,15,200,30);
