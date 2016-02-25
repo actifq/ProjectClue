@@ -182,7 +182,7 @@ public class Server implements Runnable {
 					case Function.ROOMCHAT: {
 						String rname = st.nextToken();
 						String strMsg = st.nextToken();
-						
+
 						for (int i = 0; i < roomVc.size(); i++) {
 							Room room = roomVc.elementAt(i);
 							if (rname.equals(room.roomName)) {
@@ -324,6 +324,7 @@ public class Server implements Runnable {
 
 								c.messageTo(Function.ROOMCHAT + "|[알림] " + id + "님(" + pnum + "P)이 " + roomName
 										+ "에 도달하였습니다");
+								
 
 							}
 						}

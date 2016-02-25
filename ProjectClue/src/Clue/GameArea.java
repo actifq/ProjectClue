@@ -125,7 +125,7 @@ public class GameArea extends JPanel{
 		hint[2].validate();//panel재배치
 		
 		
-		GameMsg.setText(who+"("+p+"P)님이 위 카드중 하나를 보여줬습니다.");
+		GameMsg.setText(who+"("+p+"P) 님이 위 카드중 하나를 보여줬습니다.");
 		jp.setVisible(true);
 	}
 	
@@ -179,7 +179,7 @@ public class GameArea extends JPanel{
 	
 		
 		
-		GameMsg.setText(who+"("+pp+"P)님이 "+card+" 를 줬습니다.");
+		GameMsg.setText(who+"("+pp+"P) 님이 "+card+" 를 줬습니다.");
 		jp.setVisible(true);
 	}
 	
