@@ -13,6 +13,7 @@ public class PlayerDTO {
 	public PlayerDTO(String avaname, int[] cards){
 		
 		this.id = avaname;
+		
 		for(int i=0;i<6;i++){
 			if(RefData.nameChar[i].equals(avaname)){
 				charIndex=i;

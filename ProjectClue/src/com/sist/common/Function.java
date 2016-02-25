@@ -36,6 +36,10 @@ public class Function {
 	public static final int FINISHTURN = 770;
 	public static final int MYTURN = 780;
 	
+	public static final int CHOOSECARD = 800;
+	public static final int HINT = 810;
+
+	
 	//게임관련
 	//나가기 관련
 	//기타(쪽지 보내기, 정보)

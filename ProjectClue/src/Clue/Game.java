@@ -248,4 +248,56 @@ public class Game{
 		this.count=count;
 	}
 	
+	public int getHint(String room, String suspect, String weapon){
+		int r=0, sus=0, wp=0;
+		boolean br=false,bs=false,bw=false;
+		for(int i=0; i<RefData.nameRoom.length;i++){
+			if(room.equals(RefData.nameRoom[i])){
+				r=i+14;
+				break;
+			}
+		}
+
+		for(int i=0; i<RefData.nameChar.length;i++){
+			if(suspect.equals(RefData.nameChar[i])){
+				sus=i;
+				break;
+			}
+		}
+		
+		for(int i=0; i<RefData.nameWp.length;i++){
+			if(weapon.equals(RefData.nameWp[i])){
+				wp=i+6;
+				break;
+			}
+		}
+		
+		for(int i=0; i<5;i++){
+			if(pCard[(crrPlayer+1)%4][i]==r){
+				br=true;
+				
+			}
+			if(pCard[(crrPlayer+1)%4][i]==sus){
+				bs=true;
+				
+			}
+			if(pCard[(crrPlayer+1)%4][i]==wp){
+				bw=true;
+				
+			}
+		}
+		
+		if(br==true)
+			return 0;
+		else if(bs==true)
+			return 1;
+		else if(bw==true)
+			return 2;
+		else 
+			return -1;
+		
+		
+		
+	}
+	
 }
