@@ -27,7 +27,7 @@ KeyListener,Runnable,MouseListener{
 	Join_Login join=new Join_Login();//160211 정선 추가
 	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
 	ShowTurn  jfTurn=new ShowTurn();
-	
+	FinalCard fc=new FinalCard();
 	
 	 // 소켓 연결시도
 	 
@@ -52,6 +52,7 @@ KeyListener,Runnable,MouseListener{
 		add("MS", mainScreen);
 		add("LD", loading); // 160204정선추가
 		add("CS", cs);
+		add("FC", fc);
 
 		setSize(1200, 900);
 		setVisible(true);
@@ -88,8 +89,19 @@ KeyListener,Runnable,MouseListener{
 			cs.j[i].addActionListener(this);
 		}
 		
+		for(int i=0; i<fc.p.length; i++){
+			fc.p[i].addActionListener(this);
+		}
+		for(int i=0; i<fc.q.length; i++){
+			fc.q[i].addActionListener(this);
+		}
+		for(int i=1; i<fc.j.length; i++){
+			fc.j[i].addActionListener(this);
+		}
+		
 		mainScreen.b.addActionListener(this);	//채팅입력
 		cs.st.addActionListener(this);	//추리-카드선택
+	
 		
 		
 
@@ -438,6 +450,40 @@ KeyListener,Runnable,MouseListener{
 			}catch(Exception ex){}
 			jfTurn.setVisible(false);
 		}
+		else if(e.getSource()==reachRoom.b2)
+		{
+			try
+			{
+				 out.write((Function.FINALGUESS+"|"+myRoom+"|"+n+"\n").getBytes());
+			}catch(Exception ex){}
+			
+			
+			reachRoom.setVisible(false);
+		}
+		/*else if (e.getSource() == fc.st) {
+			
+			int hint=mainScreen.game.getHint(fc.tfGuess[0].getText(),fc.tfGuess[1].getText(),fc.tfGuess[2].getText());
+			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
+			try
+			{
+				 out.write((Function.HINT+"|"+myRoom+"|"+(Game.crrPlayer%4)+1+"|"+fc.tfGuess[0].getText()+"|"+fc.tfGuess[1].getText()+"|"+fc.tfGuess[2].getText()+"\n").getBytes());
+				 JOptionPane.showMessageDialog(getContentPane(), "추리에 실패하였습니다");
+			}catch(Exception ex){}
+			
+			if(hint==-1){
+				JOptionPane.showMessageDialog(getContentPane(), "추리에 성공하였습니다.");
+				
+			}
+			
+			for(int i=0; i<3;i++){
+				if(hint==i){
+					JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					mainScreen.ta.append("[나에게만 알림]"+(Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n");
+					break;
+				}
+			}
+		}*/
+			
 		
 		
 		//########## 경은/ CS 버튼
@@ -538,6 +584,105 @@ KeyListener,Runnable,MouseListener{
 		else if(e.getSource()==cs.j[8])
 		{
 			try{ out.write((Function.CHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		// ########### 최종 선택
+		else if(e.getSource()==fc.p[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
+		}else if(e.getSource()==fc.p[1])
+		{
+			
+			try{ out.write((Function.FINALCHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+2+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+3+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+4+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+5+"\n").getBytes());}catch(Exception ex){}
+		}
+	
+		
+		//############## fc/ 무기
+		else if(e.getSource()==fc.q[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			
+		}else if(e.getSource()==fc.q[1])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+7+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+8+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+9+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+10+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+11+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[6])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+12+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[7])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+13+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		//########### fc/방
+		else if(e.getSource()==fc.j[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+14+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[1])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+15+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+16+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+17+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+18+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+19+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[6])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+20+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[7])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+21+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[8])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
 		}
 	
 	}
@@ -1078,7 +1223,63 @@ KeyListener,Runnable,MouseListener{
 					
 				}
 				break;
+				
+				case Function.FINALCHOOSECARD:
+				{
+					int cardnum=Integer.parseInt(st.nextToken());
+					 System.out.println(cardnum);
+					try{
+					if(cardnum<6){
+						fc.guess[1].removeAll();
+						fc.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", fc.guess[0].getWidth(), cs.guess[0].getHeight()))));
+						fc.guess[1].validate();//panel재배치
+						fc.tfGuess[1].setText(RefData.nameChar[cardnum]);
+					}else if(cardnum>13){
+						cardnum=cardnum-13;
+						fc.guess[0].removeAll();
+						fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", fc.guess[2].getWidth(), cs.guess[2].getHeight()))));
+						fc.guess[0].validate();//panel재배치
+						fc.tfGuess[0].setText(RefData.nameRoom[cardnum]);
+					}else{
+						cardnum=cardnum-6;
+						fc.guess[2].removeAll();
+						fc.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+						fc.guess[2].validate();//panel재배치
+						fc.tfGuess[2].setText(RefData.nameWp[cardnum]);
+					}
+					}catch(ArrayIndexOutOfBoundsException ex){
+						System.out.println("ChooseCard: "+ex.getMessage());
+					}
 				}
+				break;
+				case Function.FINALSELECTCARD:
+				{
+					String pnum=st.nextToken();
+					int avata= Integer.parseInt(st.nextToken());
+					int roomNo=Integer.parseInt(st.nextToken());
+					//데이터를 fc에 넘겨줘서 처리. 누가 어디에서 추리중.
+					for(int i=0;i<9;i++){
+						cs.j[i].setEnabled(false);
+					}
+					repaint();
+					
+					fc.guess[0].removeAll();
+					fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+					fc.guess[0].validate();//panel재배치
+					
+					fc.pl.removeAll();
+					fc.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", fc.pl.getWidth(), fc.pl.getHeight()))));
+					fc.pl.validate();//panel재배치
+					
+					fc.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
+					fc.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					card.show(getContentPane(), "FC");
+					
+					fc.setCardImg();
+				}
+				break;
+				}
+				
 				
 			} catch (Exception e) {
 				// TODO: handle exception
