@@ -454,7 +454,7 @@ KeyListener,Runnable,MouseListener{
 			
 			reachRoom.setVisible(false);
 		}
-		else if (e.getSource() == fc.st) {
+		/*else if (e.getSource() == fc.st) {
 			
 			int pGiveHint=Game.crrPlayer+1;
 			String sr=fc.tfGuess[0].getText();
@@ -485,17 +485,8 @@ KeyListener,Runnable,MouseListener{
 					break;
 				}
 			}
-			
-			
-			
-			//채팅창
-			
-			/*need to decide the action after guessing.
-			either show up one dialog or either give a msg on chatarea*/
-			
-		}
-			
-		
+
+		}*/
 		
 		//########## 경은/ CS 버튼
 		
