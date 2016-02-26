@@ -13,42 +13,47 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class ClueMain extends JFrame implements ActionListener, KeyListener, Runnable, MouseListener, FocusListener {
+public class ClueMain extends JFrame implements ActionListener,
+KeyListener,Runnable,MouseListener,FocusListener{
 
 	CardLayout card;
 	GameWaitingRoom gwr = new GameWaitingRoom();
 	Login login = new Login();
 	GameMainScreen mainScreen = new GameMainScreen();
 	CardSelect cs = new CardSelect();
-	LoadingTest loading = new LoadingTest(this); // 160204 정선 추가
-	ReachRoom reachRoom = new ReachRoom();
-	WaitRoom wait = new WaitRoom(); // 160211 정선추가
-	Join_Login join = new Join_Login();// 160211 정선 추가
-	WR_MakeRoom mkr = new WR_MakeRoom(); // 160211 정선 추가
-	ShowTurn jfTurn = new ShowTurn();
-
-	// 소켓 연결시도
+	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
+	ReachRoom reachRoom =new ReachRoom();
+	WaitRoom wait=new WaitRoom(); //160211 정선추가
+	
+	Join_Login join=new Join_Login();//160211 정선 추가
+	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
+	ShowTurn  jfTurn=new ShowTurn();
+	FinalCard fc=new FinalCard();
+	
+	 // 소켓 연결시도
+	 
 
 	Socket s;
 
-	BufferedReader in; // 서버에서 값을 읽는다
-	OutputStream out; // 서버로 요청값을 보낸다.
-	int n = 0;
-
-	String myRoom, myId;
-	int myNum;
+	BufferedReader in;	//서버에서 값을 읽는다
+	OutputStream out;	//서버로 요청값을 보낸다.
+	int n=0;
+	 
+    String myRoom,myId;
+   int myNum;
 
 	public ClueMain() {
 
 		card = new CardLayout();
 		setLayout(card);
-
-		add("LOG", login);
+		
+		add("LOG",login);
 		add("WR", wait);
 		add("GWR", gwr);
 		add("MS", mainScreen);
 		add("LD", loading); // 160204정선추가
 		add("CS", cs);
+		add("FC", fc);
 
 		setSize(1200, 900);
 		setVisible(true);
@@ -61,7 +66,6 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 		wait.b2.addActionListener(this);// 160211 정선추가
 		wait.b6.addActionListener(this);// 160217 찬재추가
 		wait.tf.addActionListener(this);// 160211 정선추가
-
 		mkr.b1.addActionListener(this);// 160211 정선추가
 		mkr.b2.addActionListener(this);
 		wait.table1.addMouseListener(this);
@@ -83,9 +87,22 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 		for (int i = 1; i < cs.j.length; i++) {
 			cs.j[i].addActionListener(this);
 		}
-
-		mainScreen.b.addActionListener(this); // 채팅입력
-		cs.st.addActionListener(this); // 추리-카드선택
+		
+		for(int i=0; i<fc.p.length; i++){
+			fc.p[i].addActionListener(this);
+		}
+		for(int i=0; i<fc.q.length; i++){
+			fc.q[i].addActionListener(this);
+		}
+		for(int i=1; i<fc.j.length; i++){
+			fc.j[i].addActionListener(this);
+		}
+		
+		mainScreen.b.addActionListener(this);	//채팅입력
+		cs.st.addActionListener(this);	//추리-카드선택
+	
+		
+		
 
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setBounds((screenSize.width - getWidth()) / 2, (screenSize.height - getHeight()) / 2, getWidth(), getHeight());
@@ -137,7 +154,6 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 		try {
 			UIManager.setLookAndFeel("com.jtattoo.plaf.hifi.HiFiLookAndFeel");
 		} catch (Exception ex) {
-			
 		}
 		ClueMain mn = new ClueMain();
 	}
@@ -153,6 +169,7 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 				JOptionPane.showMessageDialog(this, "ID를 입력하세요");
 				login.tf.requestFocus();
 				return;
+				
 			}
 
 			String name = login.tf2.getText().trim();
@@ -174,7 +191,6 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 		} else if (e.getSource() == login.b2) {
 			join.setVisible(true);
 
-		}
 		// 방만들기 버튼
 		else if (e.getSource() == wait.b1) {
 			mkr.tf.setText("");
@@ -185,9 +201,9 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 			mkr.box.setSelectedIndex(0);
 
 			mkr.setVisible(true);
-
-		} // 160211 정선추가
-		else if (e.getSource() == wait.b2) {
+		}//160211 정선추가 
+		else if(e.getSource()==wait.b2)
+		{
 
 			repaint();
 			card.show(getContentPane(), "GWR");
@@ -206,54 +222,65 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 			}
 			wait.tf.setText("");
 
-		} // 160211 정선추가
-			// 방만들기 창
-		else if (e.getSource() == mkr.b1) {
-			/*
-			 * repaint(); card.show(getContentPane(),"GWR");
-			 * mkr.setVisible(false);
-			 */
-			String rname = mkr.tf.getText().trim();
-			if (rname.length() < 1) {
-				JOptionPane.showMessageDialog(this, "방이름을 입력하세요");
-				mkr.tf.requestFocus();
-				return;
-			}
-			// 중복체크
-			String str = "";
-			for (int i = 0; i < wait.model1.getRowCount(); i++) {
-				str = wait.model1.getValueAt(i, 0).toString();
-				if (rname.equals(str)) {
-					JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다");
-					mkr.tf.setText("");
-					mkr.tf.requestFocus();
-					return;
-				}
-			}
-			String state = "", pwd = "";
-			if (mkr.rb1.isSelected()) {
-				state = "공개";
-				pwd = " ";
-			} else {
-				state = "비공개";
-				pwd = String.valueOf(mkr.pf.getPassword());// char[] ==> 문자열로 변환
-				// mr.pf.getText();
-			}
-
-			int inwon = 4;
-
-			// 서버로 전송
-			try {
-				out.write((Function.MAKEROOM + "|" + rname + "|" + state + "|" + pwd + "|" + inwon + "\n").getBytes());
-			} catch (Exception ex) {
-			}
-
+		}//160211 정선추가
+		//방만들기 창
+		else if(e.getSource()==mkr.b1)
+		{
+			/*repaint();
+			card.show(getContentPane(),"GWR");
+			mkr.setVisible(false);*/
+			String rname=mkr.tf.getText().trim();
+			  if(rname.length()<1)
+			  {
+				  JOptionPane.showMessageDialog(this,"방이름을 입력하세요");
+				  mkr.tf.requestFocus();
+				  return;
+			  }
+			  //중복체크 
+			  String str="";
+			  for(int i=0;i<wait.model1.getRowCount();i++)
+			  {
+				   str=wait.model1.getValueAt(i, 0).toString();
+				   if(rname.equals(str))
+				   {
+					   JOptionPane.showMessageDialog(this, "이미 존재하는 방입니다");
+					   mkr.tf.setText("");
+					   mkr.tf.requestFocus();
+					   return;
+				   }
+			  }
+			  String state="",pwd="";
+			  if(mkr.rb1.isSelected())
+			  {
+				  state="공개";
+				  pwd=" ";
+			  }
+			  else
+			  {
+				  state="비공개";
+				  pwd=String.valueOf(mkr.pf.getPassword());//char[] ==> 문자열로 변환
+				  //mr.pf.getText();
+			  }
+			  
+			  int inwon=4;
+			  
+			  //서버로 전송 
+			  try
+			  {
+				  out.write((Function.MAKEROOM+"|"+rname+"|"
+			                    +state+"|"+pwd+"|"+inwon+"\n").getBytes());
+			  }catch(Exception ex){}
+			  
+			  mkr.setVisible(false);
+			
+		}//160211 정선추가
+		else if(e.getSource()==mkr.b2)
+		{
 			mkr.setVisible(false);
 
 		} // 160211 정선추가
 		else if (e.getSource() == mkr.b2) {
 			mkr.setVisible(false);
-
 		} // 160211 정선추가
 		else if (e.getSource() == wait.b6) {
 			System.exit(0);
@@ -374,14 +401,18 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 				System.out.println("guessing" + ex);
 			}
 
-			for (int i = 0; i < 3; i++) {
-				if (hint == i) {
-					// JOptionPane.showMessageDialog(getContentPane(),
-					// (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고
-					// 있습니다.");
-
-					mainScreen.ta.append(
-							"[나에게만 알림]" + (pGiveHint + 1) + "P가 " + cs.tfGuess[i].getText() + "를 가지고 있습니다." + "\n");
+			
+			
+			for(int i=0; i<3;i++){
+				if(hint==i){
+					//JOptionPane.showMessageDialog(getContentPane(), (Game.crrPlayer%4)+1+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다.");
+					Document doc=mainScreen.ta.getDocument();
+					//doc.insertString(offset, str, a);
+					//mainScreen.ta.("[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n",Color.PINK);
+					
+					//Document doc = mainScreen.ta.getDocument();
+					//doc.insertString(doc.getLength(), "[나에게만 알림]"+(pGiveHint+1)+"P가 "+cs.tfGuess[i].getText()+"를 가지고 있습니다."+"\n", mainScreen.ta.getStyle(color));
+					
 
 					break;
 				}
@@ -401,71 +432,103 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 			}
 
 			reachRoom.setVisible(false);
-		} else if (e.getSource() == mainScreen.ChatInput) {
-			String msg = mainScreen.ChatInput.getText().trim();
-			if (msg.length() < 1)
-				return;
-			// 서버로 전송
-			/*
-			 * 사람 찾는다 ==> id (waitVc) 방에 있는 사람 ==> roomName(userVc)
-			 */
-			try {
-				out.write((Function.ROOMCHAT + "|" + myRoom + "|" + msg + "\n").getBytes());
-				// Server ==> in.readLine() (Thread==> run())
-				/*
-				 * 1. 이벤트 발생 (Button,Mouse) ==> 서버로 요청값 전송 ******** 브라우저으로 클릭 ,
-				 * 주소 변경 login.jsp?id=aaa&pwd=1234 2. Server (통신을 담당하는 쓰레드에서 처리)
-				 * class Client { public void run(){} } ==> 요청한 결과값을 클라이언트로 전송
-				 * ==> 웹서버 ==> 처리 결과를 클라이언트 브라우저로 전송 3. run() : 서버에서 들어오는 응답을
-				 * 받아서 윈도우에 출력 (브라우저 출력)
-				 * 
-				 * Client ==> Server ==> Client 오라클 요청 ==> 결과값 ==> 브라우저 전송(출력)
-				 * SQL 웹서버 요청 (브라우저) ==> 파일요청 ==> 파일 찾기 ==> 파일내용 브라우저 전송
-				 */
-			} catch (Exception ex) {
-			}
-			mainScreen.ChatInput.setText("");
-		} else if (e.getSource() == jfTurn.b1) {
-			try {
-				out.write((Function.SETTURN + "|" + myRoom + "\n").getBytes());
-			} catch (Exception ex) {
-			}
+		}else if(e.getSource()==mainScreen.ChatInput)
+		{
+			 String msg=mainScreen.ChatInput.getText().trim();
+			 String color = mainScreen.box.getSelectedItem().toString();
+			 initStyle();
+			 append(msg, color);
+			 mainScreen.ChatInput.setText("");
+			 //String data= mainScreen.ChatInput.getText();
+			 //mainScreen.ta.append(msg+"\n"); //append:문자 붙여줌
+			 //mainScreen.ChatInput.setText("");
+			 //mainScreen.jsChatArea.getVerticalScrollBar().setValue(mainScreen.jsChatArea.getVerticalScrollBar().getMaximum());
+			 if(msg.length()<1)
+				 return;
+			 //서버로 전송 
+			 /*
+			  *   사람 찾는다 ==> id (waitVc)
+			  *   방에 있는 사람 ==> roomName(userVc)
+			  */
+			 try
+			 {
+				 out.write((Function.ROOMCHAT+"|"+myRoom+"|"+msg+"\n").getBytes());
+				 // Server ==> in.readLine() (Thread==> run())
+				 /*
+				  *   1. 이벤트 발생 (Button,Mouse)   
+				  *      ==> 서버로 요청값 전송
+				  *      ******** 브라우저으로 클릭 , 주소 변경 
+				  *                 login.jsp?id=aaa&pwd=1234
+				  *   2. Server (통신을 담당하는 쓰레드에서 처리)
+				  *      class Client
+				  *      {
+				  *          public void run(){}
+				  *      }
+				  *      ==> 요청한 결과값을 클라이언트로 전송 
+				  *      ==> 웹서버 ==> 처리 결과를 클라이언트 브라우저로 전송
+				  *   3. run() : 서버에서 들어오는 응답을 받아서 
+				  *       윈도우에 출력 (브라우저 출력)
+				  *       
+				  *   Client ==> Server ==> Client
+				  *   오라클 
+				  *     요청 ==> 결과값 ==> 브라우저 전송(출력)
+				  *     SQL  
+				  *   웹서버
+				  *     요청 (브라우저) ==> 파일요청 ==> 
+				  *     파일 찾기 ==> 파일내용 브라우저 전송
+				  */
+				 
+			 }catch(Exception ex){}
+		}else if(e.getSource()==jfTurn.b1){
+			try
+			{
+				 out.write((Function.SETTURN+"|"+myRoom+"\n").getBytes());
+			}catch(Exception ex){}
 			jfTurn.setVisible(false);
 		}
-
-		// ########## 경은/ CS 버튼
-
-		else if (e.getSource() == cs.p[0]) {
-			try {
-				out.write((Function.CHOOSECARD + "|" + 0 + "\n").getBytes());
-			} catch (Exception ex) {
+		else if(e.getSource()==reachRoom.b2)
+		{
+			try
+			{
+				 out.write((Function.FINALGUESS+"|"+myRoom+"|"+n+"\n").getBytes());
+			}catch(Exception ex){}
+			
+			
+			reachRoom.setVisible(false);
+		}
+		else if (e.getSource() == fc.st) {
+			
+			int pGiveHint=Game.crrPlayer+1;
+			String sr=cs.tfGuess[0].getText();
+			String sp=cs.tfGuess[1].getText();
+			String sw=cs.tfGuess[2].getText();
+			int hint=-1;
+			for(int i=0;i<3;i++){
+				hint=mainScreen.game.getHint(pGiveHint,sr,sp,sw);
+				if(hint>=0)
+					break;
+				else pGiveHint++;
 			}
-		} else if (e.getSource() == cs.p[1]) {
-
-			try {
-				out.write((Function.CHOOSECARD + "|" + 1 + "\n").getBytes());
-			} catch (Exception ex) {
+			//0 -> 방. 1 -> 범인 2->무기 -1 ->없음
+			try
+			{
+				 out.write((Function.HINT+"|"+myRoom+"|"+mainScreen.game.p[pGiveHint%4].id+"|"+(pGiveHint+1)%4+"|"+sr+"|"+sp+"|"+sw+"|"+hint+"\n").getBytes());
+			}catch(Exception ex){
+				System.out.println("guessing"+ex);
 			}
-		} else if (e.getSource() == cs.p[2]) {
-			try {
-				out.write((Function.CHOOSECARD + "|" + 2 + "\n").getBytes());
-			} catch (Exception ex) {
-			}
-		} else if (e.getSource() == cs.p[3]) {
-			try {
-				out.write((Function.CHOOSECARD + "|" + 3 + "\n").getBytes());
-			} catch (Exception ex) {
-			}
-		} else if (e.getSource() == cs.p[4]) {
-			try {
-				out.write((Function.CHOOSECARD + "|" + 4 + "\n").getBytes());
-			} catch (Exception ex) {
-			}
-		} else if (e.getSource() == cs.p[5]) {
-			try {
-				out.write((Function.CHOOSECARD + "|" + 5 + "\n").getBytes());
-			} catch (Exception ex) {
-			}
+		}
+			
+		
+		
+		//########## 경은/ CS 버튼
+		
+		else if(e.getSource()==cs.p[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
+		}else if(e.getSource()==cs.p[1])
+		{
+			
+			try{ out.write((Function.CHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
 		}
 
 		// ############## cs/ 무기
@@ -559,7 +622,187 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 			} catch (Exception ex) {
 			}
 		}
-
+		else if(e.getSource()==cs.p[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+4+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.p[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+5+"\n").getBytes());}catch(Exception ex){}
+		}
+	
+		
+		//############## cs/ 무기
+		else if(e.getSource()==cs.q[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			
+		}else if(e.getSource()==cs.q[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+7+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+8+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+9+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+10+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+11+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+12+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.q[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+13+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		//########### 방
+		else if(e.getSource()==cs.j[0])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+14+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[1])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+15+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[2])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+16+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[3])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+17+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[4])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+18+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[5])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+19+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[6])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+20+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[7])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+21+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==cs.j[8])
+		{
+			try{ out.write((Function.CHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		// ########### 최종 선택
+		else if(e.getSource()==fc.p[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+0+"\n").getBytes());}catch(Exception ex){}
+		}else if(e.getSource()==fc.p[1])
+		{
+			
+			try{ out.write((Function.FINALCHOOSECARD+"|"+1+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+2+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+3+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+4+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.p[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+5+"\n").getBytes());}catch(Exception ex){}
+		}
+	
+		
+		//############## fc/ 무기
+		else if(e.getSource()==fc.q[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			
+		}else if(e.getSource()==fc.q[1])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+7+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+8+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+9+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+10+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+11+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[6])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+12+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.q[7])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+13+"\n").getBytes());}catch(Exception ex){}
+		}
+		
+		//########### fc/방
+		else if(e.getSource()==fc.j[0])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+14+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[1])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+15+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[2])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+16+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[3])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+17+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[4])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+18+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[5])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+19+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[6])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+20+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[7])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+21+"\n").getBytes());}catch(Exception ex){}
+		}
+		else if(e.getSource()==fc.j[8])
+		{
+			try{ out.write((Function.FINALCHOOSECARD+"|"+22+"\n").getBytes());}catch(Exception ex){}
+		}
+	
 	}
 
 	@Override
@@ -626,26 +869,12 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 
 	}
 
-	/*
-	 * public void initStyle() // 160211 정선추가 { Style def =
-	 * StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE
-	 * );
-	 * 
-	 * Style blue = wait.ta.addStyle("blue", def);
-	 * StyleConstants.setForeground(blue, Color.blue);
-	 * 
-	 * Style pink = wait.ta.addStyle("pink", def);
-	 * StyleConstants.setForeground(pink, Color.pink);
-	 * 
-	 * Style green = wait.ta.addStyle("green", def);
-	 * StyleConstants.setForeground(green, Color.green);
-	 * 
-	 * Style cyan = wait.ta.addStyle("cyan", def);
-	 * StyleConstants.setForeground(cyan, Color.cyan);
-	 * 
-	 * 
-	 * }
-	 */
+	public void initStyle() // 160211 정선추가
+	{
+		Style def = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+
+	}
+
 	public void append(String msg, String color) // 160211 정선추가
 	{
 		try {
@@ -671,10 +900,14 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 				case Function.LOGIN: {
 					String[] data = { st.nextToken(), st.nextToken(), st.nextToken(), st.nextToken() };
 					wait.model2.addRow(data);
+					login.clip.stop();
+					wait.clip.play();
 				}
 					break;
 
 				case Function.MYLOG: {
+					login.clip.stop();
+					wait.clip.play();
 					String id = st.nextToken();
 					setTitle(id);
 					repaint();
@@ -687,6 +920,142 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 					append(st.nextToken() + "\n", "Color.BLUE");
 					wait.bar.setValue(wait.bar.getMaximum());
 				}
+
+				break;
+				case Function.MAKEROOM:
+				{
+					 String[] temp={st.nextToken(),st.nextToken(),st.nextToken()};
+					 wait.model1.addRow(temp);
+				}
+				
+				
+				break;
+				case Function.ROOMADD:
+				{
+					 String id=st.nextToken();
+					 String sex=st.nextToken();
+					 
+					 String s="";
+					 if(sex.equals("남자")) 
+						 s="m";
+					 else 
+						 s="w";
+					 
+					 for(int i=0;i<4;i++)
+					 {
+						  if(!gwr.sw[i])
+						  {
+							  gwr.sw[i]=true;
+							  gwr.idtf[i].setText(id);
+							  
+							  break;
+						  }
+					 }
+					 
+					
+				}
+				break;
+				case Function.ROOMIN:
+				{
+					wait.clip.stop();
+					gwr.clip.play();
+					 String id=st.nextToken();
+					 String sex=st.nextToken();					 
+					 myRoom=st.nextToken();
+
+					 int pnum = Integer.parseInt(st.nextToken());
+					 
+					 String s="";
+					 if(sex.equals("남자")) 
+						 s="m";
+					 else 
+						 s="w";
+					 
+					 for(int i=0;i<4;i++)
+					 {
+						  if(!gwr.sw[i])
+						  {
+							  gwr.sw[i]=true;
+							  gwr.idtf[i].setText(id);
+							  
+							  
+							  break;
+						  }
+					 }
+					 String[] temp={id,sex};
+					 card.show(getContentPane(), "GWR");
+					 
+					 if(pnum==1){
+						 gwr.btnReady.setText("START");
+						 gwr.btnReady.setEnabled(false);
+					 }
+						 gwr.isReady[0].setFont(new Font("맑은 고딕", Font.BOLD, 20));
+						 gwr.isReady[0].setForeground(Color.white);
+						 gwr.isReady[0].setText("방장");
+						 gwr.isReady[pnum-1].setBackground(Color.black);
+						 gwr.isReady[pnum-1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
+				
+						
+				}
+				break;
+				case Function.REFLUSH:
+				{
+					 String id=st.nextToken();
+					 String pos=st.nextToken();
+					 String str="";
+					 for(int i=0;i<wait.model2.getRowCount();i++)
+					 {
+						 str=wait.model2.getValueAt(i, 0).toString();
+						 if(str.equals(id))
+						 {
+							 wait.model2.setValueAt(pos, i, 3);
+							 break;
+						 }
+					 }
+				}
+				break;
+				case Function.ROOMOUT:
+				{
+					gwr.clip.stop();
+					wait.clip.play();
+					String id=st.nextToken();
+					for(int i=0;i<4;i++)
+					 {
+						String mid=gwr.idtf[i].getText();
+						if(mid.equals(id))
+						{
+							 gwr.sw[i]=false;
+							 gwr.idtf[i].setText("");
+							 gwr.aa[i].removeAll();
+							 gwr.aa[i].setLayout(new BorderLayout());
+							 gwr.aa[i].add("Center",
+									 new JLabel(new ImageIcon("image/back/qcard.png")));
+							 gwr.aa[i].validate();
+						}
+					 }
+				}
+					break;
+				case Function.MYROOMOUT:
+				{
+					gwr.clip.stop();
+					wait.clip.play();
+					for(int i=0;i<4;i++)
+						{
+					 gwr.sw[i]=false;
+					 gwr.idtf[i].setText("");
+					 gwr.aa[i].removeAll();
+					 gwr.aa[i].setLayout(new BorderLayout());
+					 gwr.aa[i].add("Center",
+							 new JLabel(new ImageIcon("image/back/qcard.png")));
+					 gwr.aa[i].validate();
+						}
+							
+					
+					card.show(getContentPane(),"WR");
+					repaint();
+					
+				}
+				break;
 
 					break;
 				case Function.MAKEROOM: {
@@ -855,14 +1224,17 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 					gwr.avaName[pNum - 1].setHorizontalAlignment((int) JTextField.CENTER_ALIGNMENT);
 
 					break;
-				case Function.STARTGAME: {
-					int[] ans = new int[3];
-					int[][] pCard = new int[4][5];
-
-					int pnum = Integer.parseInt(st.nextToken());
-					int ava = Integer.parseInt(st.nextToken());
-					for (int i = 0; i < ans.length; i++) {
-						ans[i] = Integer.parseInt(st.nextToken());
+				case Function.STARTGAME:
+				{	
+					gwr.clip.stop();
+					mainScreen.clip.play();
+					int[] ans= new int[3];
+					int[][] pCard= new int[4][5];
+					
+					int pnum=Integer.parseInt(st.nextToken());
+					int ava=Integer.parseInt(st.nextToken());
+					for(int i=0;i<ans.length;i++){
+						ans[i]=Integer.parseInt(st.nextToken());
 					}
 					for (int i = 0; i < pCard.length; i++) {
 						for (int j = 0; j < pCard[i].length; j++) {
@@ -921,11 +1293,12 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 
 					cs.setCardImg();
 				}
-					break;
-
-				case Function.MOVE: {
-					String pnum = st.nextToken();
-					int key = Integer.parseInt(st.nextToken());
+				break;
+				
+				case Function.MOVE:
+				{
+					String pnum=st.nextToken();
+					int key= Integer.parseInt(st.nextToken());
 					mainScreen.game.keyPressed(key);
 					mainScreen.game.move();
 
@@ -960,22 +1333,23 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 					repaint();
 
 				}
-					break;
-
-				case Function.ROOMCHAT: {
-					mainScreen.ta.append(st.nextToken() + "\n");
-					mainScreen.bar.setValue(mainScreen.bar.getMaximum());
-
-					// bar.setValue(wr.bar.getMaximum());
-
+				break;
+				
+				case Function.ROOMCHAT:
+				{
+					 mainScreen.ta.append(st.nextToken()+"\n");
+					 mainScreen.bar.setValue(mainScreen.bar.getMaximum());
+					 
+					 //bar.setValue(wr.bar.getMaximum());
 				}
-					break;
-				case Function.SETTURN: {
-					Game.crrPlayer = Integer.parseInt(st.nextToken());
-					Game.dice1 = Integer.parseInt(st.nextToken());
-					Game.dice2 = Integer.parseInt(st.nextToken());
-					mainScreen.game.setGamePlayer(Game.crrPlayer, (Game.dice1 + Game.dice2));
-					// new GameThread().start();
+
+				case Function.SETTURN:
+				{
+					Game.crrPlayer=Integer.parseInt(st.nextToken());
+					Game.dice1=Integer.parseInt(st.nextToken());
+					Game.dice2=Integer.parseInt(st.nextToken());
+					mainScreen.game.setGamePlayer(Game.crrPlayer, (Game.dice1+Game.dice2));
+					//new GameThread().start();
 					mainScreen.showCount();
 					mainScreen.setImage();
 					mainScreen.jpGameBoard.repaint();
@@ -1090,9 +1464,65 @@ public class ClueMain extends JFrame implements ActionListener, KeyListener, Run
 					;
 
 				}
-					break;
+				break;
+				
+				case Function.FINALCHOOSECARD:
+				{
+					int cardnum=Integer.parseInt(st.nextToken());
+					 System.out.println(cardnum);
+					try{
+					if(cardnum<6){
+						fc.guess[1].removeAll();
+						fc.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+						fc.guess[1].validate();//panel재배치
+						fc.tfGuess[1].setText(RefData.nameChar[cardnum]);
+					}else if(cardnum>13){
+						cardnum=cardnum-13;
+						fc.guess[0].removeAll();
+						fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", fc.guess[2].getWidth(), fc.guess[2].getHeight()))));
+						fc.guess[0].validate();//panel재배치
+						fc.tfGuess[0].setText(RefData.nameRoom[cardnum]);
+					}else{
+						cardnum=cardnum-6;
+						fc.guess[2].removeAll();
+						fc.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", fc.guess[1].getWidth(), fc.guess[1].getHeight()))));
+						fc.guess[2].validate();//panel재배치
+						fc.tfGuess[2].setText(RefData.nameWp[cardnum]);
+					}
+					}catch(ArrayIndexOutOfBoundsException ex){
+						System.out.println("ChooseCard: "+ex.getMessage());
+					}
 				}
-
+				break;
+				case Function.FINALSELECTCARD:
+				{
+					String pnum=st.nextToken();
+					int avata= Integer.parseInt(st.nextToken());
+					int roomNo=Integer.parseInt(st.nextToken());
+					//데이터를 fc에 넘겨줘서 처리. 누가 어디에서 추리중.
+					for(int i=0;i<9;i++){
+						fc.j[i].setEnabled(true);
+					}
+					repaint();
+					
+					//fc.guess[0].removeAll();
+					//fc.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+(roomNo-1)+".jpg", fc.guess[0].getWidth(), fc.guess[0].getHeight()))));
+					fc.guess[0].validate();//panel재배치
+		
+					fc.pl.removeAll();
+					fc.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", fc.pl.getWidth(), fc.pl.getHeight()))));
+					fc.pl.validate();//panel재배치
+					
+					fc.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
+					//fc.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					card.show(getContentPane(), "FC");
+					
+					fc.setCardImg();
+				}
+				break;
+				}
+				
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				System.out.println(e);

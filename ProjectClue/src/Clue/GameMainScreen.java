@@ -1,5 +1,7 @@
 package Clue;
 
+import java.applet.Applet;
+import java.applet.AudioClip;
 import java.awt.*;
 
 import javax.swing.*;
@@ -14,6 +16,8 @@ import java.awt.event.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
+
 
 public class GameMainScreen extends JPanel{
 	
@@ -31,7 +35,9 @@ public class GameMainScreen extends JPanel{
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
-	
+	//JScrollPane jsChatArea;
+	JComboBox box;
+	AudioClip clip;
 	
 
 	public GameMainScreen() {
@@ -79,7 +85,8 @@ public class GameMainScreen extends JPanel{
 		
 		jsChatArea.setBounds(5, 680, 600, 160);
 		jpMyCard.setBounds(610, 680, 575, 185);
-		ChatInput.setBounds(5, 840, 540, 25);
+		ChatInput.setBounds(5, 840, 510, 25);
+		//box.setBounds(520,840,25,25);
 		b.setBounds(545, 840, 60, 25);
 		jpNote1.setBounds(865, 105, 320, 186);
 		jpNote2.setBounds(865, 295, 320, 186);
@@ -98,6 +105,15 @@ public class GameMainScreen extends JPanel{
 		add(jpNote2);
 		add(jpNote3);
 		
+		try {
+            File file = new File("wav/Game_bgm.wav");
+            clip = Applet.newAudioClip(file.toURL());
+            clip.stop();
+            
+           
+        } catch (MalformedURLException e){
+            e.printStackTrace();
+        }
 		
 	}
 	

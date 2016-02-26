@@ -182,7 +182,6 @@ public class Server implements Runnable {
 					case Function.ROOMCHAT: {
 						String rname = st.nextToken();
 						String strMsg = st.nextToken();
-
 						for (int i = 0; i < roomVc.size(); i++) {
 							Room room = roomVc.elementAt(i);
 							if (rname.equals(room.roomName)) {

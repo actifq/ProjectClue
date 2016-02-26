@@ -124,7 +124,7 @@ public class Game{
 	
 	public int isReached(){
 		int roomNo=0;
-		//¹æ1~3
+		//ë°©1~3
 		if(crrY==0){
 			if(crrX==1){
 				roomNo=1;
@@ -230,7 +230,7 @@ public class Game{
 		case 3: //KeyEvent.VK_RIGHT
 			inputX=1;
 			break;
-		default: //´Ù¸¥ Å° ´­·¶À» ¶§
+		default: //ë‹¤ë¥¸ í‚¤ ëˆŒë €ì„ ë•Œ
 			count++;
 		}
 		count--;
