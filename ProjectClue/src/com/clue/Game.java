@@ -1,4 +1,4 @@
-package Clue;
+package com.clue;
 
 
 import java.util.Random;
@@ -9,12 +9,12 @@ import javax.swing.*;
 public class Game{
 	
 	
-	GameArea gv;
+	JP_GameArea gv;
 	int[] answerCard =new int[3];
 	int[][] pCard= new int[4][5];
 	static int dice1=1,dice2=1;
-	PlayerDTO pMain;
-	PlayerDTO[] p;
+	Game_PlayerDTO pMain;
+	Game_PlayerDTO[] p;
 	static int crrPlayer; 
 	JFrame frTurn;
 	private Random random;
@@ -24,8 +24,8 @@ public class Game{
 	private int inputX=0,inputY=0;
 	private int count=0;
 
-	public Game(GameArea gv, JFrame fr){
-		p=new PlayerDTO[4];
+	public Game(JP_GameArea gv, JFrame fr){
+		p=new Game_PlayerDTO[4];
 		
 		this.gv=gv;
 		frTurn=fr;
@@ -35,7 +35,7 @@ public class Game{
 	}
 	
 	public void setPlayer(int pnum, int avata){
-		p[pnum-1]= new PlayerDTO(avata,pCard[pnum-1]);
+		p[pnum-1]= new Game_PlayerDTO(avata,pCard[pnum-1]);
 		
 	}
 	
@@ -77,7 +77,7 @@ public class Game{
 		this.myAva = myAva;
 	}
 
-	public PlayerDTO getpMain() {
+	public Game_PlayerDTO getpMain() {
 		return pMain;
 	}
 
@@ -251,22 +251,22 @@ public class Game{
 	public boolean finalGusee(String r, String p, String w){
 		//answer[0]=>room [1]=> player ,[2]=> weapon
 		int ir=0,ip=0,iw=0;
-		for(int i=0; i<RefData.nameRoom.length;i++){
-			if(r.equals(RefData.nameRoom[i])){
+		for(int i=0; i<Game_RefData.nameRoom.length;i++){
+			if(r.equals(Game_RefData.nameRoom[i])){
 				ir=i+14;
 				break;
 			}
 		}
 
-		for(int i=0; i<RefData.nameChar.length;i++){
-			if(p.equals(RefData.nameChar[i])){
+		for(int i=0; i<Game_RefData.nameChar.length;i++){
+			if(p.equals(Game_RefData.nameChar[i])){
 				ip=i;
 				break;
 			}
 		}
 		
-		for(int i=0; i<RefData.nameWp.length;i++){
-			if(w.equals(RefData.nameWp[i])){
+		for(int i=0; i<Game_RefData.nameWp.length;i++){
+			if(w.equals(Game_RefData.nameWp[i])){
 				iw=i+6;
 				break;
 			}
@@ -283,22 +283,22 @@ public class Game{
 		int r=0, sus=0, wp=0;
 		boolean br=false,bs=false,bw=false;
 		
-		for(int i=0; i<RefData.nameRoom.length;i++){
-			if(room.equals(RefData.nameRoom[i])){
+		for(int i=0; i<Game_RefData.nameRoom.length;i++){
+			if(room.equals(Game_RefData.nameRoom[i])){
 				r=i+14;
 				break;
 			}
 		}
 
-		for(int i=0; i<RefData.nameChar.length;i++){
-			if(suspect.equals(RefData.nameChar[i])){
+		for(int i=0; i<Game_RefData.nameChar.length;i++){
+			if(suspect.equals(Game_RefData.nameChar[i])){
 				sus=i;
 				break;
 			}
 		}
 		
-		for(int i=0; i<RefData.nameWp.length;i++){
-			if(weapon.equals(RefData.nameWp[i])){
+		for(int i=0; i<Game_RefData.nameWp.length;i++){
+			if(weapon.equals(Game_RefData.nameWp[i])){
 				wp=i+6;
 				break;
 			}

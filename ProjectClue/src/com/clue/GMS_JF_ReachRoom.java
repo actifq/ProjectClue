@@ -1,8 +1,11 @@
-package Clue;
+package com.clue;
 
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,13 +13,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class ReachRoom extends JFrame {
+public class GMS_JF_ReachRoom extends JFrame {
 	JLabel la1;
 	JButton b1,b2;
-	PUImg2 jp;
-	public ReachRoom(){
+	PanelRR jp;
+	public GMS_JF_ReachRoom(){
 		
-		jp = new PUImg2();
+		jp = new PanelRR();
 		la1 = new JLabel("  사랑방에 도달했습니다");
 		setLayout(null);
 		
@@ -44,7 +47,28 @@ public class ReachRoom extends JFrame {
 		setSize(300,300);
 	}
 	
-
+	
+	
+	class PanelRR extends JPanel{
+		Image reach;
+		JLabel la1 ;
+		
+		public JButton b2,b3;
+		public PanelRR(){
+			
+			
+			
+			reach=Toolkit.getDefaultToolkit().getImage("image/back/corr.jpg");
+			setLayout(null);
+			
+		
+		}
+		@Override
+		protected void paintComponent(Graphics g) {  
+			
+			g.drawImage(reach, 0, 0, getWidth(),getHeight(),this);
+		}
+	}
 	
 
 }

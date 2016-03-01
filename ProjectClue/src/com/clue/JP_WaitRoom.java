@@ -1,8 +1,8 @@
-package Clue;
+package com.clue;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
-public class WaitRoom extends JPanel {
+public class JP_WaitRoom extends JPanel {
 	Image back,movie1;
 	JTable table1,table2;
 	DefaultTableModel model1,model2;
@@ -16,11 +16,11 @@ public class WaitRoom extends JPanel {
 	TableColumn column;
 	
 	
-	public WaitRoom() {
+	public JP_WaitRoom() {
 		back=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");
 		movie1=Toolkit.getDefaultToolkit().getImage("image/back/moon.gif");
 		
-		String[] col1={"방이름","공개/비공개","인원"};
+		String[] col1={"방이름","공개/비공개","현재인원"};
 		String[][] row1=new String[0][3];
 		
 		model1=new DefaultTableModel(row1, col1){
@@ -58,14 +58,14 @@ public class WaitRoom extends JPanel {
 		bar=js3.getVerticalScrollBar();
 		tf=new JTextField();
 		box=new JComboBox();
-		box.addItem("전체채팅");
+		box.addItem("인원");
 		box.setFont(new Font("맑은 고딕",Font.BOLD,13));
 		
 		
 		
 		b1=new JButton("방만들기");
 		b2=new JButton("방들어가기");
-		b3=new JButton("게임신청");
+		b3=new JButton("게임하기");
 		b4=new JButton("쪽지보내기");
 		b5=new JButton("정보보기");
 		b6=new JButton("나가기");
@@ -143,7 +143,7 @@ public class WaitRoom extends JPanel {
 		return null;
 	}
 	@Override
-	//paint, paintComponent => 자동호출
+	//paint, paintComponent => ?��?��?���?
 	protected void paintComponent(Graphics g) {
 	g.drawImage(back, 0, 0, getWidth(),getHeight(),this);
 	g.drawImage(movie1,740, 385, 420, 250,this);

@@ -1,7 +1,7 @@
-package com.sist.server;
+package com.clue.server;
 import java.util.*;
 
-import Clue.ShowTurn;
+import com.clue.GMS_JF_ShowTurn;
 
 public class Room {
      String roomName,roomState,roomPwd;

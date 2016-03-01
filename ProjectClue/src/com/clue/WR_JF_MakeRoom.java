@@ -1,8 +1,8 @@
-package Clue;
+package com.clue;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class WR_MakeRoom extends JFrame implements ActionListener{
+public class WR_JF_MakeRoom extends JFrame implements ActionListener{
 	JLabel la1,la2,la3,la4;
 	JTextField tf;
 	JRadioButton rb1,rb2;
@@ -10,7 +10,7 @@ public class WR_MakeRoom extends JFrame implements ActionListener{
 	JComboBox box;
 	JButton b1,b2;
 	// {} 초기화 블록 or 생성자 이용
-	public WR_MakeRoom()
+	public WR_JF_MakeRoom()
 	{
 		la1=new JLabel("방이름");
 		la2=new JLabel("상태");

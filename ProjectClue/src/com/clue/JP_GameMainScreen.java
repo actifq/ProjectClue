@@ -1,4 +1,4 @@
-package Clue;
+package com.clue;
 
 import java.awt.*;
 
@@ -16,14 +16,14 @@ import java.applet.Applet;
 import java.applet.AudioClip;
 
 
-public class GameMainScreen extends JPanel{
+public class JP_GameMainScreen extends JPanel{
 	
 	Image back;
 	Image dice1,dice2,jpTurn; //정선
-	LogoSet jpLogo; //정선
+	GMS_JP_LogoSet jpLogo; //정선
 	JPanel jpCount,jpNote1,jpNote2,jpNote3;
-	ShowMyCard jpMyCard;
-	GameArea jpGameBoard;
+	GMS_JP_ShowMyCard jpMyCard;
+	JP_GameArea jpGameBoard;
 	//JTable table;
 	JTextArea ta;
 	JTextField ChatInput;
@@ -34,11 +34,11 @@ public class GameMainScreen extends JPanel{
 	AudioClip clip;
 	
 
-	public GameMainScreen() {
+	public JP_GameMainScreen() {
 
 		dice1=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
 		dice2=Toolkit.getDefaultToolkit().getImage("image/dice/d1.png");
-		jpLogo=new LogoSet();
+		jpLogo=new GMS_JP_LogoSet();
 		
 		//jpLogo=Toolkit.getDefaultToolkit().getImage("image/back/jplogo2.png");
 		back=Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
@@ -51,10 +51,10 @@ public class GameMainScreen extends JPanel{
 		jpCount.add("CENTER",jlshowCnt);
 			//이미지 불러와서 판넬에 채우기
 		
-		jpGameBoard=new GameArea();//게임화면
+		jpGameBoard=new JP_GameArea();//게임화면
 		
 		
-		jpMyCard=new ShowMyCard();//카드보여주기
+		jpMyCard=new GMS_JP_ShowMyCard();//카드보여주기
 		ta=new JTextArea();
 		JScrollPane jsChatArea=new JScrollPane(ta);//채팅창
 		ChatInput=new JTextField();	//채팅입력창

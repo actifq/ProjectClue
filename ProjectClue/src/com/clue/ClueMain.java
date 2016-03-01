@@ -1,9 +1,11 @@
-package Clue;
+package com.clue;
 
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.*;
-import com.sist.common.Function;
+
+import com.clue.common.Function;
+
 import java.awt.event.*;
 import java.io.*;
 import java.net.*;
@@ -13,19 +15,19 @@ public class ClueMain extends JFrame implements ActionListener,
 KeyListener,Runnable,MouseListener,FocusListener{
 
 	CardLayout card;
-	GameWaitingRoom gwr = new GameWaitingRoom();
-	Login login = new Login();
-	GameMainScreen mainScreen = new GameMainScreen();
-	CardSelect cs = new CardSelect();
-	FinalCardSelect fcs = new FinalCardSelect();
+	JP_GameWaitingRoom gwr = new JP_GameWaitingRoom();
+	JP_Login login = new JP_Login();
+	JP_GameMainScreen mainScreen = new JP_GameMainScreen();
+	JP_CardSelect cs = new JP_CardSelect();
+	JP_FinalCardSelect fcs = new JP_FinalCardSelect();
 
-	LoadingTest loading= new LoadingTest(this); //160204 정선 추가
-	ReachRoom reachRoom =new ReachRoom();
-	WaitRoom wait=new WaitRoom(); //160211 정선추가
+	JP_Loading loading= new JP_Loading(this); //160204 정선 추가
+	GMS_JF_ReachRoom reachRoom =new GMS_JF_ReachRoom();
+	JP_WaitRoom wait=new JP_WaitRoom(); //160211 정선추가
 	
-	Join_Login join=new Join_Login();//160211 정선 추가
-	WR_MakeRoom mkr=new WR_MakeRoom(); //160211 정선 추가
-	ShowTurn  jfTurn=new ShowTurn();
+	
+	WR_JF_MakeRoom mkr=new WR_JF_MakeRoom(); //160211 정선 추가
+	GMS_JF_ShowTurn  jfTurn=new GMS_JF_ShowTurn();
 	int[] removedP={-1,-1};
 	
 	 // 소켓 연결시도
@@ -183,7 +185,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			// repaint();
 			// card.show(getContentPane(),"WR");
 		} else if (e.getSource() == login.b2) {
-			join.setVisible(true);
+			//join.setVisible(true);
 
 		} 
 		// 방만들기 버튼
@@ -995,7 +997,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					int prvChar=Integer.parseInt(st.nextToken()); //이전캐릭
 					
 					chAvata(pNum-1,charNum);	//사진바꾸기
-					gwr.avaName[pNum-1].setText(RefData.nameChar[charNum-1]);//캐릭터 바꾸기
+					gwr.avaName[pNum-1].setText(Game_RefData.nameChar[charNum-1]);//캐릭터 바꾸기
 					gwr.chr[charNum].setEnabled(false);
 					gwr.chr[prvChar].setEnabled(true);
 					
@@ -1079,8 +1081,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					cs.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", cs.pl.getWidth(), cs.pl.getHeight()))));
 					cs.pl.validate();//panel재배치
 					
-					cs.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
-					cs.tfGuess[0].setText(RefData.nameRoom[roomNo-1]);
+					cs.nPl.setText(Game_RefData.nameChar[avata-1]+" 추리중");
+					cs.tfGuess[0].setText(Game_RefData.nameRoom[roomNo-1]);
 					
 					if((pnum-1)!=mainScreen.game.getMyNum()){
 						cs.st.setVisible(false);
@@ -1109,7 +1111,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					fcs.pl.add(new JLabel(new ImageIcon(setImage("image/player/char"+ (avata-1) + ".jpg", cs.pl.getWidth(), cs.pl.getHeight()))));
 					fcs.pl.validate();//panel재배치
 					
-					fcs.nPl.setText(RefData.nameChar[avata-1]+" 추리중");
+					fcs.nPl.setText(Game_RefData.nameChar[avata-1]+" 추리중");
 					fcs.tfGuess[0].setText("");
 					
 					
@@ -1147,8 +1149,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					if(n!=0){
 						reachRoom.setBounds(500,250,300,300);
 						try{
-						reachRoom.la1.setText("  "+RefData.nameRoom[n-1]+"에 도달했습니다.");
-						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+RefData.nameRoom[n-1]+"\n").getBytes());
+						reachRoom.la1.setText("  "+Game_RefData.nameRoom[n-1]+"에 도달했습니다.");
+						out.write((Function.REACHROOM+"|"+myRoom+"|"+(myNum+1)+"|"+Game_RefData.nameRoom[n-1]+"\n").getBytes());
 						}
 						catch(Exception ex){
 							
@@ -1222,7 +1224,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 						cs.guess[1].removeAll();
 						cs.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
 						cs.guess[1].validate();//panel재배치
-						cs.tfGuess[1].setText(RefData.nameChar[cardnum]);
+						cs.tfGuess[1].setText(Game_RefData.nameChar[cardnum]);
 						
 						
 						}else if(cardnum>=14){
@@ -1230,7 +1232,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 							cs.guess[0].removeAll();
 							cs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room+"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
 							cs.guess[0].validate();//panel재배치
-							cs.tfGuess[0].setText(RefData.nameRoom[cardnum]);
+							cs.tfGuess[0].setText(Game_RefData.nameRoom[cardnum]);
 							
 							
 						}else{
@@ -1238,7 +1240,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 							cs.guess[2].removeAll();
 							cs.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
 							cs.guess[2].validate();//panel재배치
-							cs.tfGuess[2].setText(RefData.nameWp[cardnum]);
+							cs.tfGuess[2].setText(Game_RefData.nameWp[cardnum]);
 						
 						}
 					}else if(flag.equals("fcs")){
@@ -1246,7 +1248,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 							fcs.guess[1].removeAll();
 							fcs.guess[1].add(new JLabel(new ImageIcon(setImage("image/player/char"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
 							fcs.guess[1].validate();//panel재배치
-							fcs.tfGuess[1].setText(RefData.nameChar[cardnum]);
+							fcs.tfGuess[1].setText(Game_RefData.nameChar[cardnum]);
 							
 						}else if(cardnum>=6 && cardnum<14){
 							
@@ -1255,13 +1257,13 @@ KeyListener,Runnable,MouseListener,FocusListener{
 							fcs.guess[2].removeAll();
 							fcs.guess[2].add(new JLabel(new ImageIcon(setImage("image/weapon/wp"+cardnum+".jpg", cs.guess[0].getWidth(), cs.guess[0].getHeight()))));
 							fcs.guess[2].validate();//panel재배치
-							fcs.tfGuess[2].setText(RefData.nameWp[cardnum]);
+							fcs.tfGuess[2].setText(Game_RefData.nameWp[cardnum]);
 						}else{
 							cardnum=cardnum-14;
 							fcs.guess[0].removeAll();
 							fcs.guess[0].add(new JLabel(new ImageIcon(setImage("image/room/room"+cardnum+".jpg", cs.guess[2].getWidth(), cs.guess[2].getHeight()))));
 							fcs.guess[0].validate();//panel재배치
-							fcs.tfGuess[0].setText(RefData.nameRoom[cardnum]);
+							fcs.tfGuess[0].setText(Game_RefData.nameRoom[cardnum]);
 						
 						}
 							

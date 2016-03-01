@@ -1,4 +1,4 @@
-package Clue;
+package com.clue;
 
 import java.awt.*;
 
@@ -6,13 +6,13 @@ import java.awt.*;
 import javax.swing.*;
 
 
-public class LogoSet extends JPanel{
+public class GMS_JP_LogoSet extends JPanel{
    Image jpLogo;
    JPanel[] playerImg=new JPanel[4];
    JLabel[] playerNo=new JLabel[4];
    
    
-   public LogoSet()
+   public GMS_JP_LogoSet()
    {
       setLayout(null);
                

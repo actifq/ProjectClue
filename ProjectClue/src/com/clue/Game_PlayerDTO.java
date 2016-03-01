@@ -1,6 +1,6 @@
-package Clue;
+package com.clue;
 
-public class PlayerDTO {
+public class Game_PlayerDTO {
 
 	String id;
 	int crrX,crrY;
@@ -10,12 +10,12 @@ public class PlayerDTO {
 	
 	
 
-	public PlayerDTO(String avaname, int[] cards){
+	public Game_PlayerDTO(String avaname, int[] cards){
 		
 		this.id = avaname;
 		
 		for(int i=0;i<6;i++){
-			if(RefData.nameChar[i].equals(avaname)){
+			if(Game_RefData.nameChar[i].equals(avaname)){
 				charIndex=i;
 				break;
 			}
@@ -26,9 +26,9 @@ public class PlayerDTO {
 		this.cards=cards.clone();//카드인덱스 복제.
 	}
 	
-public PlayerDTO(int avaname, int[] cards){
+public Game_PlayerDTO(int avaname, int[] cards){
 		
-		this.id = RefData.nameChar[avaname-1];
+		this.id = Game_RefData.nameChar[avaname-1];
 		charIndex=avaname;
 		
 		crrX = 6;

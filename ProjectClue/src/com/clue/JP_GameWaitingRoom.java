@@ -1,9 +1,9 @@
-package Clue;
+package com.clue;
 
 import java.awt.*;
 import javax.swing.*;
 
-public class GameWaitingRoom extends JPanel {
+public class JP_GameWaitingRoom extends JPanel {
 
 	/*
 	 * class userInfo{ JPanel uPan; JPanel aa; JPanel bb; JTextField idtf;
@@ -39,7 +39,7 @@ public class GameWaitingRoom extends JPanel {
 	// JButton chr, chr2, chr3, chr4, chr5, chr6, chrN;
 	JButton[] chr = new JButton[7];
 
-	public GameWaitingRoom() {
+	public JP_GameWaitingRoom() {
 		back3 = Toolkit.getDefaultToolkit().getImage("image/back/gwrback.jpg");
 
 		p1 = Toolkit.getDefaultToolkit().getImage("image/player/char0.jpg");

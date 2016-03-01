@@ -1,11 +1,11 @@
-package Clue;
+package com.clue;
 import java.awt.*;
 import javax.swing.*;
 
-public class ShowMyCard extends JPanel{
+public class GMS_JP_ShowMyCard extends JPanel{
    JButton[] jb=new JButton[5];
    
-   public ShowMyCard()
+   public GMS_JP_ShowMyCard()
    {
       for(int i=0;i<5;i++)
          jb[i]=new JButton();

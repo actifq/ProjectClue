@@ -1,9 +1,9 @@
-package Clue;
+package com.clue;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class FinalCardSelect extends JPanel{
+public class JP_FinalCardSelect extends JPanel{
 
    Image back, back3;
    JLabel[] tfGuess=new JLabel[3];//무기
@@ -17,7 +17,7 @@ public class FinalCardSelect extends JPanel{
    JPanel[] guess= new JPanel[3];
    JButton st;//추리 제안
 
-public FinalCardSelect()
+public JP_FinalCardSelect()
    {
 	
    back=Toolkit.getDefaultToolkit().getImage("image/back/cardback.jpg");

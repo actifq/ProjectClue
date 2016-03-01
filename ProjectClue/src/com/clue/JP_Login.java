@@ -1,10 +1,10 @@
-package Clue;
+package com.clue;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-public class Login extends JPanel{
+public class JP_Login extends JPanel{
 	Image back;
 	JLabel la1,la2;
 	JTextField tf;
@@ -19,7 +19,7 @@ public class Login extends JPanel{
 	 *                paint(),paintComponent() ==> 자동 호출
 	 *             ==> 화면 변경
 	 */
-	public Login() 
+	public JP_Login() 
 	{
 
 		back=Toolkit.getDefaultToolkit().getImage("image/back/background.gif");

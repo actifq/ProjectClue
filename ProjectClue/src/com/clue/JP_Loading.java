@@ -1,14 +1,14 @@
-package Clue;
+package com.clue;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class LoadingTest extends JPanel implements Runnable{
+public class JP_Loading extends JPanel implements Runnable{
 	JProgressBar prg;
 	Image back;
 	int i=0,num=0;  
 	ClueMain cm;
-	public LoadingTest(ClueMain cm) {
+	public JP_Loading(ClueMain cm) {
 		this.cm=cm;
 
 		back=Toolkit.getDefaultToolkit().getImage("image/back/loadingbr.gif");

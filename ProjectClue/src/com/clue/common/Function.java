@@ -1,4 +1,4 @@
-package com.sist.common;
+package com.clue.common;
 
 public class Function {
 	public static final int LOGIN=100;

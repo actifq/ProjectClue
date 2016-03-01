@@ -1,10 +1,10 @@
-package Clue;
+package com.clue;
 
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.text.*;
 
-public class GameArea extends JPanel{
+public class JP_GameArea extends JPanel{
 
 	Image backImg;
 	Image[] horse= new Image[4];
@@ -25,7 +25,7 @@ public class GameArea extends JPanel{
 	
 	
 
-	public GameArea(){
+	public JP_GameArea(){
 
 
 		backImg=Toolkit.getDefaultToolkit().getImage("image/back/boardBack.png");
@@ -130,21 +130,21 @@ public class GameArea extends JPanel{
 		
 		int ir=0,ip=0,iw=0;
 		
-		for(int i=0; i<RefData.nameRoom.length; i++){
-			if(RefData.nameRoom[i].equals(r.trim())){
+		for(int i=0; i<Game_RefData.nameRoom.length; i++){
+			if(Game_RefData.nameRoom[i].equals(r.trim())){
 				ir=i;
 				break;
 			}
 		}
 		
-		for(int i=0; i<RefData.nameChar.length; i++){
-			if(RefData.nameChar[i].equals(p.trim())){
+		for(int i=0; i<Game_RefData.nameChar.length; i++){
+			if(Game_RefData.nameChar[i].equals(p.trim())){
 				ip=i;
 			}
 		}
 		
-		for(int i=0; i<RefData.nameWp.length; i++){
-			if(RefData.nameWp[i].equals(w.trim())){
+		for(int i=0; i<Game_RefData.nameWp.length; i++){
+			if(Game_RefData.nameWp[i].equals(w.trim())){
 				iw=i;
 			}
 		}
@@ -186,8 +186,8 @@ public class GameArea extends JPanel{
 		
 		int index=0;
 		if(key==0){
-			for(int i=0; i<RefData.nameRoom.length; i++){
-				if(RefData.nameRoom[i].equals(card.trim())){
+			for(int i=0; i<Game_RefData.nameRoom.length; i++){
+				if(Game_RefData.nameRoom[i].equals(card.trim())){
 					index=i;
 					break;
 				}
@@ -199,8 +199,8 @@ public class GameArea extends JPanel{
 			
 		}else if(key==1){
 		
-			for(int i=0; i<RefData.nameChar.length; i++){
-				if(RefData.nameChar[i].equals(card.trim())){
+			for(int i=0; i<Game_RefData.nameChar.length; i++){
+				if(Game_RefData.nameChar[i].equals(card.trim())){
 					index=i;
 					break;
 				}
@@ -211,8 +211,8 @@ public class GameArea extends JPanel{
 			hint[1].validate();//panelÀç¹èÄ¡
 		}else if(key==2){
 		
-			for(int i=0; i<RefData.nameWp.length; i++){
-				if(RefData.nameWp[i].equals(card.trim())){
+			for(int i=0; i<Game_RefData.nameWp.length; i++){
+				if(Game_RefData.nameWp[i].equals(card.trim())){
 					index=i;
 					break;
 				}
