@@ -17,12 +17,12 @@ public class GameNote extends JPanel{
 			JLabel lb1 = new JLabel(" 용의자");
 			JLabel lb2 = new JLabel(" ");
 			lb1.setFont(new Font("", Font.BOLD, 13));
-			sus1=new JCheckBox("고현정");
-			sus2=new JCheckBox("길태미");
+			sus1=new JCheckBox("길태미");
+			sus2=new JCheckBox("신민아");
 			sus3=new JCheckBox("오달수");
-			sus4=new JCheckBox("신민아");
-			sus5=new JCheckBox("오달수");
-			sus6=new JCheckBox("신민아");
+			sus4=new JCheckBox("고현정");
+			sus5=new JCheckBox("이준기");
+			sus6=new JCheckBox("김혜수");
 			nt1=new JTextField();
 			nt2=new JTextField();
 			nt3=new JTextField();

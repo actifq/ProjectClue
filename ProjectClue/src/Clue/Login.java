@@ -3,6 +3,7 @@ package Clue;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 public class Login extends JPanel{
 	Image back;
 	JLabel la1,la2;
@@ -53,6 +54,7 @@ public class Login extends JPanel{
 		add(la2); add(tf2);
 		add(p);
 	}
+
 	@Override
 	//paint, paintComponent => 자동호출
 	protected void paintComponent(Graphics g) {

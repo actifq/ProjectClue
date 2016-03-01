@@ -791,7 +791,8 @@ KeyListener,Runnable,MouseListener,FocusListener{
 
 				case Function.LOGIN: {
 					String[] data = { st.nextToken(), st.nextToken(), st.nextToken(), st.nextToken() };
-					wait.model2.addRow(data);
+					wait.model2.addRow(data); 
+
 				}
 					break;
 
@@ -800,6 +801,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					setTitle(id);
 					repaint();
 					card.show(getContentPane(), "WR");
+	
 				}
 					break;
 
@@ -845,6 +847,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				break;
 				case Function.ROOMIN:
 				{
+
 					 String id=st.nextToken();
 					 String sex=st.nextToken();					 
 					 myRoom=st.nextToken();
@@ -901,6 +904,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 				break;
 				case Function.ROOMOUT:
 				{
+
 					String id=st.nextToken();
 					for(int i=0;i<4;i++)
 					 {
@@ -920,7 +924,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					break;
 				case Function.MYROOMOUT:
 				{
-					
+
 					for(int i=0;i<4;i++)
 						{
 					 gwr.sw[i]=false;
@@ -997,7 +1001,9 @@ KeyListener,Runnable,MouseListener,FocusListener{
 					
 					break;
 				case Function.STARTGAME:
-				{	int[] ans= new int[3];
+				{
+
+					int[] ans= new int[3];
 					int[][] pCard= new int[4][5];
 					int  avata[]=new int[4];
 					

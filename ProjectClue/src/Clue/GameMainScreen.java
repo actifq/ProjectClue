@@ -11,7 +11,9 @@ import com.clue.note.GameNote_js2;
 import com.clue.note.GameNote_js3;
 
 import java.awt.event.*;
-
+import java.io.File;
+import java.applet.Applet;
+import java.applet.AudioClip;
 
 
 public class GameMainScreen extends JPanel{
@@ -29,7 +31,7 @@ public class GameMainScreen extends JPanel{
 	Game game;
 	JLabel jlshowCnt;
 	JFrame jfTurn;
-	
+	AudioClip clip;
 	
 
 	public GameMainScreen() {
@@ -94,7 +96,15 @@ public class GameMainScreen extends JPanel{
 		add(jpNote1);
 		add(jpNote2);
 		add(jpNote3);
-		
+		try {
+			     File file = new File("wav/Game_bgm.wav");
+			             clip = Applet.newAudioClip(file.toURL());
+			          clip.stop();
+			         
+			         
+			       } catch (Exception e){
+			           e.printStackTrace();
+			       }
 		
 	}
 	
@@ -107,6 +117,9 @@ public class GameMainScreen extends JPanel{
 		//
 		g.drawImage(jpTurn,865, 10,this);
 	}
+	
+	
+	
 	//서버에서 받아와야 하는 것->플레이어 번호, 캐릭터카드 인덱스 ,id
 	
 	public void gameStart(){

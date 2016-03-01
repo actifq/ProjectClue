@@ -2,7 +2,6 @@ package Clue;
 
 import java.awt.*;
 import javax.swing.*;
-import javax.swing.table.*;
 
 public class GameWaitingRoom extends JPanel {
 
@@ -14,9 +13,9 @@ public class GameWaitingRoom extends JPanel {
 	Image p1, p2, p3, p4, p5, p6, qc;
 
 	JPanel title;
-	JPanel uPan1, uPan2, uPan3, uPan4, bb1, bb2, bb3, bb4;
+	JPanel uPan1, uPan2, uPan3, uPan4;
 
-	JPanel CntDwn;
+
 
 	JPanel[] aa = new JPanel[4];
 	int pnum; // 플레이어 넘버
@@ -71,12 +70,6 @@ public class GameWaitingRoom extends JPanel {
 		aa[0].add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa[0]);
 
-		bb1 = new JPanel();
-		bb1.setOpaque(false);
-		bb1.setBounds(230, 60, 220, 295);
-		bb1.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		// add(bb1);
-
 		uPan2 = new JPanel();
 		uPan2.setBackground(Color.BLACK);
 		uPan2.setBounds(457, 45, 449, 300);
@@ -89,12 +82,6 @@ public class GameWaitingRoom extends JPanel {
 		aa[1].setBounds(457, 60, 220, 295);
 		aa[1].add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa[1]);
-
-		bb2 = new JPanel();
-		bb2.setOpaque(false);
-		bb2.setBounds(682, 60, 220, 250);
-		bb2.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		// add(bb2);
 
 		uPan3 = new JPanel();
 		uPan3.setBackground(Color.BLACK);
@@ -110,12 +97,6 @@ public class GameWaitingRoom extends JPanel {
 		aa[2].add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa[2]);
 
-		bb3 = new JPanel();
-		bb3.setOpaque(false);
-		bb3.setBounds(230, 362, 220, 295);
-		bb3.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		// add(bb3);
-
 		uPan4 = new JPanel();
 		uPan4.setBackground(Color.BLACK);
 		setLayout(null);
@@ -130,11 +111,6 @@ public class GameWaitingRoom extends JPanel {
 		aa[3].add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
 		add(aa[3]);
 
-		bb4 = new JPanel();
-		bb4.setOpaque(false);
-		bb4.setBounds(682, 362, 220, 295);
-		bb4.add(new JLabel(new ImageIcon(setImage("image/back/qcard.png", 171, 250))));
-		// add(bb4);
 
 		// 채팅창
 		chat = new JTextArea();
@@ -322,10 +298,6 @@ public class GameWaitingRoom extends JPanel {
 		add(isReady[2]);
 		add(isReady[3]);
 
-		CntDwn = new JPanel();
-		CntDwn.setOpaque(false);
-		CntDwn.setBounds(510, 330, 171, 250);
-		CntDwn.add(new JLabel(new ImageIcon(setImage("image/dice/d3.png", 171, 250))));
 
 		js1.setBounds(5, 652, 902, 180);
 		chatInput.setBounds(5, 837, 795, 30);
@@ -363,17 +335,13 @@ public class GameWaitingRoom extends JPanel {
 		 * gwr.pan[i].validate();//panel재배치
 		 */
 		// setCntDwn();
-	}
+		
+		
 
-	public void setCntDwn() {
-		this.add(CntDwn);
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-	}
+	
+
+
 
 	private Image setImage(String filename, int width, int height) {
 		// TODO Auto-generated method stub

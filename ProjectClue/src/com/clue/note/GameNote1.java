@@ -12,18 +12,18 @@ public class GameNote1 extends JPanel{
 	
 	public GameNote1() {
 		
-		JLabel lb5 = new JLabel("¿Âº“");
+		JLabel lb5 = new JLabel(" ¿Âº“");
 		JLabel lb6 = new JLabel(" ");
 		lb5.setFont(new Font("", Font.BOLD, 13));
 		pl1=new JCheckBox("µﬁ∞£");
 		pl2=new JCheckBox("«Í∞£");
 		pl3=new JCheckBox("æ»√§");
 		pl4=new JCheckBox("≈‘πÁ");
-		pl5=new JCheckBox("µﬁ∞£");
-		pl6=new JCheckBox("«Í∞£");
-		pl7=new JCheckBox("æ»√§");
-		pl8=new JCheckBox("≈‘πÁ");
-		pl9=new JCheckBox("≈‘πÁ");
+		pl5=new JCheckBox("∫Œæ˝");
+		pl6=new JCheckBox("∞˜∞£");
+		pl7=new JCheckBox("º≠¿Á");
+		pl8=new JCheckBox("ªÁ∂˚πÊ");
+		pl9=new JCheckBox("≈Ú∏∂∑Á");
 		nt15=new JTextField();
 		nt16=new JTextField();
 		nt17=new JTextField();
