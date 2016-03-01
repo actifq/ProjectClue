@@ -268,24 +268,28 @@ public class Server implements Runnable{
  				   break;
 						
  				   case Function.CHOOSECHAR :
- 					   
+ 				   {
  					   // avata=> 1번부터 시작. 0번은 qcard.
+ 					  String rname=st.nextToken();
  					  int charnum=Integer.parseInt(st.nextToken());
  					  for(int i=0;i<roomVc.size();i++)
 					    {
  						  Room room=roomVc.elementAt(i);  
  						 
  					   				
- 					   
- 					   for(int j=0;j<room.userVc.size();j++)
-			    		 {
-			    			 ClientThread c=room.userVc.elementAt(j);
-			    			 c.messageTo(Function.AVATA+"|"+pnum+"|"+charnum+"|"+avata);
-			    			
-			    			 avata=charnum; 
-			    		}
+ 						 if(rname.equals(room.roomName))//방을 찾는다
+					    	{ 
+ 							 for(int j=0;j<room.userVc.size();j++)
+ 							 {
+				    			 ClientThread c=room.userVc.elementAt(j);
+				    			 c.messageTo(Function.AVATA+"|"+pnum+"|"+charnum+"|"+avata);
+				    			
+				    			 avata=charnum; 
+ 							 }
+					    	}
  					   
 					    }
+ 				   }
  					  break;
  					  
  				   case Function.READY:
@@ -295,8 +299,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	/*if(rname.equals(room.roomName))//방을 찾는다
-					    	{	*/
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    		room.rdyCnt++;
 					    		ready=true;
 					    		 // 이미 방에 들어가 있는 사람들 처리
@@ -321,6 +325,7 @@ public class Server implements Runnable{
 				    			 }
 					    	}
 					    }
+ 				   }
  				  
  				   break;
  				   
@@ -332,6 +337,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	room.initGame();
 					    	
 					    	 for(int j=0;j<room.userVc.size();j++)
@@ -349,6 +356,7 @@ public class Server implements Runnable{
 					    			c.messageTo(Function.ROOMCHAT+"|[알림] 게임이 시작되었습니다");
 					    			 
 					    		 }
+					    	}
 					    }
  				   }
  				  break;
@@ -361,14 +369,17 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
 					    			    			 
 					    			c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+roomName+"에 도달하였습니다");
 					    			 
+					    		 
 					    		 }
+					    	}
 					    }
  				   }
  				   break;
@@ -380,7 +391,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
@@ -388,6 +400,7 @@ public class Server implements Runnable{
 					    			
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -399,7 +412,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
@@ -407,6 +421,7 @@ public class Server implements Runnable{
 					    			
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -419,7 +434,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);
@@ -427,6 +443,7 @@ public class Server implements Runnable{
 					    			// c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)이 "+key+"누름");
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -438,6 +455,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	room.runDice();
 					    		 for(int j=0;j<room.userVc.size();j++)
 					    		 {
@@ -447,6 +466,7 @@ public class Server implements Runnable{
 					    			 c.messageTo(Function.ROOMCHAT+"|[알림] "+id+"님("+pnum+"P)턴");
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -459,6 +479,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	if(nextP==room.removedP[0]||nextP==room.removedP[1]){
 					    		nextP++;
 					    		if(nextP==room.removedP[0]||nextP==room.removedP[1]){
@@ -477,18 +499,21 @@ public class Server implements Runnable{
 					    			 }
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
  				case Function.CHOOSECARD:
 				   {
-					  //String rname=st.nextToken();	
+					  String rname=st.nextToken();	
 					   String flag=st.nextToken();
 					 int cardnum = Integer.parseInt(st.nextToken());
 					    
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	 	 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);					    			 
@@ -496,6 +521,7 @@ public class Server implements Runnable{
 					    			 
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -514,7 +540,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
-					    	
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	 	 for(int j=0;j<room.userVc.size();j++)
 					    		 {
 					    			 ClientThread c=room.userVc.elementAt(j);					    			 
@@ -529,6 +556,7 @@ public class Server implements Runnable{
 					    			 
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;
@@ -549,6 +577,8 @@ public class Server implements Runnable{
 					    for(int i=0;i<roomVc.size();i++)
 					    {
 					    	Room room=roomVc.elementAt(i);
+					    	if(rname.equals(room.roomName))//방을 찾는다
+					    	{	
 					    	if(room.removedP[0]==-1){
 					    		room.removedP[0]=pnum-1;
 					    	}else{
@@ -567,6 +597,7 @@ public class Server implements Runnable{
 					    			 }
 					    			 
 					    		 }
+					    	}
 					    }
 				   }
 				   break;

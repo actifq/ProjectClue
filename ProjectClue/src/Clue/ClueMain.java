@@ -314,7 +314,7 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			int avata=1;
 			try
 			{
-				 out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+				 out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 			}catch(Exception ex){}
 			
 			
@@ -323,33 +323,33 @@ KeyListener,Runnable,MouseListener,FocusListener{
 			int avata=2;
 			try
 			{
-				 out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+				 out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 			}catch(Exception ex){}
 			
 		} else if (e.getSource() == gwr.chr[3]) {
 			int avata=3;
 			try
 			{
-				 out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+				 out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 			}catch(Exception ex){}
 		} else if (e.getSource() == gwr.chr[4]) {
 			int avata=4;
 			try
 			{
-				 out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+				 out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 			}catch(Exception ex){}
 			
 		} else if (e.getSource() == gwr.chr[5]) {
 			int avata=5;
 			try
 			{
-				out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+				out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 			}catch(Exception ex){}
 			} else if (e.getSource() == gwr.chr[6]) {
 				int avata=6;
 				try
 				{
-					 out.write((Function.CHOOSECHAR+"|"+avata+"\n").getBytes());
+					 out.write((Function.CHOOSECHAR+"|"+myRoom+"|"+avata+"\n").getBytes());
 				}catch(Exception ex){}
 
 		} else if (e.getSource() == cs.st) {
@@ -495,100 +495,100 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		
 		else if(e.getSource()==cs.p[0])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+0+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+0+"\n").getBytes());}catch(Exception ex){}
 		}else if(e.getSource()==cs.p[1])
 		{
 			
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+1+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+1+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.p[2])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+2+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+2+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.p[3])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+3+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+3+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.p[4])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+4+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+4+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.p[5])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+5+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+5+"\n").getBytes());}catch(Exception ex){}
 		}
 	
 		
 		//############## cs/ 公扁
 		else if(e.getSource()==cs.q[0])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+6+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+6+"\n").getBytes());}catch(Exception ex){}
 			
 		}else if(e.getSource()==cs.q[1])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+7+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+7+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[2])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+8+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+8+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[3])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+9+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+9+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[4])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+10+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+10+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[5])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+11+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+11+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[6])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+12+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+12+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.q[7])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+13+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+13+"\n").getBytes());}catch(Exception ex){}
 		}
 		
 		//########### 规
 		else if(e.getSource()==cs.j[0])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+14+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+14+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[1])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+15+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+15+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[2])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+16+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+16+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[3])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+17+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+17+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[4])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+18+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+18+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[5])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+19+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+19+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[6])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+20+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+20+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[7])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+21+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+21+"\n").getBytes());}catch(Exception ex){}
 		}
 		else if(e.getSource()==cs.j[8])
 		{
-			try{ out.write((Function.CHOOSECARD+"|"+"cs"+"|"+22+"\n").getBytes());}catch(Exception ex){}
+			try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"cs"+"|"+22+"\n").getBytes());}catch(Exception ex){}
 		}
 		
 		
@@ -596,100 +596,100 @@ KeyListener,Runnable,MouseListener,FocusListener{
 		
 				else if(e.getSource()==fcs.p[0])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+0+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+0+"\n").getBytes());}catch(Exception ex){}
 				}else if(e.getSource()==fcs.p[1])
 				{
 					
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+1+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+1+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.p[2])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+2+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+2+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.p[3])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+3+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+3+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.p[4])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+4+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+4+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.p[5])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+5+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+5+"\n").getBytes());}catch(Exception ex){}
 				}
 			
 				
 				//############## fcs/ 公扁
 				else if(e.getSource()==fcs.q[0])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+6+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+6+"\n").getBytes());}catch(Exception ex){}
 					
 				}else if(e.getSource()==fcs.q[1])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+7+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+7+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[2])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+8+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+8+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[3])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+9+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+9+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[4])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+10+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+10+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[5])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+11+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+11+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[6])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+12+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+12+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.q[7])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+13+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+13+"\n").getBytes());}catch(Exception ex){}
 				}
 				
 				//########### 规
 				else if(e.getSource()==fcs.j[0])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+14+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+14+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[1])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+15+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+15+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[2])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+16+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+16+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[3])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+17+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+17+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[4])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+18+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+18+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[5])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+19+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+19+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[6])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+20+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+20+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[7])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+21+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+21+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==fcs.j[8])
 				{
-					try{ out.write((Function.CHOOSECARD+"|"+"fcs"+"|"+22+"\n").getBytes());}catch(Exception ex){}
+					try{ out.write((Function.CHOOSECARD+"|"+myRoom+"|"+"fcs"+"|"+22+"\n").getBytes());}catch(Exception ex){}
 				}
 				else if(e.getSource()==mainScreen.jpGameBoard.b1)
 				{
